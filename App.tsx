@@ -1,6 +1,5 @@
 import React from "react";
-import { StatusBar, StyleSheet, useColorScheme } from "react-native";
-
+import { StatusBar, StyleSheet } from "react-native";
 import { AppProviders } from "./context/AppProviders";
 import { PaperProvider } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
