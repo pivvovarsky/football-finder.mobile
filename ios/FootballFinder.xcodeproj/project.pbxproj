@@ -12,6 +12,12 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		6C2CBE552AFBD0D6002D3D80 /* GoogleService-Info.plist in Sources */ = {isa = PBXBuildFile; fileRef = 6C2CBE542AFBD0D6002D3D80 /* GoogleService-Info.plist */; };
+		6C2CBE5C2AFBD5A7002D3D80 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C2CBE572AFBD5A7002D3D80 /* MaterialCommunityIcons.ttf */; };
+		6C2CBE5D2AFBD5A7002D3D80 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C2CBE582AFBD5A7002D3D80 /* Ionicons.ttf */; };
+		6C2CBE5E2AFBD5A7002D3D80 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C2CBE592AFBD5A7002D3D80 /* SimpleLineIcons.ttf */; };
+		6C2CBE5F2AFBD5A7002D3D80 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C2CBE5A2AFBD5A7002D3D80 /* EvilIcons.ttf */; };
+		6C2CBE602AFBD5A7002D3D80 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C2CBE5B2AFBD5A7002D3D80 /* MaterialIcons.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-FootballFinder-FootballFinderTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-FootballFinder-FootballFinderTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -41,6 +47,12 @@
 		5709B34CF0A7D63546082F79 /* Pods-FootballFinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FootballFinder.release.xcconfig"; path = "Target Support Files/Pods-FootballFinder/Pods-FootballFinder.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-FootballFinder-FootballFinderTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FootballFinder-FootballFinderTests.debug.xcconfig"; path = "Target Support Files/Pods-FootballFinder-FootballFinderTests/Pods-FootballFinder-FootballFinderTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-FootballFinder.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FootballFinder.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C2CBE542AFBD0D6002D3D80 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6C2CBE572AFBD5A7002D3D80 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		6C2CBE582AFBD5A7002D3D80 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		6C2CBE592AFBD5A7002D3D80 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		6C2CBE5A2AFBD5A7002D3D80 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		6C2CBE5B2AFBD5A7002D3D80 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = FootballFinder/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-FootballFinder-FootballFinderTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FootballFinder-FootballFinderTests.release.xcconfig"; path = "Target Support Files/Pods-FootballFinder-FootballFinderTests/Pods-FootballFinder-FootballFinderTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -86,6 +98,7 @@
 		13B07FAE1A68108700A75B9A /* FootballFinder */ = {
 			isa = PBXGroup;
 			children = (
+				6C2CBE562AFBD4CF002D3D80 /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -106,6 +119,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6C2CBE562AFBD4CF002D3D80 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				6C2CBE5A2AFBD5A7002D3D80 /* EvilIcons.ttf */,
+				6C2CBE582AFBD5A7002D3D80 /* Ionicons.ttf */,
+				6C2CBE572AFBD5A7002D3D80 /* MaterialCommunityIcons.ttf */,
+				6C2CBE5B2AFBD5A7002D3D80 /* MaterialIcons.ttf */,
+				6C2CBE592AFBD5A7002D3D80 /* SimpleLineIcons.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +141,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				6C2CBE542AFBD0D6002D3D80 /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* FootballFinder */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* FootballFinderTests */,
@@ -245,7 +271,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				6C2CBE5F2AFBD5A7002D3D80 /* EvilIcons.ttf in Resources */,
+				6C2CBE5C2AFBD5A7002D3D80 /* MaterialCommunityIcons.ttf in Resources */,
+				6C2CBE5E2AFBD5A7002D3D80 /* SimpleLineIcons.ttf in Resources */,
+				6C2CBE5D2AFBD5A7002D3D80 /* Ionicons.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				6C2CBE602AFBD5A7002D3D80 /* MaterialIcons.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +458,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C2CBE552AFBD0D6002D3D80 /* GoogleService-Info.plist in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
@@ -503,6 +535,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RWYXV8774F;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = FootballFinder/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Football Finder";
@@ -531,6 +564,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RWYXV8774F;
 				INFOPLIST_FILE = FootballFinder/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Football Finder";
 				LD_RUNPATH_SEARCH_PATHS = (

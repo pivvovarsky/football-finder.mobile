@@ -9,10 +9,7 @@ function App(): JSX.Element {
   return (
     <AppProviders>
       <PaperProvider>
-        <SafeAreaView
-          style={styles.safeArea}
-          edges={["left", "right", "top", "bottom"]}
-        >
+        <SafeAreaView style={styles.safeArea} edges={["left", "right", "top"]}>
           <StatusBar hidden barStyle="dark-content" />
           <Navigation />
         </SafeAreaView>
