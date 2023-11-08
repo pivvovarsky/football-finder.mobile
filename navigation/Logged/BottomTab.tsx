@@ -1,38 +1,40 @@
 import * as React from "react";
+import { useState } from "react";
 import { BottomNavigation, Text } from "react-native-paper";
 
-const MusicRoute = () => <Text>Music</Text>;
+const FavoritesRoute = () => <Text>FavoritesRoute</Text>;
 
-const AlbumsRoute = () => <Text>Albums</Text>;
+const MapRoute = () => <Text>Map route</Text>;
 
-const RecentsRoute = () => <Text>Recents</Text>;
-
-const NotificationsRoute = () => <Text>Notifications</Text>;
+const AccountRoute = () => <Text>AccountRoute</Text>;
 
 export const BottomTab = () => {
-  const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
+  const [index, setIndex] = useState(0);
+  const [routes] = useState([
     {
-      key: "music",
+      key: "favorites",
       title: "Favorites",
-      focusedIcon: "heart",
-      unfocusedIcon: "heart-outline",
+      focusedIcon: "heart-multiple",
+      unfocusedIcon: "heart-multiple-outline",
     },
-    { key: "albums", title: "Albums", focusedIcon: "album" },
-    { key: "recents", title: "Recents", focusedIcon: "history" },
     {
-      key: "notifications",
-      title: "Notifications",
-      focusedIcon: "bell",
-      unfocusedIcon: "bell-outline",
+      key: "map",
+      title: "Map",
+      focusedIcon: "map-marker-radius",
+      unfocusedIcon: "map-marker-radius-outline",
+    },
+    {
+      key: "account",
+      title: "Account",
+      focusedIcon: "account-cog",
+      unfocusedIcon: "account-cog-outline",
     },
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
-    music: MusicRoute,
-    albums: AlbumsRoute,
-    recents: RecentsRoute,
-    notifications: NotificationsRoute,
+    favorites: FavoritesRoute,
+    map: MapRoute,
+    account: AccountRoute,
   });
 
   return (
