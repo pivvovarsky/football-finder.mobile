@@ -2,13 +2,13 @@
 #import <Firebase.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTLinkingManager.h>
-// #import <GoogleMaps/GoogleMaps.h>
+#import <GoogleMaps/GoogleMaps.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-// [GMSServices provideAPIKey:@"AIzaSyDb0fA-PdxTVuvsDKvjp26W4xpqVmnntkg"];
+[GMSServices provideAPIKey:@"AIzaSyDb0fA-PdxTVuvsDKvjp26W4xpqVmnntkg"];
 [FIRApp configure];
  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
  if (![defaults boolForKey:@"notFirstRun"]) {

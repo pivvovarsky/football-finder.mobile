@@ -1,10 +1,23 @@
 import * as React from "react";
 import { useState } from "react";
+import { StyleSheet } from "react-native";
 import { BottomNavigation, Text } from "react-native-paper";
+import MapView from "react-native-maps";
 
 const FavoritesRoute = () => <Text>FavoritesRoute</Text>;
 
-const MapRoute = () => <Text>Map route</Text>;
+const MapRoute = () => (
+  <MapView
+    // remove if not using Google Maps
+    style={styles.map}
+    region={{
+      latitude: 37.78825,
+      longitude: -122.4324,
+      latitudeDelta: 0.015,
+      longitudeDelta: 0.0121,
+    }}
+  ></MapView>
+);
 
 const AccountRoute = () => <Text>AccountRoute</Text>;
 
@@ -45,3 +58,16 @@ export const BottomTab = () => {
     />
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    ...StyleSheet.absoluteFillObject,
+    height: 400,
+    width: 400,
+    justifyContent: "flex-end",
+    alignItems: "center",
+  },
+  map: {
+    ...StyleSheet.absoluteFillObject,
+  },
+});
