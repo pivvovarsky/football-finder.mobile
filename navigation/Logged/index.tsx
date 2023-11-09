@@ -3,7 +3,6 @@ import {
   createStackNavigator,
   StackNavigationProp,
 } from "@react-navigation/stack";
-import { ActivityIndicator } from "react-native";
 import { BottomTab } from "./BottomTab";
 
 export type LoggedScreenNavigationProp = StackNavigationProp<LoggedStackList>;

@@ -5,11 +5,14 @@ import { initLoginFormData } from "./Login.utils";
 import { useUser } from "../../hooks/context/useUser";
 import { TextInput } from "react-native-paper";
 import { Button } from "react-native-paper";
+import { colors } from "../../constants/Colors";
 
 export function Login() {
   const { login, isError, isLoading } = useUser();
+
   return (
     <View style={styles.container}>
+      <Text style={styles.text}>Football Finder</Text>
       <Formik initialValues={initLoginFormData} onSubmit={login}>
         {({ handleChange, handleSubmit, values }) => (
           <View style={styles.formikContainer}>
@@ -34,9 +37,18 @@ export function Login() {
             <Button
               mode="contained"
               onPress={handleSubmit}
+              loading={isLoading}
               style={styles.button}
             >
               Submit
+            </Button>
+            <Button
+              mode="text"
+              onPress={handleSubmit}
+              loading={isLoading}
+              style={styles.buttonSignUp}
+            >
+              Sign up
             </Button>
           </View>
         )}
@@ -48,10 +60,13 @@ export function Login() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-start",
+    backgroundColor: colors.white,
     marginHorizontal: 30,
   },
+  text: { fontSize: 20 },
   formikContainer: {},
   passwordInput: { marginTop: 10 },
   button: { marginTop: 10 },
+  buttonSignUp: {},
 });

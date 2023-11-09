@@ -8,12 +8,12 @@ import Navigation from "./navigation";
 function App(): JSX.Element {
   return (
     <AppProviders>
-      <PaperProvider>
-        <SafeAreaView style={styles.safeArea} edges={["left", "right", "top"]}>
-          <StatusBar hidden barStyle="dark-content" />
+      <SafeAreaView style={styles.safeArea} edges={["left", "right", "top"]}>
+        <PaperProvider>
+          <StatusBar barStyle="dark-content" />
           <Navigation />
-        </SafeAreaView>
-      </PaperProvider>
+        </PaperProvider>
+      </SafeAreaView>
     </AppProviders>
   );
 }
@@ -21,6 +21,7 @@ function App(): JSX.Element {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
+    backgroundColor: "white",
   },
 });
 
