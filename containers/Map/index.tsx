@@ -4,16 +4,25 @@ import { Formik } from "formik";
 import { useUser } from "../../hooks/context/useUser";
 import { TextInput } from "react-native-paper";
 import { Button } from "react-native-paper";
-import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, {
+  Callout,
+  Circle,
+  Geojson,
+  Heatmap,
+  Marker,
+  Overlay,
+  PROVIDER_GOOGLE,
+  Polygon,
+} from "react-native-maps";
 import Geolocation from "@react-native-community/geolocation";
 
 export function Map() {
   const { login, isError, isLoading } = useUser();
   const [position, setPosition] = useState({
-    latitude: 0,
-    latitudeDelta: 0,
-    longitude: 0,
-    longitudeDelta: 0,
+    latitude: 50.19293799535422,
+    latitudeDelta: 0.0421,
+    longitude: 18.974965056422143,
+    longitudeDelta: 0.0421, //to change
   });
   useEffect(() => {
     console.log(position);
@@ -30,10 +39,12 @@ export function Map() {
       });
     });
   }, []);
+
   return (
     <MapView
       // remove if not using Google Maps
       provider={PROVIDER_GOOGLE}
+      region={position}
       style={styles.map}
       initialRegion={position}
       showsUserLocation={true}
@@ -44,8 +55,10 @@ export function Map() {
       zoomEnabled={true}
       pitchEnabled={true}
       rotateEnabled={true}
+      loadingEnabled={true}
     >
       <Marker
+        isPreselected={true}
         title="Yor are here"
         description="Let's look for some football game!"
         coordinate={position}

@@ -11,6 +11,11 @@ export interface LoginEntry {
   email: string;
   password: string;
 }
+export interface RegisterEntry {
+  email: string;
+  password: string;
+  repeatPassword?: string;
+}
 
 interface ContextProps {
   user: FirebaseAuthTypes.User | null;
