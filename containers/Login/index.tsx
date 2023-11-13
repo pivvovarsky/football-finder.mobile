@@ -1,69 +1,87 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Alert, BackHandler, StyleSheet, View } from "react-native";
 import { Formik } from "formik";
 import { initLoginFormData } from "./Login.utils";
 import { useUser } from "../../hooks/context/useUser";
-import { TextInput } from "react-native-paper";
+import { DefaultTheme, TextInput, Text } from "react-native-paper";
 import { Button } from "react-native-paper";
 import { colors } from "../../constants/Colors";
 import { useNavigation } from "@react-navigation/native";
 import { NotLoggedNavigationProp } from "../../navigation/NotLogged";
+import { Topbar } from "../../components/Topbar/Top bar";
+import { Row } from "../../components/Containers/Row";
 
 export function Login() {
   const navigation = useNavigation<NotLoggedNavigationProp>();
   const { login, isError, isLoading } = useUser();
   const [securePassword, setSecurePassword] = useState(true);
+  const goBack = () => {
+    navigation.goBack();
+  };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Football Finder</Text>
-      <Formik initialValues={initLoginFormData} onSubmit={login}>
-        {({ handleChange, handleSubmit, values }) => (
-          <View style={styles.formikContainer}>
-            <TextInput
-              label="Email"
-              returnKeyType="next"
-              value={values.email}
-              onChangeText={handleChange("email")}
-              autoCapitalize="none"
-              textContentType="emailAddress"
-              keyboardType="email-address"
-              autoFocus
-            />
-            <TextInput
-              onChangeText={handleChange("password")}
-              value={values.password}
-              label="Password"
-              returnKeyType="done"
-              secureTextEntry={securePassword}
-              right={
-                <TextInput.Icon
-                  icon={securePassword ? "eye-off" : "eye"}
-                  onPress={() => setSecurePassword(!securePassword)}
-                />
-              }
-              style={styles.passwordInput}
-            />
-            <Button
-              mode="contained"
-              onPress={handleSubmit}
-              loading={isLoading}
-              style={styles.button}
-            >
-              Submit
-            </Button>
-            <Button
-              mode="text"
-              onPress={() => {}}
-              loading={isLoading}
-              style={styles.buttonSignUp}
-            >
-              Sign up
-            </Button>
-          </View>
-        )}
-      </Formik>
-    </View>
+    <>
+      <Topbar title={"Login"} onPress={goBack} />
+      <View style={styles.container}>
+        <Formik initialValues={initLoginFormData} onSubmit={login}>
+          {({ handleChange, handleSubmit, values }) => (
+            <View style={styles.formikContainer}>
+              <TextInput
+                label="Email"
+                returnKeyType="next"
+                value={values.email}
+                onChangeText={handleChange("email")}
+                autoCapitalize="none"
+                textContentType="emailAddress"
+                keyboardType="email-address"
+                autoFocus
+                error={false}
+                style={{
+                  backgroundColor: "#D5E4FF",
+                }}
+              />
+              <TextInput
+                onChangeText={handleChange("password")}
+                value={values.password}
+                label="Password"
+                returnKeyType="done"
+                secureTextEntry={securePassword}
+                right={
+                  <TextInput.Icon
+                    icon={securePassword ? "eye-off" : "eye"}
+                    onPress={() => setSecurePassword(!securePassword)}
+                  />
+                }
+                error={false}
+                style={styles.passwordInput}
+              />
+              <Button
+                mode="contained"
+                //@ts-ignore
+                onPress={handleSubmit}
+                loading={isLoading}
+                style={styles.button}
+                textColor={colors.white}
+                buttonColor={colors.darkBlue}
+              >
+                Submit
+              </Button>
+              <Row style={styles.signUpRow}>
+                <Text>Dont have account?</Text>
+                <Button
+                  mode="text"
+                  onPress={() => {}}
+                  loading={isLoading}
+                  textColor={colors.darkBlue}
+                >
+                  Sign up
+                </Button>
+              </Row>
+            </View>
+          )}
+        </Formik>
+      </View>
+    </>
   );
 }
 
@@ -76,7 +94,10 @@ const styles = StyleSheet.create({
   },
   text: { fontSize: 20 },
   formikContainer: {},
-  passwordInput: { marginTop: 10 },
+  passwordInput: {
+    marginTop: 10,
+    backgroundColor: "#D5E4FF",
+  },
+  signUpRow: { justifyContent: "flex-end", alignItems: "center" },
   button: { marginTop: 10 },
-  buttonSignUp: {},
 });

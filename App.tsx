@@ -1,15 +1,27 @@
 import React from "react";
 import { StatusBar, StyleSheet } from "react-native";
 import { AppProviders } from "./context/AppProviders";
-import { PaperProvider } from "react-native-paper";
+import { DefaultTheme, PaperProvider } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Navigation from "./navigation";
+import { colors } from "./constants/Colors";
 
 function App(): JSX.Element {
+  const theme = {
+    ...DefaultTheme,
+    // Specify custom property
+    dark: false,
+    // Specify custom property in nested object
+    colors: {
+      ...DefaultTheme.colors,
+      primary: colors.darkBlue,
+      text: colors.darkBlue,
+    },
+  };
   return (
     <AppProviders>
       <SafeAreaView style={styles.safeArea} edges={["left", "right", "top"]}>
-        <PaperProvider>
+        <PaperProvider theme={theme}>
           <StatusBar barStyle="dark-content" />
           <Navigation />
         </PaperProvider>

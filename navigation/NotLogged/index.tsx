@@ -28,7 +28,7 @@ export const NotLoggedNavigator = () => {
       <NotLoggedStack.Screen
         name="Login"
         component={Login}
-        options={{ headerShown: true }}
+        options={{ headerShown: false }}
       />
       <NotLoggedStack.Screen
         name="SignUp"

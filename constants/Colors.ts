@@ -21,4 +21,5 @@ export const colors = {
   pass: "#275C3E",
   failed: "#611D1D",
   blueViolet: "#8A2BE2",
+  lightBlue: "#c1e1ec",
 };

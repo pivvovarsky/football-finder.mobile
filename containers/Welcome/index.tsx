@@ -1,13 +1,8 @@
 import Geolocation from "@react-native-community/geolocation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import MapView, {
-  LocalTile,
-  Marker,
-  PROVIDER_GOOGLE,
-  UrlTile,
-} from "react-native-maps";
-import { Text, TextInput, useTheme } from "react-native-paper";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import { Text } from "react-native-paper";
 import { layout, window } from "../../constants/Layout";
 import { colors } from "../../constants/Colors";
 import { MapButton } from "../../components/Map/MapButton";
@@ -24,9 +19,7 @@ export function Welcome() {
     longitude: 18.974965056422143,
     longitudeDelta: 0.0421, //to change
   });
-  useEffect(() => {
-    console.log(position);
-  }, []);
+
   const navigateSignUp = () => {
     navigation.navigate("SignUp");
   };
@@ -46,7 +39,7 @@ export function Welcome() {
           longitudeDelta: 0.0421,
         });
       },
-      _,
+      () => {},
       {
         enableHighAccuracy: true,
         timeout: 10000,
@@ -136,6 +129,3 @@ const styles = StyleSheet.create({
     width: window.width * 0.5,
   },
 });
-function _(error: GeolocationError): void {
-  throw new Error("Function not implemented.");
-}
