@@ -13,7 +13,7 @@ export const window = {
 export const isSmallDeviceHeight = height < BIG_HEIGHT_MIN;
 
 export const layout = {
-  screenHorizontalPadding: 24,
+  screenHorizontalPadding: 15,
   publicScreenHorizontalPadding: 32, // login, signup, onBoarding, forgotPassword etc.
   screenTopPadding: "10%",
   screenBottomPadding: "10%",

@@ -1,7 +1,7 @@
 export const colors = {
   gradientStart: "#C77327",
   gradientEnd: "#A03637",
-  white: "#fffff",
+  white: "#FFFFFF",
   elixir: "#C8D2C8",
   darkGreen: "#32321E",
   raw: "#596E76",
@@ -20,4 +20,5 @@ export const colors = {
   darkGrey: "#828282",
   pass: "#275C3E",
   failed: "#611D1D",
+  blueViolet: "#8A2BE2",
 };

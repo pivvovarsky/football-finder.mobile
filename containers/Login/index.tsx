@@ -6,8 +6,11 @@ import { useUser } from "../../hooks/context/useUser";
 import { TextInput } from "react-native-paper";
 import { Button } from "react-native-paper";
 import { colors } from "../../constants/Colors";
+import { useNavigation } from "@react-navigation/native";
+import { NotLoggedNavigationProp } from "../../navigation/NotLogged";
 
 export function Login() {
+  const navigation = useNavigation<NotLoggedNavigationProp>();
   const { login, isError, isLoading } = useUser();
   const [securePassword, setSecurePassword] = useState(true);
 

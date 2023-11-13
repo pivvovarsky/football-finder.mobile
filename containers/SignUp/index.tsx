@@ -12,7 +12,7 @@ export function SignUp() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Football Finder</Text>
+      {/* <Text style={styles.text}>Football Finder</Text>
       <Formik initialValues={initRegisterFormData} onSubmit={login}>
         {({ handleChange, handleSubmit, values }) => (
           <View style={styles.formikContainer}>
@@ -72,7 +72,7 @@ export function SignUp() {
             </Button>
           </View>
         )}
-      </Formik>
+      </Formik> */}
     </View>
   );
 }
