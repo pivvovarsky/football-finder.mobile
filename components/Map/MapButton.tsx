@@ -15,7 +15,8 @@ export function MapButton({ style, text, isLoading, onPress }: MapButtonProps) {
       <Button
         mode="contained"
         onPress={onPress}
-        buttonColor="rgba(255, 255, 255, 0.6)"
+        buttonColor="rgba(255, 255, 255, 0.5)"
+        labelStyle={{ fontWeight: "600" }}
         textColor={colors.darkBlue}
         loading={isLoading}
       >

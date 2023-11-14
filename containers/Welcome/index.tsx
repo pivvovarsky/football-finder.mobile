@@ -1,14 +1,15 @@
 import Geolocation from "@react-native-community/geolocation";
 import { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { Image, ImageSourcePropType, StyleSheet, View } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
-import { Text } from "react-native-paper";
+import { Icon, Text } from "react-native-paper";
 import { layout, window } from "../../constants/Layout";
 import { colors } from "../../constants/Colors";
 import { MapButton } from "../../components/Map/MapButton";
 import { Row } from "../../components/Containers/Row";
 import { useNavigation } from "@react-navigation/native";
 import { NotLoggedNavigationProp } from "../../navigation/NotLogged";
+import WelcomeIcon from "../../assets/icons/default.svg";
 
 export function Welcome() {
   const navigation = useNavigation<NotLoggedNavigationProp>();
@@ -83,12 +84,17 @@ export function Welcome() {
           coordinate={position}
         />
       </MapView>
-      <View>
+      <View style={{ marginTop: 10 }}>
         <Text style={styles.welcomeHeader} variant="titleLarge">
           Welcome to
         </Text>
-        <Text style={styles.welcomeHeader} variant="displayMedium">
-          Football Finder
+        <View style={styles.welcomeHeader}>
+          <WelcomeIcon width={300} height={50} />
+        </View>
+      </View>
+      <View>
+        <Text style={styles.welcomeText} variant="titleLarge">
+          Ready to explore?
         </Text>
         <Row style={styles.buttonsContainer}>
           <MapButton
@@ -112,18 +118,30 @@ export function Welcome() {
 const styles = StyleSheet.create({
   map: {
     flex: 1,
-
     ...StyleSheet.absoluteFillObject,
+    justifyContent: "space-between",
   },
   welcomeHeader: {
     backgroundColor: "rgba(255, 255, 255, 0.5)",
     textAlign: "center",
+    alignItems: "center",
     paddingHorizontal: layout.screenHorizontalPadding,
     color: colors.darkBlue,
     fontWeight: "700",
+    marginHorizontal: 15,
+  },
+  welcomeText: {
+    backgroundColor: "rgba(255, 255, 255, 0.5)",
+    textAlign: "center",
+    alignItems: "center",
+    paddingHorizontal: layout.screenHorizontalPadding,
+    color: colors.darkBlue,
+    fontWeight: "700",
+    marginHorizontal: 15,
   },
   buttonsContainer: {
     width: "100%",
+    marginBottom: window.height * 0.15,
   },
   button: {
     width: window.width * 0.5,

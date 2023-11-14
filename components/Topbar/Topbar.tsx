@@ -1,26 +1,14 @@
 import React from "react";
-import {
-  StyleSheet,
-  TouchableOpacityProps,
-  View,
-  ViewProps,
-} from "react-native";
-import { Row } from "../Containers/Row";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { StyleSheet } from "react-native";
 import { colors } from "../../constants/Colors";
 import { Appbar } from "react-native-paper";
 
-const MIN_TOP_MARGIN = 30;
-interface TopbarProps extends TouchableOpacityProps {
+interface TopbarProps {
   title: string;
+  onPress: () => void;
 }
+
 export const Topbar = ({ title, onPress }: TopbarProps) => {
-  const _goBack = () => console.log("Went back");
-
-  const _handleSearch = () => console.log("Searching");
-
-  const _handleMore = () => console.log("Shown more");
-
   return (
     <Appbar.Header
       statusBarHeight={0}
@@ -28,6 +16,7 @@ export const Topbar = ({ title, onPress }: TopbarProps) => {
       style={styles.container}
       dark={false}
       theme={{
+        //@ts-ignore
         colors: colors.white,
       }}
     >

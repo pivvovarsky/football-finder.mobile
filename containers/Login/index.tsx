@@ -8,7 +8,7 @@ import { Button } from "react-native-paper";
 import { colors } from "../../constants/Colors";
 import { useNavigation } from "@react-navigation/native";
 import { NotLoggedNavigationProp } from "../../navigation/NotLogged";
-import { Topbar } from "../../components/Topbar/Top bar";
+import { Topbar } from "../../components/Topbar/Topbar";
 import { Row } from "../../components/Containers/Row";
 
 export function Login() {
@@ -17,6 +17,9 @@ export function Login() {
   const [securePassword, setSecurePassword] = useState(true);
   const goBack = () => {
     navigation.goBack();
+  };
+  const navigateSignUp = () => {
+    navigation.navigate("SignUp");
   };
 
   return (
@@ -67,10 +70,11 @@ export function Login() {
                 Submit
               </Button>
               <Row style={styles.signUpRow}>
-                <Text>Dont have account?</Text>
+                <Text>Don't have an account?</Text>
                 <Button
                   mode="text"
-                  onPress={() => {}}
+                  labelStyle={styles.signUp}
+                  onPress={navigateSignUp}
                   loading={isLoading}
                   textColor={colors.darkBlue}
                 >
@@ -98,6 +102,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
     backgroundColor: "#D5E4FF",
   },
-  signUpRow: { justifyContent: "flex-end", alignItems: "center" },
+  signUpRow: {
+    justifyContent: "flex-end",
+    alignItems: "center",
+    paddingTop: 5,
+  },
+  signUp: { textDecorationLine: "underline", paddingBottom: 1 },
   button: { marginTop: 10 },
 });
