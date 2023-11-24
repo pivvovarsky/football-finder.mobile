@@ -3,7 +3,7 @@ import { Alert, BackHandler, StyleSheet, View } from "react-native";
 import { Formik } from "formik";
 import { initLoginFormData } from "./Login.utils";
 import { useUser } from "../../hooks/context/useUser";
-import { DefaultTheme, TextInput, Text, HelperText } from "react-native-paper";
+import { DefaultTheme, TextInput, Text, HelperText, Snackbar, Tooltip, IconButton } from "react-native-paper";
 import { Button } from "react-native-paper";
 import { colors } from "../../constants/Colors";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
@@ -13,7 +13,7 @@ import { Row } from "../../components/Containers/Row";
 
 export function Login() {
   const navigation = useNavigation<NotLoggedNavigationProp>();
-  const { login, isLoading, isCreatedAccount, isError, cleanState } = useUser();
+  const { login, isLoading, isCreatedAccount, isError, cleanState, setIsCreatedAccount } = useUser();
   const [securePassword, setSecurePassword] = useState(true);
 
   const goBack = () => {
@@ -30,11 +30,26 @@ export function Login() {
     }, []),
   );
 
+  const closeSnackBar = () => {
+    setIsCreatedAccount(false);
+  };
+
   return (
     <>
       <Topbar title={"Login"} onPress={goBack} />
       <View style={styles.container}>
-        {isCreatedAccount && <HelperText type={"info"}>The account has been successfully created.</HelperText>}
+        <Snackbar
+          visible={isCreatedAccount}
+          onDismiss={closeSnackBar}
+          duration={4000}
+          action={{
+            label: "close",
+            onPress: () => {
+              closeSnackBar();
+            },
+          }}>
+          The account has been successfully created.
+        </Snackbar>
         <Formik initialValues={initLoginFormData} onSubmit={login}>
           {({ handleChange, handleSubmit, values }) => (
             <View style={styles.formikContainer}>

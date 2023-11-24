@@ -44,20 +44,10 @@ export function Welcome() {
       {
         enableHighAccuracy: true,
         timeout: 10000,
-      }
+      },
     );
   }, []);
 
-  //   <MapView region={this.state.region} onRegionChange={this.onRegionChange}>
-  //   {this.state.markers.map((marker, index) => (
-  //     <Marker
-  //       key={index}
-  //       coordinate={marker.latlng}
-  //       title={marker.title}
-  //       description={marker.description}
-  //     />
-  //   ))}
-  // </MapView>;
   return (
     <View style={styles.map}>
       <MapView
@@ -75,8 +65,7 @@ export function Welcome() {
         zoomEnabled={true}
         pitchEnabled={true}
         rotateEnabled={true}
-        loadingEnabled={true}
-      >
+        loadingEnabled={true}>
         <Marker
           isPreselected={true}
           title="Yor are here"
@@ -98,18 +87,8 @@ export function Welcome() {
           </Text>
         </View>
         <Row style={styles.buttonsContainer}>
-          <MapButton
-            onPress={navigateLogin}
-            style={styles.button}
-            text={"Login"}
-            isLoading={false}
-          />
-          <MapButton
-            onPress={navigateSignUp}
-            style={styles.button}
-            text={"Sign Up"}
-            isLoading={false}
-          />
+          <MapButton onPress={navigateLogin} style={styles.button} text={"Login"} isLoading={false} />
+          <MapButton onPress={navigateSignUp} style={styles.button} text={"Sign Up"} isLoading={false} />
         </Row>
       </View>
     </View>
@@ -126,6 +105,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     alignItems: "center",
     marginTop: 10,
+    paddingVertical: 10,
     marginHorizontal: layout.screenHorizontalPadding,
     borderRadius: 60,
     backgroundColor: "rgba(255, 255, 255, 0.5)",
