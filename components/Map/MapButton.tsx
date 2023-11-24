@@ -1,8 +1,5 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, TouchableOpacityProps, View } from "react-native";
-import { Formik } from "formik";
-import { useUser } from "../../hooks/context/useUser";
-import { TextInput } from "react-native-paper";
+import React from "react";
+import { StyleSheet, TouchableOpacityProps, View } from "react-native";
 import { Button } from "react-native-paper";
 import { colors } from "../../constants/Colors";
 interface MapButtonProps extends TouchableOpacityProps {
@@ -15,7 +12,7 @@ export function MapButton({ style, text, isLoading, onPress }: MapButtonProps) {
       <Button
         mode="contained"
         onPress={onPress}
-        buttonColor="rgba(255, 255, 255, 0.5)"
+        buttonColor="rgba(255, 255, 255, 0.7)"
         labelStyle={{ fontWeight: "600" }}
         textColor={colors.darkBlue}
         loading={isLoading}

@@ -1,31 +1,40 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Alert, BackHandler, StyleSheet, View } from "react-native";
 import { Formik } from "formik";
 import { initLoginFormData } from "./Login.utils";
 import { useUser } from "../../hooks/context/useUser";
-import { DefaultTheme, TextInput, Text } from "react-native-paper";
+import { DefaultTheme, TextInput, Text, HelperText } from "react-native-paper";
 import { Button } from "react-native-paper";
 import { colors } from "../../constants/Colors";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { NotLoggedNavigationProp } from "../../navigation/NotLogged";
 import { Topbar } from "../../components/Topbar/Topbar";
 import { Row } from "../../components/Containers/Row";
 
 export function Login() {
   const navigation = useNavigation<NotLoggedNavigationProp>();
-  const { login, isError, isLoading } = useUser();
+  const { login, isLoading, isCreatedAccount, isError, cleanState } = useUser();
   const [securePassword, setSecurePassword] = useState(true);
+
   const goBack = () => {
     navigation.goBack();
   };
+
   const navigateSignUp = () => {
     navigation.navigate("SignUp");
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      return cleanState();
+    }, []),
+  );
 
   return (
     <>
       <Topbar title={"Login"} onPress={goBack} />
       <View style={styles.container}>
+        {isCreatedAccount && <HelperText type={"info"}>The account has been successfully created.</HelperText>}
         <Formik initialValues={initLoginFormData} onSubmit={login}>
           {({ handleChange, handleSubmit, values }) => (
             <View style={styles.formikContainer}>
@@ -38,7 +47,7 @@ export function Login() {
                 textContentType="emailAddress"
                 keyboardType="email-address"
                 autoFocus
-                error={false}
+                error={isError}
                 style={{
                   backgroundColor: "#D5E4FF",
                 }}
@@ -58,6 +67,9 @@ export function Login() {
                 error={false}
                 style={styles.passwordInput}
               />
+              <HelperText visible={isError} type={"error"}>
+                Invalid email or password. Please try again.
+              </HelperText>
               <Button
                 mode="contained"
                 //@ts-ignore
@@ -65,19 +77,12 @@ export function Login() {
                 loading={isLoading}
                 style={styles.button}
                 textColor={colors.white}
-                buttonColor={colors.darkBlue}
-              >
+                buttonColor={colors.darkBlue}>
                 Submit
               </Button>
               <Row style={styles.signUpRow}>
                 <Text>Don't have an account?</Text>
-                <Button
-                  mode="text"
-                  labelStyle={styles.signUp}
-                  onPress={navigateSignUp}
-                  loading={isLoading}
-                  textColor={colors.darkBlue}
-                >
+                <Button mode="text" labelStyle={styles.signUp} onPress={navigateSignUp} textColor={colors.darkBlue}>
                   Sign up
                 </Button>
               </Row>

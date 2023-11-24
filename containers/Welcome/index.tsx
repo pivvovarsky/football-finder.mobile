@@ -84,18 +84,19 @@ export function Welcome() {
           coordinate={position}
         />
       </MapView>
-      <View style={{ marginTop: 10 }}>
+      <View style={styles.welcomeContainer}>
         <Text style={styles.welcomeHeader} variant="titleLarge">
           Welcome to
         </Text>
-        <View style={styles.welcomeHeader}>
-          <WelcomeIcon width={300} height={50} />
-        </View>
+        <WelcomeIcon width={300} height={50} />
       </View>
+
       <View>
-        <Text style={styles.welcomeText} variant="titleLarge">
-          Ready to explore?
-        </Text>
+        <View style={styles.welcomeTextContainer}>
+          <Text style={styles.welcomeText} variant="titleLarge">
+            Ready to explore?
+          </Text>
+        </View>
         <Row style={styles.buttonsContainer}>
           <MapButton
             onPress={navigateLogin}
@@ -121,23 +122,29 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     justifyContent: "space-between",
   },
-  welcomeHeader: {
-    backgroundColor: "rgba(255, 255, 255, 0.5)",
+  welcomeContainer: {
     textAlign: "center",
     alignItems: "center",
-    paddingHorizontal: layout.screenHorizontalPadding,
+    marginTop: 10,
+    marginHorizontal: layout.screenHorizontalPadding,
+    borderRadius: 60,
+    backgroundColor: "rgba(255, 255, 255, 0.5)",
+  },
+  welcomeHeader: {
     color: colors.darkBlue,
     fontWeight: "700",
+  },
+  welcomeTextContainer: {
+    backgroundColor: "rgba(255, 255, 255, 0.8)",
+    borderRadius: 60,
     marginHorizontal: 15,
   },
   welcomeText: {
-    backgroundColor: "rgba(255, 255, 255, 0.5)",
     textAlign: "center",
     alignItems: "center",
     paddingHorizontal: layout.screenHorizontalPadding,
     color: colors.darkBlue,
     fontWeight: "700",
-    marginHorizontal: 15,
   },
   buttonsContainer: {
     width: "100%",

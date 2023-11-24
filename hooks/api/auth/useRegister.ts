@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { api } from "../../services/API";
+import { api } from "../../../services/API";
 
 export interface RegisterEntry {
   email: string;

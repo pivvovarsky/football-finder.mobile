@@ -1,20 +1,18 @@
 import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
-import React, {
-  createContext,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { createContext, useCallback, useEffect, useMemo, useState } from "react";
+import navigation from "../navigation";
+import { BackHandler } from "react-native";
+import { NotLoggedNavigationProp } from "../navigation/NotLogged";
+import { useNavigation } from "@react-navigation/native";
 
-export interface LoginEntry {
+interface LoginEntry {
   email: string;
   password: string;
 }
-export interface RegisterEntry {
+interface RegisterEntry {
   email: string;
   password: string;
-  repeatPassword?: string;
+  confirmPassword?: string;
 }
 
 interface ContextProps {
@@ -25,6 +23,10 @@ interface ContextProps {
   isAuthenticated: boolean;
   isLoading: boolean;
   isError: boolean;
+  setIsCreatedAccount: React.Dispatch<React.SetStateAction<boolean>>;
+  setError: React.Dispatch<React.SetStateAction<boolean>>;
+  isCreatedAccount: boolean;
+  cleanState: () => void;
 }
 export const UserContext = createContext<ContextProps | null>(null);
 
@@ -32,6 +34,12 @@ export function UserProvider({ children }: React.PropsWithChildren<unknown>) {
   const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setError] = useState<boolean>(false);
+  const [isCreatedAccount, setIsCreatedAccount] = useState<boolean>(false);
+
+  const cleanState = () => {
+    setError(false);
+    setIsCreatedAccount(false);
+  };
 
   useEffect(() => {
     const unsubscribe = auth().onAuthStateChanged((user) => {
@@ -90,16 +98,18 @@ export function UserProvider({ children }: React.PropsWithChildren<unknown>) {
     () => ({
       login,
       logout,
-      user,
       setUser,
+      setIsCreatedAccount,
+      setError,
+      cleanState,
+      isCreatedAccount,
+      user,
       isAuthenticated,
       isLoading,
       isError,
     }),
-    [login, logout, user, isAuthenticated, isLoading, isError]
+    [login, logout, setIsCreatedAccount, setError, isCreatedAccount, user, isAuthenticated, isLoading, isError],
   );
 
-  return (
-    <UserContext.Provider value={userContext}>{children}</UserContext.Provider>
-  );
+  return <UserContext.Provider value={userContext}>{children}</UserContext.Provider>;
 }
