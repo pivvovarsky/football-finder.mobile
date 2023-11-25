@@ -2,7 +2,7 @@ import React from "react";
 import { StatusBar, StyleSheet } from "react-native";
 import { AppProviders } from "./context/AppProviders";
 import { DefaultTheme, PaperProvider } from "react-native-paper";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 import Navigation from "./navigation";
 import { colors } from "./constants/Colors";
 
@@ -18,9 +18,10 @@ function App(): JSX.Element {
       text: colors.darkBlue,
     },
   };
+
   return (
     <AppProviders>
-      <SafeAreaView style={styles.safeArea} edges={["left", "right", "top"]}>
+      <SafeAreaView style={styles.safeArea} edges={["left", "right"]}>
         <PaperProvider theme={theme}>
           <StatusBar barStyle="dark-content" />
           <Navigation />

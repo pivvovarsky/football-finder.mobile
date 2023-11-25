@@ -55,7 +55,7 @@ export function SignUp() {
 
   return (
     <>
-      <Topbar title={"Sign Up"} onPress={goBack} />
+      <Topbar title={"Sign Up"} onPress={goBack} arrowIcon />
       <View style={styles.container}>
         <Formik
           initialValues={initRegisterFormData}

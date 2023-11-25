@@ -36,7 +36,7 @@ export function Login() {
 
   return (
     <>
-      <Topbar title={"Login"} onPress={goBack} />
+      <Topbar title={"Login"} onPress={goBack} arrowIcon />
       <View style={styles.container}>
         <Snackbar
           visible={isCreatedAccount}

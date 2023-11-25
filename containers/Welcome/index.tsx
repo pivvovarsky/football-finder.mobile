@@ -10,9 +10,11 @@ import { Row } from "../../components/Containers/Row";
 import { useNavigation } from "@react-navigation/native";
 import { NotLoggedNavigationProp } from "../../navigation/NotLogged";
 import WelcomeIcon from "../../assets/icons/default.svg";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export function Welcome() {
   const navigation = useNavigation<NotLoggedNavigationProp>();
+  const insets = useSafeAreaInsets();
 
   const [position, setPosition] = useState({
     latitude: 50.19293799535422,
@@ -49,7 +51,7 @@ export function Welcome() {
   }, []);
 
   return (
-    <View style={styles.map}>
+    <View style={[styles.map, { paddingTop: Math.max(insets.top, 15) }]}>
       <MapView
         // remove if not using Google Maps
         provider={PROVIDER_GOOGLE}
