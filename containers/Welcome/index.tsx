@@ -1,8 +1,8 @@
 import Geolocation from "@react-native-community/geolocation";
 import { useEffect, useState } from "react";
 import { Image, ImageSourcePropType, PermissionsAndroid, Platform, StyleSheet, View } from "react-native";
-import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
-import { Icon, Text } from "react-native-paper";
+import MapView, { MapMarkerProps, Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import { ActivityIndicator, Icon, Text } from "react-native-paper";
 import { layout, window } from "../../constants/Layout";
 import { colors } from "../../constants/Colors";
 import { MapButton } from "../../components/Map/MapButton";
@@ -11,17 +11,22 @@ import { useNavigation } from "@react-navigation/native";
 import { NotLoggedNavigationProp } from "../../navigation/NotLogged";
 import WelcomeIcon from "../../assets/icons/default.svg";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Map } from "./components/Map";
+import { StadiumData, useGetStadiums } from "../../hooks/api/stadiums/getStadiums";
+import { MarkerProps } from "react-native-svg";
+import { ResourcesLoader } from "../../components/Loaders/ResourcesLoader";
 
 export function Welcome() {
   const navigation = useNavigation<NotLoggedNavigationProp>();
+  const { data: stadiums, isLoading } = useGetStadiums();
+  const [stadiumsData, setStadiumsData] = useState<StadiumData[]>([]);
   const insets = useSafeAreaInsets();
 
-  const [position, setPosition] = useState({
-    latitude: 50.19293799535422,
-    latitudeDelta: 0.0421,
-    longitude: 18.974965056422143,
-    longitudeDelta: 0.0421, //to change
-  });
+  useEffect(() => {
+    if (!!stadiums?.data) {
+      setStadiumsData(stadiums.data);
+    }
+  }, [stadiums?.data]);
 
   const navigateSignUp = () => {
     navigation.navigate("SignUp");
@@ -31,76 +36,35 @@ export function Welcome() {
     navigation.navigate("Login");
   };
 
-  useEffect(() => {
-    Geolocation.getCurrentPosition(
-      (pos) => {
-        const crd = pos.coords;
-        setPosition({
-          latitude: crd.latitude,
-          longitude: crd.longitude,
-          latitudeDelta: 0.0421,
-          longitudeDelta: 0.0421,
-        });
-      },
-      () => {},
-      {
-        enableHighAccuracy: true,
-        timeout: 10000,
-      },
-    );
-  }, []);
-
   return (
-    <View style={[styles.map, { paddingTop: Math.max(insets.top, 15) }]}>
-      <MapView
-        // remove if not using Google Maps
-        provider={PROVIDER_GOOGLE}
-        region={position}
-        style={styles.map}
-        loadingBackgroundColor={colors.white}
-        initialRegion={position}
-        showsUserLocation={true}
-        showsMyLocationButton={true}
-        followsUserLocation={true}
-        showsCompass={true}
-        scrollEnabled={true}
-        zoomEnabled={true}
-        pitchEnabled={true}
-        rotateEnabled={true}
-        loadingEnabled={true}>
-        <Marker
-          isPreselected={true}
-          title="Yor are here"
-          description="Let's look for some football game!"
-          coordinate={position}
-        />
-      </MapView>
-
-      <View style={styles.welcomeContainer}>
-        <WelcomeIcon width={300} height={50} />
-      </View>
-
-      <View style={{ marginBottom: Platform.OS === "android" ? 60 : window.width * 0.27 }}>
-        <View style={styles.welcomeTextContainer}>
-          <Text style={styles.welcomeText} variant="titleLarge">
-            Ready to explore?
-          </Text>
-        </View>
-        <Row style={styles.buttonsContainer}>
-          <MapButton onPress={navigateLogin} style={styles.button} text={"Login"} isLoading={false} />
-          <MapButton onPress={navigateSignUp} style={styles.button} text={"Sign Up"} isLoading={false} />
-        </Row>
-      </View>
+    <View style={[styles.container, { paddingTop: Math.max(insets.top, 15) }]}>
+      {isLoading ? (
+        <ActivityIndicator size={"large"} color={colors.darkGreen} />
+      ) : (
+        <>
+          <Map stadiums={stadiumsData} />
+          <View style={styles.welcomeContainer}>
+            <WelcomeIcon width={300} height={50} />
+          </View>
+          <View style={{ marginBottom: Platform.OS === "android" ? 60 : window.width * 0.27 }}>
+            <View style={styles.welcomeTextContainer}>
+              <Text style={styles.welcomeText} variant="titleLarge">
+                Ready to explore?
+              </Text>
+            </View>
+            <Row style={styles.buttonsContainer}>
+              <MapButton onPress={navigateLogin} style={styles.button} text={"Login"} isLoading={false} />
+              <MapButton onPress={navigateSignUp} style={styles.button} text={"Sign Up"} isLoading={false} />
+            </Row>
+          </View>
+        </>
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  map: {
-    flex: 1,
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: "space-between",
-  },
+  container: { flex: 1, ...StyleSheet.absoluteFillObject, justifyContent: "space-between" },
   textContainer: {
     textAlign: "center",
     alignItems: "center",
