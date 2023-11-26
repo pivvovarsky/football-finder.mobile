@@ -1,6 +1,6 @@
 import Geolocation from "@react-native-community/geolocation";
 import { useEffect, useState } from "react";
-import { Image, ImageSourcePropType, StyleSheet, View } from "react-native";
+import { Image, ImageSourcePropType, PermissionsAndroid, StyleSheet, View } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { Icon, Text } from "react-native-paper";
 import { layout, window } from "../../constants/Layout";
@@ -22,6 +22,10 @@ export function Welcome() {
     longitude: 18.974965056422143,
     longitudeDelta: 0.0421, //to change
   });
+
+  useEffect(() => {
+    console.log(position);
+  }, []);
 
   const navigateSignUp = () => {
     navigation.navigate("SignUp");
@@ -82,7 +86,7 @@ export function Welcome() {
         <WelcomeIcon width={300} height={50} />
       </View>
 
-      <View>
+      <View style={{ marginBottom: window.width * 0.3 }}>
         <View style={styles.welcomeTextContainer}>
           <Text style={styles.welcomeText} variant="titleLarge">
             Ready to explore?
@@ -130,7 +134,6 @@ const styles = StyleSheet.create({
   },
   buttonsContainer: {
     width: "100%",
-    marginBottom: window.height * 0.15,
   },
   button: {
     width: window.width * 0.5,

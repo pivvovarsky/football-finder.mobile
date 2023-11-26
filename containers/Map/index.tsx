@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { PermissionsAndroid, StyleSheet, Text, View } from "react-native";
 import { Formik } from "formik";
 import { useUser } from "../../hooks/context/useUser";
 import { TextInput } from "react-native-paper";
@@ -31,6 +31,7 @@ export function Map() {
   useEffect(() => {
     Geolocation.getCurrentPosition((pos) => {
       const crd = pos.coords;
+
       setPosition({
         latitude: crd.latitude,
         longitude: crd.longitude,
@@ -55,8 +56,7 @@ export function Map() {
       zoomEnabled={true}
       pitchEnabled={true}
       rotateEnabled={true}
-      loadingEnabled={true}
-    >
+      loadingEnabled={true}>
       <Marker
         isPreselected={true}
         title="Yor are here"

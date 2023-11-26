@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { colors } from "../../constants/Colors";
 import { Appbar } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -16,7 +16,7 @@ export const Topbar = ({ title, arrowIcon = false, onPress }: TopbarProps) => {
     <Appbar.Header
       statusBarHeight={0}
       shouldRasterizeIOS
-      style={[styles.container, { marginTop: Math.max(insets.top - 20, 0) }]}
+      style={[styles.container, { marginTop: Math.max(insets.top, 0) }]}
       dark={false}
       theme={{
         //@ts-ignore
@@ -32,5 +32,5 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 10,
   },
-  title: { fontWeight: "700", color: colors.darkBlue, alignSelf: "center" },
+  title: { fontWeight: "700", color: colors.darkBlue, alignSelf: "center", paddingRight: 15 },
 });

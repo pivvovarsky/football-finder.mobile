@@ -56,24 +56,26 @@ export function UserProvider({ children }: React.PropsWithChildren<unknown>) {
   }, []);
 
   const login = useCallback((data: LoginEntry) => {
-    setIsLoading(true);
-    auth()
-      .signInWithEmailAndPassword(data.email, data.password)
-      .then((credentials) => {
-        if (credentials.user && credentials.user.emailVerified) {
-          setUser(credentials.user);
-          setError(false);
-        } else {
-          setUser(null);
+    if (data.email && data.password) {
+      setIsLoading(true);
+      auth()
+        .signInWithEmailAndPassword(data.email, data.password)
+        .then((credentials) => {
+          if (credentials.user && credentials.user.emailVerified) {
+            setUser(credentials.user);
+            setError(false);
+          } else {
+            setUser(null);
+            setError(true);
+            logout();
+          }
+        })
+        .catch((err: Error) => {
           setError(true);
-          logout();
-        }
-      })
-      .catch((err: Error) => {
-        setError(true);
-        console.error(err);
-      })
-      .finally(() => setIsLoading(false));
+          console.error(err);
+        })
+        .finally(() => setIsLoading(false));
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
