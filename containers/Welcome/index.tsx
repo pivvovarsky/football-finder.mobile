@@ -1,6 +1,6 @@
 import Geolocation from "@react-native-community/geolocation";
 import { useEffect, useState } from "react";
-import { Image, ImageSourcePropType, PermissionsAndroid, StyleSheet, View } from "react-native";
+import { Image, ImageSourcePropType, PermissionsAndroid, Platform, StyleSheet, View } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { Icon, Text } from "react-native-paper";
 import { layout, window } from "../../constants/Layout";
@@ -22,10 +22,6 @@ export function Welcome() {
     longitude: 18.974965056422143,
     longitudeDelta: 0.0421, //to change
   });
-
-  useEffect(() => {
-    console.log(position);
-  }, []);
 
   const navigateSignUp = () => {
     navigation.navigate("SignUp");
@@ -79,14 +75,12 @@ export function Welcome() {
           coordinate={position}
         />
       </MapView>
+
       <View style={styles.welcomeContainer}>
-        <Text style={styles.welcomeHeader} variant="titleLarge">
-          Welcome to
-        </Text>
         <WelcomeIcon width={300} height={50} />
       </View>
 
-      <View style={{ marginBottom: window.width * 0.3 }}>
+      <View style={{ marginBottom: Platform.OS === "android" ? 60 : window.width * 0.27 }}>
         <View style={styles.welcomeTextContainer}>
           <Text style={styles.welcomeText} variant="titleLarge">
             Ready to explore?
@@ -107,18 +101,17 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     justifyContent: "space-between",
   },
-  welcomeContainer: {
+  textContainer: {
     textAlign: "center",
     alignItems: "center",
-    marginTop: 10,
+  },
+  welcomeContainer: {
     paddingVertical: 10,
+    paddingHorizontal: 20,
     marginHorizontal: layout.screenHorizontalPadding,
+    marginTop: Platform.OS === "android" ? 40 : 0,
     borderRadius: 60,
     backgroundColor: "rgba(255, 255, 255, 0.5)",
-  },
-  welcomeHeader: {
-    color: colors.darkBlue,
-    fontWeight: "700",
   },
   welcomeTextContainer: {
     backgroundColor: "rgba(255, 255, 255, 0.8)",
