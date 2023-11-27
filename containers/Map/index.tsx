@@ -1,74 +1,46 @@
-import React, { useEffect, useState } from "react";
-import { PermissionsAndroid, StyleSheet, Text, View } from "react-native";
-import { Formik } from "formik";
-import { useUser } from "../../hooks/context/useUser";
-import { TextInput } from "react-native-paper";
-import { Button } from "react-native-paper";
-import MapView, {
-  Callout,
-  Circle,
-  Geojson,
-  Heatmap,
-  Marker,
-  Overlay,
-  PROVIDER_GOOGLE,
-  Polygon,
-} from "react-native-maps";
-import Geolocation from "@react-native-community/geolocation";
+import React, { useState } from "react";
+import { CustomMap } from "../../components/Map/CustomMap";
+import { useMap } from "../../hooks/context/useMap";
+import { StyleSheet, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { ActivityIndicator } from "react-native-paper";
+import { colors } from "../../constants/Colors";
+import { LocationCard } from "../../components/Map/LocationCard";
+import { StadiumData } from "../../hooks/api/stadiums/getStadiums";
 
 export function Map() {
-  const { login, isError, isLoading } = useUser();
-  const [position, setPosition] = useState({
-    latitude: 50.19293799535422,
-    latitudeDelta: 0.0421,
-    longitude: 18.974965056422143,
-    longitudeDelta: 0.0421, //to change
-  });
-  useEffect(() => {
-    console.log(position);
-  }, []);
+  const { stadiumsData, isLoadingStadiumsData } = useMap();
+  const [locationDetails, setLocationDetails] = useState<StadiumData | null>(null);
 
-  useEffect(() => {
-    Geolocation.getCurrentPosition((pos) => {
-      const crd = pos.coords;
-
-      setPosition({
-        latitude: crd.latitude,
-        longitude: crd.longitude,
-        latitudeDelta: 0.0421,
-        longitudeDelta: 0.0421,
-      });
-    });
-  }, []);
-
+  const updateLocationDetails = (stadium: StadiumData | null) => {
+    if (!stadium) {
+      setLocationDetails(null);
+    } else setLocationDetails(stadium);
+  };
+  const insets = useSafeAreaInsets();
   return (
-    <MapView
-      // remove if not using Google Maps
-      provider={PROVIDER_GOOGLE}
-      region={position}
-      style={styles.map}
-      initialRegion={position}
-      showsUserLocation={true}
-      showsMyLocationButton={true}
-      followsUserLocation={true}
-      showsCompass={true}
-      scrollEnabled={true}
-      zoomEnabled={true}
-      pitchEnabled={true}
-      rotateEnabled={true}
-      loadingEnabled={true}>
-      <Marker
-        isPreselected={true}
-        title="Yor are here"
-        description="Let's look for some football game!"
-        coordinate={position}
-      />
-    </MapView>
+    <View style={[styles.container, { paddingTop: Math.max(insets.top, 15) }]}>
+      {isLoadingStadiumsData ? (
+        <ActivityIndicator size={"large"} color={colors.darkGreen} />
+      ) : (
+        <>
+          <CustomMap stadiums={stadiumsData} onMarkerPress={updateLocationDetails} />
+          {!!locationDetails ? (
+            <LocationCard
+              style={styles.card}
+              locationDetails={locationDetails}
+              updateLocationDetails={updateLocationDetails}
+              version={"logged"}
+            />
+          ) : (
+            <></>
+          )}
+        </>
+      )}
+    </View>
   );
 }
-
 const styles = StyleSheet.create({
-  map: {
-    ...StyleSheet.absoluteFillObject,
-  },
+  container: { flex: 1, ...StyleSheet.absoluteFillObject, justifyContent: "flex-end" },
+  card: {},
 });

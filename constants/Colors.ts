@@ -22,4 +22,5 @@ export const colors = {
   failed: "#611D1D",
   blueViolet: "#8A2BE2",
   lightBlue: "#D5E4FF",
+  orange: "#ffcc00",
 };

@@ -1,8 +1,6 @@
-import Geolocation from "@react-native-community/geolocation";
-import { useEffect, useState } from "react";
-import { Image, ImageSourcePropType, PermissionsAndroid, Platform, StyleSheet, View } from "react-native";
-import MapView, { MapMarkerProps, Marker, PROVIDER_GOOGLE } from "react-native-maps";
-import { ActivityIndicator, Icon, Text } from "react-native-paper";
+import { useState } from "react";
+import { Platform, StyleSheet, View } from "react-native";
+import { ActivityIndicator, Text } from "react-native-paper";
 import { layout, window } from "../../constants/Layout";
 import { colors } from "../../constants/Colors";
 import { MapButton } from "../../components/Map/MapButton";
@@ -11,22 +9,22 @@ import { useNavigation } from "@react-navigation/native";
 import { NotLoggedNavigationProp } from "../../navigation/NotLogged";
 import WelcomeIcon from "../../assets/icons/default.svg";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Map } from "./components/Map";
-import { StadiumData, useGetStadiums } from "../../hooks/api/stadiums/getStadiums";
-import { MarkerProps } from "react-native-svg";
-import { ResourcesLoader } from "../../components/Loaders/ResourcesLoader";
+import { CustomMap } from "../../components/Map/CustomMap";
+import { LocationCard } from "../../components/Map/LocationCard";
+import { useMap } from "../../hooks/context/useMap";
+import { StadiumData } from "../../hooks/api/stadiums/getStadiums";
 
 export function Welcome() {
   const navigation = useNavigation<NotLoggedNavigationProp>();
-  const { data: stadiums, isLoading } = useGetStadiums();
-  const [stadiumsData, setStadiumsData] = useState<StadiumData[]>([]);
   const insets = useSafeAreaInsets();
+  const { isLoadingStadiumsData, stadiumsData } = useMap();
+  const [locationDetails, setLocationDetails] = useState<StadiumData | null>(null);
 
-  useEffect(() => {
-    if (!!stadiums?.data) {
-      setStadiumsData(stadiums.data);
-    }
-  }, [stadiums?.data]);
+  const updateLocationDetails = (stadium: StadiumData | null) => {
+    if (!stadium) {
+      setLocationDetails(null);
+    } else setLocationDetails(stadium);
+  };
 
   const navigateSignUp = () => {
     navigation.navigate("SignUp");
@@ -38,25 +36,34 @@ export function Welcome() {
 
   return (
     <View style={[styles.container, { paddingTop: Math.max(insets.top, 15) }]}>
-      {isLoading ? (
+      {isLoadingStadiumsData ? (
         <ActivityIndicator size={"large"} color={colors.darkGreen} />
       ) : (
         <>
-          <Map stadiums={stadiumsData} />
+          <CustomMap stadiums={stadiumsData} onMarkerPress={updateLocationDetails} />
           <View style={styles.welcomeContainer}>
             <WelcomeIcon width={300} height={50} />
           </View>
-          <View style={{ marginBottom: Platform.OS === "android" ? 60 : window.width * 0.27 }}>
-            <View style={styles.welcomeTextContainer}>
-              <Text style={styles.welcomeText} variant="titleLarge">
-                Ready to explore?
-              </Text>
+
+          {!!locationDetails ? (
+            <LocationCard
+              version="public"
+              locationDetails={locationDetails}
+              updateLocationDetails={updateLocationDetails}
+            />
+          ) : (
+            <View style={{ marginBottom: Platform.OS === "android" ? 60 : window.width * 0.27 }}>
+              <View style={styles.welcomeTextContainer}>
+                <Text style={styles.welcomeText} variant="titleLarge">
+                  Ready to explore?
+                </Text>
+              </View>
+              <Row style={styles.buttonsContainer}>
+                <MapButton onPress={navigateLogin} style={styles.button} text={"Login"} isLoading={false} />
+                <MapButton onPress={navigateSignUp} style={styles.button} text={"Sign Up"} isLoading={false} />
+              </Row>
             </View>
-            <Row style={styles.buttonsContainer}>
-              <MapButton onPress={navigateLogin} style={styles.button} text={"Login"} isLoading={false} />
-              <MapButton onPress={navigateSignUp} style={styles.button} text={"Sign Up"} isLoading={false} />
-            </Row>
-          </View>
+          )}
         </>
       )}
     </View>
