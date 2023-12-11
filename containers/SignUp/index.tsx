@@ -64,7 +64,7 @@ export function SignUp() {
             signup(values, resetForm);
           }}>
           {({ handleChange, handleBlur, handleSubmit, errors, values, touched }) => (
-            <View style={styles.formikContainer}>
+            <View>
               <TextInput
                 label="Email"
                 returnKeyType="next"
@@ -163,7 +163,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
   },
   text: { fontSize: 20 },
-  formikContainer: {},
   passwordInput: {
     marginTop: 10,
     backgroundColor: "#D5E4FF",

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useUser } from "../../hooks/context/useUser";
-import { SegmentedButtons, TextInput } from "react-native-paper";
+import { SegmentedButtons } from "react-native-paper";
 import { Button } from "react-native-paper";
 import { Topbar } from "../../components/Topbar/Topbar";
 import { openEmailbox } from "./account.utils";
@@ -41,7 +41,6 @@ export function Account() {
       {value === NavTab.Profile && <Profile />}
       {value === NavTab.Contact && <Contact />}
 
-      <Button onPress={openEmailbox}>open email box</Button>
       <Button onPress={logout}>Logout</Button>
     </View>
   );

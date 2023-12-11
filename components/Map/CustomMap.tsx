@@ -1,9 +1,9 @@
-import Geolocation from "@react-native-community/geolocation";
-import React, { useEffect, useState } from "react";
-import { Image, StyleSheet } from "react-native";
-import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import React, { useState } from "react";
+import { Image, StyleSheet, TouchableOpacity } from "react-native";
+import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { colors } from "../../constants/Colors";
 import { StadiumData } from "../../hooks/api/stadiums/getStadiums";
+
 interface MapProps {
   stadiums: StadiumData[];
   onMarkerPress: (stadium: StadiumData | null) => void;
@@ -16,24 +16,24 @@ export function CustomMap({ stadiums, onMarkerPress }: MapProps) {
     longitudeDelta: 0.0421, //to change
   });
 
-  useEffect(() => {
-    Geolocation.getCurrentPosition(
-      (pos) => {
-        const crd = pos.coords;
-        setPosition({
-          latitude: crd.latitude,
-          longitude: crd.longitude,
-          latitudeDelta: 0.0421,
-          longitudeDelta: 0.0421,
-        });
-      },
-      () => {},
-      {
-        enableHighAccuracy: true,
-        timeout: 10000,
-      },
-    );
-  }, []);
+  // useEffect(() => {
+  //   Geolocation.getCurrentPosition(
+  //     (pos) => {
+  //       const crd = pos.coords;
+  //       setPosition({
+  //         latitude: crd.latitude,
+  //         longitude: crd.longitude,
+  //         latitudeDelta: 0.0421,
+  //         longitudeDelta: 0.0421,
+  //       });
+  //     },
+  //     () => {},
+  //     {
+  //       enableHighAccuracy: true,
+  //       timeout: 10000,
+  //     },
+  //   );
+  // }, []);
 
   return (
     <>
@@ -60,7 +60,12 @@ export function CustomMap({ stadiums, onMarkerPress }: MapProps) {
           return (
             <Marker
               key={stadium.id}
-              onPress={() => onMarkerPress(stadium)}
+              onSelect={() => onMarkerPress(stadium)}
+              onPress={(e) => {
+                e.stopPropagation();
+                onMarkerPress(stadium);
+              }}
+              style={styles.markerPadding}
               coordinate={{ latitude: stadium.latitude, longitude: stadium.longitude }}>
               <Image style={{ height: 35, width: 35 }} source={require("../../assets/images/stadium.png")} />
             </Marker>
@@ -83,4 +88,5 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     justifyContent: "space-between",
   },
+  markerPadding: { padding: 20 },
 });

@@ -1,36 +1,41 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { Formik } from "formik";
-
-import { SegmentedButtons, TextInput } from "react-native-paper";
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { Text } from "react-native-paper";
 import { Button } from "react-native-paper";
-import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
-
-enum NavTab {
-  Profile = "Profile",
-  Contact = "Contact",
-}
+import { openEmailbox } from "../account.utils";
+import { colors } from "../../../constants/Colors";
 
 export function Contact() {
-  const [value, setValue] = useState<NavTab>(NavTab.Profile);
   return (
-    <View>
-      <TextInput
-        multiline
-        mode="outlined"
-        label={"Contact"}
-        dense
-        style={{ height: 100 }}
-        placeholder="Enter the message here..."
-      />
-      {/* <Button onPress={openEmailbox}>open email box</Button>
-      <Button onPress={logout}>Logout</Button> */}
+    <View style={styles.formContainer}>
+      <Text
+        lineBreakMode="head"
+        variant="titleSmall"
+        style={{ color: colors.darkBlue, paddingHorizontal: 5, paddingVertical: 10, textAlign: "center" }}>
+        {`Have you encountered a problem?\nReport the problem to us, we will try to solve the problem.`}
+      </Text>
+      <Text
+        lineBreakMode="head"
+        variant="titleSmall"
+        style={{
+          color: colors.simple,
+          paddingHorizontal: 5,
+          fontWeight: "700",
+          paddingVertical: 10,
+          textAlign: "center",
+        }}>
+        {`Would you like to share your opinion?\n Send us an email!`}
+      </Text>
+      <Button mode="contained" onPress={openEmailbox}>
+        Open email box
+      </Button>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  map: {
-    ...StyleSheet.absoluteFillObject,
+  button: { marginVertical: 10 },
+  formContainer: {
+    padding: 20,
   },
 });
