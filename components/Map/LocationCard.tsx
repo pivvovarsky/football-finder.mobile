@@ -51,7 +51,7 @@ export function LocationCard({ locationDetails, version, style, updateLocationDe
             resizeMode="cover"
             style={styles.cardImage}
           />
-
+          <StarsRating />
           <Card.Actions>
             <Button
               buttonColor={colors.darkBlue}

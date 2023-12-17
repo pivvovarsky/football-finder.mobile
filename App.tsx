@@ -1,17 +1,16 @@
 import React from "react";
 import { StatusBar, StyleSheet } from "react-native";
 import { AppProviders } from "./context/AppProviders";
-import { DefaultTheme, PaperProvider } from "react-native-paper";
-import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
+import { DefaultTheme, PaperProvider, configureFonts } from "react-native-paper";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Navigation from "./navigation";
 import { colors } from "./constants/Colors";
+import { fonts } from "./constants/Fonts";
 
 function App(): JSX.Element {
   const theme = {
     ...DefaultTheme,
-    // Specify custom property
     dark: false,
-    // Specify custom property in nested object
     colors: {
       ...DefaultTheme.colors,
       primary: colors.darkBlue,

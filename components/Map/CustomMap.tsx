@@ -47,7 +47,8 @@ export function CustomMap({ stadiums, onMarkerPress }: MapProps) {
         showsUserLocation={true}
         showsMyLocationButton={true}
         followsUserLocation={true}
-        onPress={() => {
+        onPress={(e) => {
+          e.stopPropagation();
           onMarkerPress(null);
         }}
         showsCompass={true}

@@ -11,6 +11,7 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { NotLoggedNavigationProp } from "../../navigation/NotLogged";
 import { RegisterEntry, useRegister } from "../../hooks/api/auth/useRegister";
 import { Row } from "../../components/Containers/Row";
+import { fonts } from "../../constants/Fonts";
 
 export function SignUp() {
   const navigation = useNavigation<NotLoggedNavigationProp>();
@@ -138,12 +139,13 @@ export function SignUp() {
                 loading={isLoading}
                 style={styles.button}
                 textColor={colors.white}
+                labelStyle={{ fontFamily: fonts.bold }}
                 buttonColor={colors.darkBlue}>
                 Submit
               </Button>
               <Row style={styles.signUpRow}>
-                <Text>Already have an account?</Text>
-                <Button mode="text" labelStyle={styles.signUp} onPress={navigateLogin} textColor={colors.darkBlue}>
+                <Text style={{ fontFamily: fonts.regular }}>Already have an account?</Text>
+                <Button mode="text" labelStyle={styles.login} onPress={navigateLogin} textColor={colors.darkBlue}>
                   Login
                 </Button>
               </Row>
@@ -172,6 +174,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingTop: 5,
   },
-  signUp: { textDecorationLine: "underline", paddingBottom: 1 },
+  login: { textDecorationLine: "underline", paddingBottom: 1, fontFamily: fonts.medium },
   button: { marginTop: 10 },
 });

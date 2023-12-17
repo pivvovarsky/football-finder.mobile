@@ -29,14 +29,10 @@ export class API {
 
   get = async <REQ, RES = undefined>(
     url: string,
-    config?: AxiosRequestConfig | undefined
+    config?: AxiosRequestConfig | undefined,
   ): Promise<AxiosResponse<RES>> => {
     // this.logger.debug("GET: ", { url, config });
-    const response = await this.instance.get<REQ, AxiosResponse<RES>>(
-      url,
-      config
-    );
-    // this.logger.debug("GET: ", response);
+    const response = await this.instance.get<REQ, AxiosResponse<RES>>(url, config);
 
     return response;
   };
@@ -44,14 +40,10 @@ export class API {
   post = async <REQ, RES = undefined>(
     url: string,
     data?: unknown,
-    config?: AxiosRequestConfig | undefined
+    config?: AxiosRequestConfig | undefined,
   ): Promise<AxiosResponse<RES>> => {
     // this.logger.debug("POST: ", { url, data, config });
-    const response = await this.instance.post<REQ, AxiosResponse<RES>>(
-      url,
-      data,
-      config
-    );
+    const response = await this.instance.post<REQ, AxiosResponse<RES>>(url, data, config);
     // this.logger.debug("POST: ", response);
 
     return response;
@@ -60,14 +52,10 @@ export class API {
   put = async <REQ, RES = undefined>(
     url: string,
     data?: unknown,
-    config?: AxiosRequestConfig | undefined
+    config?: AxiosRequestConfig | undefined,
   ): Promise<AxiosResponse<RES>> => {
     console.debug("PUT: ", { url, data, config });
-    const response = await this.instance.put<REQ, AxiosResponse<RES>>(
-      url,
-      data,
-      config
-    );
+    const response = await this.instance.put<REQ, AxiosResponse<RES>>(url, data, config);
     console.debug("PUT: ", response);
 
     return response;
@@ -76,14 +64,10 @@ export class API {
   patch = async <REQ, RES = undefined>(
     url: string,
     data?: unknown,
-    config?: AxiosRequestConfig | undefined
+    config?: AxiosRequestConfig | undefined,
   ): Promise<AxiosResponse<RES>> => {
     console.debug("PATCH: ", { url, data, config });
-    const response = await this.instance.patch<REQ, AxiosResponse<RES>>(
-      url,
-      data,
-      config
-    );
+    const response = await this.instance.patch<REQ, AxiosResponse<RES>>(url, data, config);
     console.debug("PATCH: ", response);
 
     return response;
@@ -91,13 +75,10 @@ export class API {
 
   delete = async <REQ, RES = undefined>(
     url: string,
-    config?: AxiosRequestConfig | undefined
+    config?: AxiosRequestConfig | undefined,
   ): Promise<AxiosResponse<RES>> => {
     console.debug("DELETE: ", { url, config });
-    const response = await this.instance.delete<REQ, AxiosResponse<RES>>(
-      url,
-      config
-    );
+    const response = await this.instance.delete<REQ, AxiosResponse<RES>>(url, config);
     console.debug("DELETE: ", response);
 
     return response;

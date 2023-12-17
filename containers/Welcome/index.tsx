@@ -13,6 +13,7 @@ import { CustomMap } from "../../components/Map/CustomMap";
 import { LocationCard } from "../../components/Map/LocationCard";
 import { useMap } from "../../hooks/context/useMap";
 import { StadiumData } from "../../hooks/api/stadiums/getStadiums";
+import { fonts } from "../../constants/Fonts";
 
 export function Welcome() {
   const navigation = useNavigation<NotLoggedNavigationProp>();
@@ -94,7 +95,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: layout.screenHorizontalPadding,
     color: colors.darkBlue,
-    fontWeight: "700",
+    fontFamily: fonts.medium,
   },
   buttonsContainer: {
     width: "100%",
