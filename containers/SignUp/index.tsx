@@ -45,7 +45,7 @@ export function SignUp() {
           setErrorText("Account already in use.");
           return;
         } else {
-          setErrorText("Something went wrong.");
+          setErrorText("Something went wrong. Try again later.");
         }
       },
     });

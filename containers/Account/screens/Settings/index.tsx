@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { Formik, FormikState } from "formik";
 import { HelperText, TextInput } from "react-native-paper";
 import { Button } from "react-native-paper";
-import { ChangePasswordValidationSchema, initChangePasswordFormData } from "./utils/Signup.utils";
+import { ChangePasswordValidationSchema, initChangePasswordFormData } from "./utils/ChangePassword.utils";
 import { ChangePasswordEntry, useChangePassword } from "../../../../hooks/api/auth/useChangePassword";
 import { colors } from "../../../../constants/Colors";
 import { fonts } from "../../../../constants/Fonts";
@@ -30,7 +30,7 @@ export function Settings() {
         setIsPasswordChanged(true);
       },
       onError: (error: any) => {
-        setErrorText("Something went wrong.");
+        setErrorText("Something went wrong. Try again later.");
       },
     });
   };
@@ -41,7 +41,7 @@ export function Settings() {
         initialValues={initChangePasswordFormData}
         validationSchema={ChangePasswordValidationSchema}
         onSubmit={(values, { resetForm }) => {
-          chPassword(values, resetForm);
+          changePassoword(values, resetForm);
         }}>
         {({ handleChange, handleBlur, handleSubmit, errors, values, touched }) => (
           <View>
