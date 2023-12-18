@@ -1,10 +1,12 @@
 import React from "react";
-import { Linking, StyleSheet, ViewProps } from "react-native";
-import { Button, Card, Text } from "react-native-paper";
+import { Linking, StyleSheet, ViewProps, Text, View } from "react-native";
+import { Button, Card } from "react-native-paper";
 import { colors } from "../../constants/Colors";
 import { StadiumData } from "../../hooks/api/stadiums/getStadiums";
 import { openAddressOnMap } from "../../containers/Map/map.utils";
 import { StarsRating } from "../Ratings/StarsRating";
+import { fonts } from "../../constants/Fonts";
+import { Row } from "../Containers/Row";
 interface MapButtonProps extends ViewProps {
   locationDetails: StadiumData | null;
   updateLocationDetails: (stadium: StadiumData | null) => void;
@@ -20,10 +22,8 @@ export function LocationCard({ locationDetails, version, style, updateLocationDe
       {version === "public" ? (
         <Card style={[styles.container, style]}>
           <Card.Content>
-            <Text variant="titleLarge" style={styles.cardTitle}>
-              {locationDetails?.name ?? ""}
-            </Text>
-            <Text variant="bodyMedium">{locationDetails?.description ?? ""}</Text>
+            <Text style={styles.cardTitle}>{locationDetails?.name ?? ""}</Text>
+            <Text style={styles.description}>{locationDetails?.description ?? ""}</Text>
           </Card.Content>
           <Card.Cover
             source={{ uri: locationDetails?.imageUrl ?? "" }}
@@ -40,10 +40,8 @@ export function LocationCard({ locationDetails, version, style, updateLocationDe
       ) : (
         <Card style={[styles.container, style]}>
           <Card.Content>
-            <Text variant="titleLarge" style={styles.cardTitle}>
-              {locationDetails?.name ?? ""}
-            </Text>
-            <Text variant="bodyMedium">{locationDetails?.description ?? ""}</Text>
+            <Text style={styles.cardTitle}>{locationDetails?.name ?? ""}</Text>
+            <Text style={styles.description}>{locationDetails?.description ?? ""}</Text>
           </Card.Content>
           <Card.Cover
             source={{ uri: locationDetails?.imageUrl ?? "" }}
@@ -53,24 +51,42 @@ export function LocationCard({ locationDetails, version, style, updateLocationDe
           />
           <StarsRating />
           <Card.Actions>
-            <Button
-              buttonColor={colors.darkBlue}
-              textColor={colors.orange}
-              onPress={() =>
-                openAddressOnMap(
-                  locationDetails?.name ?? "",
-                  locationDetails?.latitude ?? 0,
-                  locationDetails?.longitude ?? 0,
-                )
-              }>
-              Navigate
-            </Button>
-            <Button textColor={colors.white} onPress={() => openLocationWebsite(locationDetails?.websiteUrl ?? "")}>
-              Buy ticket
-            </Button>
-            <Button textColor={colors.white} onPress={() => updateLocationDetails(null)}>
-              Close
-            </Button>
+            <Row
+              style={{
+                justifyContent: "space-around",
+                width: "100%",
+              }}>
+              <Button
+                style={styles.button}
+                buttonColor={colors.darkBlue}
+                textColor={colors.orange}
+                labelStyle={styles.fontFamily}
+                onPress={() =>
+                  openAddressOnMap(
+                    locationDetails?.name ?? "",
+                    locationDetails?.latitude ?? 0,
+                    locationDetails?.longitude ?? 0,
+                  )
+                }>
+                Navigate
+              </Button>
+              <Button
+                style={styles.button}
+                textColor={colors.white}
+                buttonColor={colors.darkBlue}
+                labelStyle={styles.fontFamily}
+                onPress={() => openLocationWebsite(locationDetails?.websiteUrl ?? "")}>
+                Buy ticket
+              </Button>
+              <Button
+                style={styles.button}
+                textColor={colors.white}
+                buttonColor={colors.darkBlue}
+                labelStyle={styles.fontFamily}
+                onPress={() => updateLocationDetails(null)}>
+                Close
+              </Button>
+            </Row>
           </Card.Actions>
         </Card>
       )}
@@ -88,6 +104,11 @@ const styles = StyleSheet.create({
     borderBottomEndRadius: 0,
     borderBottomStartRadius: 0,
   },
+  button: { width: "30%" },
   cardImage: { height: 200, width: 400, padding: 20, alignSelf: "center", backgroundColor: colors.white },
-  cardTitle: { marginBottom: 10, fontWeight: "700" },
+  cardTitle: { marginBottom: 10, fontFamily: fonts.medium, fontSize: 26 },
+  description: { fontFamily: fonts.regular },
+  fontFamily: {
+    fontFamily: fonts.medium,
+  },
 });

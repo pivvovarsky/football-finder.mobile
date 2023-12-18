@@ -10,6 +10,7 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { NotLoggedNavigationProp } from "../../navigation/NotLogged";
 import { Topbar } from "../../components/Topbar/Topbar";
 import { Row } from "../../components/Containers/Row";
+import { fonts } from "../../constants/Fonts";
 
 export function Login() {
   const navigation = useNavigation<NotLoggedNavigationProp>();
@@ -63,8 +64,11 @@ export function Login() {
                 keyboardType="email-address"
                 autoFocus
                 error={isError}
+                theme={{
+                  fonts: { bodyLarge: { fontFamily: fonts.regular } },
+                }}
                 style={{
-                  backgroundColor: "#D5E4FF",
+                  backgroundColor: colors.lightBlue,
                 }}
               />
               <TextInput
@@ -72,6 +76,9 @@ export function Login() {
                 value={values.password}
                 label="Password"
                 returnKeyType="done"
+                theme={{
+                  fonts: { bodyLarge: { fontFamily: fonts.regular } },
+                }}
                 secureTextEntry={securePassword}
                 right={
                   <TextInput.Icon
@@ -90,13 +97,14 @@ export function Login() {
                 //@ts-ignore
                 onPress={handleSubmit}
                 loading={isLoading}
+                labelStyle={{ fontFamily: fonts.bold }}
                 style={styles.button}
                 textColor={colors.white}
                 buttonColor={colors.darkBlue}>
                 Submit
               </Button>
               <Row style={styles.signUpRow}>
-                <Text>Don't have an account?</Text>
+                <Text style={styles.textStyle}>Don't have an account?</Text>
                 <Button mode="text" labelStyle={styles.signUp} onPress={navigateSignUp} textColor={colors.darkBlue}>
                   Sign up
                 </Button>
@@ -127,6 +135,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingTop: 5,
   },
-  signUp: { textDecorationLine: "underline", paddingBottom: 1 },
+  signUp: { textDecorationLine: "underline", paddingBottom: 1, fontFamily: fonts.medium },
   button: { marginTop: 10 },
+  textStyle: { fontFamily: fonts.regular },
 });

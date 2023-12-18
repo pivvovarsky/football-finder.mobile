@@ -1,8 +1,9 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { colors } from "../../constants/Colors";
 import { Appbar } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { fonts } from "../../constants/Fonts";
 
 interface TopbarProps {
   title: string;
@@ -32,5 +33,10 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 10,
   },
-  title: { fontWeight: "700", color: colors.darkBlue, alignSelf: "center", paddingRight: 15 },
+  title: {
+    color: colors.darkBlue,
+    alignSelf: "center",
+    paddingRight: 15,
+    fontFamily: fonts.medium,
+  },
 });

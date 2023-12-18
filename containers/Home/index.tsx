@@ -8,6 +8,8 @@ import { layout } from "../../constants/Layout";
 import dayjs from "dayjs";
 import { Row } from "../../components/Containers/Row";
 import { colors } from "../../constants/Colors";
+import { ActivityIndicator } from "react-native-paper";
+import { fonts } from "../../constants/Fonts";
 
 export function Home() {
   const { data: matchesData } = useGetMatches();
@@ -29,7 +31,7 @@ export function Home() {
                 resizeMode="cover"
                 style={styles.itemImage}
               />
-              <Text>{`${item?.host?.name}`}</Text>
+              <Text style={styles.fontFamilyBold}>{`${item?.host?.name}`}</Text>
             </View>
             <Text style={styles.scoreSeparator}>-</Text>
             <View style={{ justifyContent: "center", alignItems: "center", width: "50%" }}>
@@ -39,12 +41,12 @@ export function Home() {
                 resizeMode="cover"
                 style={styles.itemImage}
               />
-              <Text>{`${item?.guest?.name}`}</Text>
+              <Text style={styles.fontFamilyBold}>{`${item?.guest?.name}`}</Text>
             </View>
           </Row>
-          <View style={styles.bottoMatchInfo}>
-            <Text>{`${item?.host.stadium?.name}`}</Text>
-            <Text>{`${dayjs(item?.date).format("DD/MM/YYYY, HH:mm")}`}</Text>
+          <View style={styles.bottomMatchInfo}>
+            <Text style={styles.fontFamily}>{`${item?.host.stadium?.name}`}</Text>
+            <Text style={styles.fontFamily}>{`${dayjs(item?.date).format("DD/MM/YYYY, HH:mm")}`}</Text>
           </View>
         </View>
       ),
@@ -54,7 +56,7 @@ export function Home() {
       data: stadiumsData?.data ?? [],
       renderItem: ({ item }: { item: StadiumData }) => (
         <View style={styles.stadiumItem}>
-          <Text>{item?.name}</Text>
+          <Text style={styles.fontFamily}>{item?.name}</Text>
         </View>
       ),
     },
@@ -63,7 +65,7 @@ export function Home() {
       data: teamsData?.data ?? [],
       renderItem: ({ item }: { item: TeamData }) => (
         <View style={styles.teamItem}>
-          <Text>{item?.name}</Text>
+          <Text style={styles.fontFamily}> {item?.name}</Text>
         </View>
       ),
     },
@@ -74,6 +76,7 @@ export function Home() {
       <Topbar title={"Home"} arrowIcon={false} />
       <SectionList
         sections={DATA}
+        ListEmptyComponent={<ActivityIndicator size={"large"} />}
         keyExtractor={(item, index) => item.id + index}
         renderSectionHeader={({ section: { title } }) => <Text style={styles.header}>{title}</Text>}
       />
@@ -97,8 +100,9 @@ const styles = StyleSheet.create({
   matchInfo: {
     alignSelf: "center",
     paddingBottom: 10,
+    fontFamily: fonts.regular,
   },
-  bottoMatchInfo: { padding: 10, alignItems: "center" },
+  bottomMatchInfo: { padding: 10, alignItems: "center", fontFamily: fonts.regular },
   itemImage: { backgroundColor: colors.transparent, width: 50, height: 50 },
   teamItem: {
     backgroundColor: colors.heal,
@@ -114,11 +118,10 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 32,
-    backgroundColor: "#fff",
-    fontFamily: "Kanit-Regular",
+    fontFamily: fonts.regular,
+    alignSelf: "center",
   },
   scoreSeparator: { alignSelf: "center", fontSize: 40 },
-  title: {
-    fontSize: 24,
-  },
+  fontFamily: { fontFamily: fonts.regular },
+  fontFamilyBold: { fontFamily: fonts.bold },
 });

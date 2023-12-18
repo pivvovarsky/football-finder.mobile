@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Formik, FormikState } from "formik";
 import { SignupValidationSchema, initRegisterFormData } from "./Signup.utils";
@@ -7,7 +7,7 @@ import { HelperText, TextInput } from "react-native-paper";
 import { Button } from "react-native-paper";
 import { colors } from "../../constants/Colors";
 import { Topbar } from "../../components/Topbar/Topbar";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { NotLoggedNavigationProp } from "../../navigation/NotLogged";
 import { RegisterEntry, useRegister } from "../../hooks/api/auth/useRegister";
 import { Row } from "../../components/Containers/Row";
@@ -77,7 +77,10 @@ export function SignUp() {
                 onBlur={handleBlur("email")}
                 error={!!errors.email && touched.email}
                 style={{
-                  backgroundColor: "#D5E4FF",
+                  backgroundColor: colors.lightBlue,
+                }}
+                theme={{
+                  fonts: { bodyLarge: { fontFamily: fonts.regular } },
                 }}
               />
               {!!errors.email && touched.email && (
@@ -89,6 +92,9 @@ export function SignUp() {
                 onChangeText={handleChange("password")}
                 value={values.password}
                 label="Password"
+                theme={{
+                  fonts: { bodyLarge: { fontFamily: fonts.regular } },
+                }}
                 onBlur={handleBlur("password")}
                 returnKeyType="done"
                 secureTextEntry={securePassword}
@@ -112,6 +118,9 @@ export function SignUp() {
                 value={values.confirmPassword}
                 label="Confirm Password"
                 returnKeyType="done"
+                theme={{
+                  fonts: { bodyLarge: { fontFamily: fonts.regular } },
+                }}
                 secureTextEntry={secureConfirmPassword}
                 right={
                   <TextInput.Icon
@@ -167,7 +176,7 @@ const styles = StyleSheet.create({
   text: { fontSize: 20 },
   passwordInput: {
     marginTop: 10,
-    backgroundColor: "#D5E4FF",
+    backgroundColor: colors.lightBlue,
   },
   signUpRow: {
     justifyContent: "flex-end",

@@ -1,7 +1,8 @@
 import React from "react";
-import { StyleSheet, TouchableOpacityProps, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacityProps, View } from "react-native";
 import { Button } from "react-native-paper";
 import { colors } from "../../constants/Colors";
+import { fonts } from "../../constants/Fonts";
 interface MapButtonProps extends TouchableOpacityProps {
   text: string;
   isLoading: boolean;
@@ -15,9 +16,8 @@ export function MapButton({ style, text, isLoading, onPress }: MapButtonProps) {
         buttonColor="rgba(255, 255, 255, 0.7)"
         labelStyle={{ fontWeight: "600" }}
         textColor={colors.darkBlue}
-        loading={isLoading}
-      >
-        {text}
+        loading={isLoading}>
+        <Text style={styles.textButton}>{text}</Text>
       </Button>
     </View>
   );
@@ -25,4 +25,5 @@ export function MapButton({ style, text, isLoading, onPress }: MapButtonProps) {
 
 const styles = StyleSheet.create({
   container: { padding: 5 },
+  textButton: { fontFamily: fonts.bold },
 });
