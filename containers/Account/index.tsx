@@ -8,6 +8,8 @@ import { openEmailbox } from "./account.utils";
 import { Contact } from "./screens/Contact";
 import { Profile } from "./screens/Profile";
 import { Settings } from "./screens/Settings";
+import { fonts } from "../../constants/Fonts";
+import { colors } from "../../constants/Colors";
 enum NavTab {
   Settings = "Settings",
   Profile = "Profile",
@@ -16,17 +18,22 @@ enum NavTab {
 
 export function Account() {
   const { login, isError, isLoading, logout, user } = useUser();
+  const [value, setValue] = useState<NavTab>(NavTab.Settings);
   const HEADER_BUTTONS = [
-    { value: NavTab.Settings, label: NavTab.Settings, icon: "cog" },
     {
-      value: NavTab.Profile,
-      label: NavTab.Profile,
-      icon: "account",
+      value: NavTab.Settings,
+      label: NavTab.Settings,
+      icon: "cog",
+      style: { ...styles.segmentButtons, backgroundColor: value === NavTab.Settings ? colors.brown : colors.cream },
     },
-    { value: NavTab.Contact, label: NavTab.Contact, icon: "comment-processing" },
+    {
+      value: NavTab.Contact,
+      label: NavTab.Contact,
+      icon: "comment-processing",
+      style: { ...styles.segmentButtons, backgroundColor: value === NavTab.Contact ? colors.brown : colors.cream },
+    },
   ];
 
-  const [value, setValue] = useState<NavTab>(NavTab.Profile);
   return (
     <View>
       <Topbar title={"Account"} />
@@ -34,6 +41,8 @@ export function Account() {
         value={value}
         //@ts-ignore
         onValueChange={setValue}
+        checkedColor={colors.darkBlue}
+        uncheckedColor={colors.darkBlue}
         style={{ paddingHorizontal: 30 }}
         buttons={HEADER_BUTTONS}
       />
@@ -41,7 +50,9 @@ export function Account() {
       {value === NavTab.Profile && <Profile />}
       {value === NavTab.Contact && <Contact />}
 
-      <Button onPress={logout}>Logout</Button>
+      <Button labelStyle={styles.logout} style={styles.buttonLogout} onPress={logout}>
+        Logout
+      </Button>
     </View>
   );
 }
@@ -50,4 +61,7 @@ const styles = StyleSheet.create({
   map: {
     ...StyleSheet.absoluteFillObject,
   },
+  buttonLogout: { width: "50%", padding: 15, alignSelf: "center" },
+  logout: { fontFamily: fonts.bold, width: "50%" },
+  segmentButtons: {},
 });

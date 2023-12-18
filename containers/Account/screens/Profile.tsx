@@ -1,23 +1,10 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { Formik } from "formik";
-
-import { SegmentedButtons, TextInput } from "react-native-paper";
-import { Button } from "react-native-paper";
-import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
-
-enum NavTab {
-  Profile = "Profile",
-  Contact = "Contact",
-}
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { useUser } from "../../../hooks/context/useUser";
 
 export function Profile() {
-  return (
-    <View>
-      {/* <Button onPress={openEmailbox}>open email box</Button>
-      <Button onPress={logout}>Logout</Button> */}
-    </View>
-  );
+  const { user } = useUser();
+  return <View></View>;
 }
 
 const styles = StyleSheet.create({

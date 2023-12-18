@@ -84,11 +84,6 @@ export function UserProvider({ children }: React.PropsWithChildren<unknown>) {
     setIsLoading(true);
     auth()
       .signOut()
-      // .then(async () => {
-      //   await storage.removeValue("AccountSettings");
-      //   queryClient.removeQueries();
-      //   setUser(null);
-      // })
       .catch((error: Error) => console.error(error.message))
       .finally(() => setIsLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps

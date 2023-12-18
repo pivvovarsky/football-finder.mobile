@@ -1,32 +1,18 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
-import { Text } from "react-native-paper";
+import { StyleSheet, View, Text } from "react-native";
 import { Button } from "react-native-paper";
 import { openEmailbox } from "../account.utils";
 import { colors } from "../../../constants/Colors";
+import { fonts } from "../../../constants/Fonts";
 
 export function Contact() {
   return (
     <View style={styles.formContainer}>
-      <Text
-        lineBreakMode="head"
-        variant="titleSmall"
-        style={{ color: colors.darkBlue, paddingHorizontal: 5, paddingVertical: 10, textAlign: "center" }}>
+      <Text style={styles.topText}>
         {`Have you encountered a problem?\nReport the problem to us, we will try to solve the problem.`}
       </Text>
-      <Text
-        lineBreakMode="head"
-        variant="titleSmall"
-        style={{
-          color: colors.simple,
-          paddingHorizontal: 5,
-          fontWeight: "700",
-          paddingVertical: 10,
-          textAlign: "center",
-        }}>
-        {`Would you like to share your opinion?\n Send us an email!`}
-      </Text>
-      <Button mode="contained" onPress={openEmailbox}>
+      <Text style={styles.bottomText}>{`Would you like to share your opinion?\n Send us an email!`}</Text>
+      <Button mode="contained" style={styles.button} labelStyle={{ fontFamily: fonts.medium }} onPress={openEmailbox}>
         Open email box
       </Button>
     </View>
@@ -34,7 +20,21 @@ export function Contact() {
 }
 
 const styles = StyleSheet.create({
-  button: { marginVertical: 10 },
+  topText: {
+    color: colors.darkBlue,
+    paddingHorizontal: 5,
+    paddingVertical: 10,
+    textAlign: "center",
+    fontFamily: fonts.medium,
+  },
+  bottomText: {
+    color: colors.simple,
+    paddingHorizontal: 5,
+    paddingVertical: 10,
+    textAlign: "center",
+    fontFamily: fonts.regular,
+  },
+  button: { backgroundColor: colors.brown },
   formContainer: {
     padding: 20,
   },

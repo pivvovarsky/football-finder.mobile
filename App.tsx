@@ -6,14 +6,19 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Navigation from "./navigation";
 import { colors } from "./constants/Colors";
 import { fonts } from "./constants/Fonts";
+const fontConfig = {
+  fontFamily: fonts.regular,
+};
 
 function App(): JSX.Element {
   const theme = {
     ...DefaultTheme,
     dark: false,
+    fonts: configureFonts({ config: fontConfig }),
     colors: {
       ...DefaultTheme.colors,
       primary: colors.darkBlue,
+      secondaryContainer: colors.cream,
       text: colors.darkBlue,
     },
   };

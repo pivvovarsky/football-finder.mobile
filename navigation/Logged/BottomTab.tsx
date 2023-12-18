@@ -3,7 +3,10 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { HomeNavigator } from "./Home";
 import { MapNavigator } from "./Map";
 import { AccountNavigator } from "./Account";
-import { Icon } from "react-native-paper";
+import { BottomNavigation, BottomNavigationRoute, Icon } from "react-native-paper";
+import { colors } from "../../constants/Colors";
+import { fonts } from "../../constants/Fonts";
+import { ReactNode } from "react";
 
 export type BottomTabNavigationProp = StackNavigationProp<BottomTabList>;
 
@@ -27,14 +30,10 @@ export function BottomTab() {
       iconName = focused ? "home" : "home-outline";
     }
 
-    return <Icon source={iconName} size={26} color="black" />;
+    return <Icon source={iconName} size={26} />;
   };
   return (
-    <Tab.Navigator
-      initialRouteName="HOME"
-      // activeColor="#f0edf6"
-      // inactiveColor="#3e2465"
-    >
+    <Tab.Navigator initialRouteName="HOME" barStyle={{ backgroundColor: colors.white }}>
       <Tab.Screen
         name="HOME"
         component={HomeNavigator}

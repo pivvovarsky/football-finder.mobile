@@ -105,13 +105,13 @@ const styles = StyleSheet.create({
   bottomMatchInfo: { padding: 10, alignItems: "center", fontFamily: fonts.regular },
   itemImage: { backgroundColor: colors.transparent, width: 50, height: 50 },
   teamItem: {
-    backgroundColor: colors.heal,
+    backgroundColor: colors.brown,
     padding: 20,
     marginVertical: 8,
     borderRadius: 30,
   },
   stadiumItem: {
-    backgroundColor: colors.heal,
+    backgroundColor: colors.cream,
     padding: 20,
     marginVertical: 8,
     borderRadius: 30,

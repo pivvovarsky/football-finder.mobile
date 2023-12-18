@@ -5,7 +5,7 @@ export const colors = {
   elixir: "#C8D2C8",
   darkGreen: "#32321E",
   raw: "#596E76",
-  heal: "#EEDEC8",
+  cream: "#EEDEC8",
   performance: "#C87328",
   power: "#A03737",
   green: "#6FCF97",
@@ -23,4 +23,5 @@ export const colors = {
   blueViolet: "#8A2BE2",
   lightBlue: "#D5E4FF",
   orange: "#ffcc00",
+  brown: "#c3b091",
 };
