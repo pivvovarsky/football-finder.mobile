@@ -21,7 +21,7 @@ export function Map() {
   return (
     <View style={[styles.container, { paddingTop: Math.max(insets.top, 15) }]}>
       {isLoadingStadiumsData ? (
-        <ActivityIndicator size={"large"} color={colors.darkGreen} />
+        <ActivityIndicator size={"large"} />
       ) : (
         <>
           <CustomMap stadiums={stadiumsData} onMarkerPress={updateLocationDetails} />

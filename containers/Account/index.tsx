@@ -4,15 +4,12 @@ import { useUser } from "../../hooks/context/useUser";
 import { SegmentedButtons } from "react-native-paper";
 import { Button } from "react-native-paper";
 import { Topbar } from "../../components/Topbar/Topbar";
-import { openEmailbox } from "./account.utils";
 import { Contact } from "./screens/Contact";
-import { Profile } from "./screens/Profile";
 import { Settings } from "./screens/Settings";
 import { fonts } from "../../constants/Fonts";
 import { colors } from "../../constants/Colors";
 enum NavTab {
   Settings = "Settings",
-  Profile = "Profile",
   Contact = "Contact",
 }
 
@@ -35,7 +32,7 @@ export function Account() {
   ];
 
   return (
-    <View>
+    <>
       <Topbar title={"Account"} />
       <SegmentedButtons
         value={value}
@@ -43,25 +40,27 @@ export function Account() {
         onValueChange={setValue}
         checkedColor={colors.darkBlue}
         uncheckedColor={colors.darkBlue}
+        density="regular"
         style={{ paddingHorizontal: 30 }}
         buttons={HEADER_BUTTONS}
       />
-      {value === NavTab.Settings && <Settings />}
-      {value === NavTab.Profile && <Profile />}
-      {value === NavTab.Contact && <Contact />}
+      <View style={styles.container}>
+        {value === NavTab.Settings && <Settings />}
+        {value === NavTab.Contact && <Contact />}
 
-      <Button labelStyle={styles.logout} style={styles.buttonLogout} onPress={logout}>
-        Logout
-      </Button>
-    </View>
+        <Button labelStyle={styles.logout} style={styles.buttonLogout} onPress={logout}>
+          Logout
+        </Button>
+      </View>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  map: {
-    ...StyleSheet.absoluteFillObject,
+  container: { flex: 1, justifyContent: "space-around" },
+  buttonLogout: { width: "40%", alignSelf: "center", borderColor: colors.brown, borderWidth: 2 },
+  logout: { fontFamily: fonts.bold },
+  segmentButtons: {
+    borderColor: colors.white,
   },
-  buttonLogout: { width: "50%", padding: 15, alignSelf: "center" },
-  logout: { fontFamily: fonts.bold, width: "50%" },
-  segmentButtons: {},
 });

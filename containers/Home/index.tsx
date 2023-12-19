@@ -11,74 +11,102 @@ import { colors } from "../../constants/Colors";
 import { ActivityIndicator } from "react-native-paper";
 import { fonts } from "../../constants/Fonts";
 
-export function Home() {
-  const { data: matchesData } = useGetMatches();
-  const { data: stadiumsData } = useGetStadiums();
-  const { data: teamsData } = useGetTeams();
+type Section = {
+  title: string;
+  data: any[];
+  isLoading: boolean;
+  renderItem: ({ item }: { item: any }) => JSX.Element;
+};
 
-  const DATA = [
-    {
-      title: "Upcoming games",
-      data: matchesData?.data ?? [],
-      renderItem: ({ item }: { item: MatchData }) => (
-        <View style={styles.matchItem}>
-          <Text style={styles.matchInfo}>{`${item.host.country}, ${item.host.league}`}</Text>
-          <Row style={styles.matchRow}>
-            <View style={{ justifyContent: "center", alignItems: "center", width: "50%" }}>
-              <Image
-                source={{ uri: item?.host?.imageUrl ?? "" }}
-                resizeMethod="resize"
-                resizeMode="cover"
-                style={styles.itemImage}
-              />
-              <Text style={styles.fontFamilyBold}>{`${item?.host?.name}`}</Text>
+export function Home() {
+  const { data: matchesData, isLoading: matchesLoading } = useGetMatches();
+  const { data: stadiumsData, isLoading: stadiumsLoading } = useGetStadiums();
+  const { data: teamsData, isLoading: teamsLoading } = useGetTeams();
+  const [sections, setSections] = useState<Section[]>([]);
+  useEffect(() => {
+    const newSections: object[] = [];
+
+    if (matchesData && matchesData?.data?.length > 0) {
+      newSections.push({
+        title: "Upcoming games",
+        data: matchesData?.data,
+        isLoading: matchesLoading,
+        renderItem: ({ item }: { item: MatchData }) => (
+          <View style={styles.matchItem}>
+            <Text style={styles.matchInfo}>{`${item?.host?.country}, ${item?.host?.league}`}</Text>
+            <Row style={styles.matchRow}>
+              <View style={{ justifyContent: "center", alignItems: "center", width: "50%" }}>
+                <Image
+                  source={{ uri: item?.host?.imageUrl ?? "" }}
+                  resizeMethod="resize"
+                  resizeMode="cover"
+                  style={styles.itemImage}
+                />
+                <Text style={styles.fontFamilyBold}>{item?.host?.name}</Text>
+              </View>
+              <Text style={styles.scoreSeparator}>-</Text>
+              <View style={{ justifyContent: "center", alignItems: "center", width: "50%" }}>
+                <Image
+                  source={{ uri: item?.guest?.imageUrl ?? "" }}
+                  resizeMethod="resize"
+                  resizeMode="cover"
+                  style={styles.itemImage}
+                />
+                <Text style={styles.fontFamilyBold}>{item?.guest?.name}</Text>
+              </View>
+            </Row>
+            <View style={styles.bottomMatchInfo}>
+              <Text style={styles.fontFamily}>{item?.host.stadium?.name}</Text>
+              <Text style={styles.fontFamily}>{dayjs(item?.date).format("DD/MM/YYYY, HH:mm")}</Text>
             </View>
-            <Text style={styles.scoreSeparator}>-</Text>
-            <View style={{ justifyContent: "center", alignItems: "center", width: "50%" }}>
-              <Image
-                source={{ uri: item?.guest?.imageUrl ?? "" }}
-                resizeMethod="resize"
-                resizeMode="cover"
-                style={styles.itemImage}
-              />
-              <Text style={styles.fontFamilyBold}>{`${item?.guest?.name}`}</Text>
-            </View>
-          </Row>
-          <View style={styles.bottomMatchInfo}>
-            <Text style={styles.fontFamily}>{`${item?.host.stadium?.name}`}</Text>
-            <Text style={styles.fontFamily}>{`${dayjs(item?.date).format("DD/MM/YYYY, HH:mm")}`}</Text>
           </View>
-        </View>
-      ),
-    },
-    {
-      title: "Stadiums",
-      data: stadiumsData?.data ?? [],
-      renderItem: ({ item }: { item: StadiumData }) => (
-        <View style={styles.stadiumItem}>
-          <Text style={styles.fontFamily}>{item?.name}</Text>
-        </View>
-      ),
-    },
-    {
-      title: "Teams",
-      data: teamsData?.data ?? [],
-      renderItem: ({ item }: { item: TeamData }) => (
-        <View style={styles.teamItem}>
-          <Text style={styles.fontFamily}> {item?.name}</Text>
-        </View>
-      ),
-    },
-  ];
+        ),
+      });
+    }
+
+    if (stadiumsData && stadiumsData?.data?.length > 0) {
+      newSections.push({
+        title: "Stadiums",
+        data: stadiumsData?.data,
+        isLoading: stadiumsLoading,
+        renderItem: ({ item }: { item: StadiumData }) => (
+          <View style={styles.stadiumItem}>
+            <Text style={styles.fontFamily}>{item?.name}</Text>
+          </View>
+        ),
+      });
+    }
+
+    if (teamsData && teamsData?.data?.length > 0) {
+      newSections.push({
+        title: "Teams",
+        data: teamsData?.data,
+        isLoading: teamsLoading,
+        renderItem: ({ item }: { item: TeamData }) => (
+          <View style={styles.teamItem}>
+            <Text style={styles.fontFamily}>{item?.name}</Text>
+          </View>
+        ),
+      });
+    }
+
+    setSections(newSections as Section[]);
+  }, [matchesData, stadiumsData, teamsData, matchesLoading, stadiumsLoading, teamsLoading]);
 
   return (
     <View style={styles.container}>
       <Topbar title={"Home"} arrowIcon={false} />
       <SectionList
-        sections={DATA}
-        ListEmptyComponent={<ActivityIndicator size={"large"} />}
-        keyExtractor={(item, index) => item.id + index}
+        sections={sections}
         renderSectionHeader={({ section: { title } }) => <Text style={styles.header}>{title}</Text>}
+        renderSectionFooter={({ section: { isLoading } }) => {
+          if (isLoading) {
+            return <ActivityIndicator />;
+          }
+          return null;
+        }}
+        ListEmptyComponent={<ActivityIndicator size="large" />}
+        keyExtractor={(item, index) => item.id + index}
       />
     </View>
   );

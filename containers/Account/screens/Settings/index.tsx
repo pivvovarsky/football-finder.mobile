@@ -7,6 +7,7 @@ import { ChangePasswordValidationSchema, initChangePasswordFormData } from "./ut
 import { ChangePasswordEntry, useChangePassword } from "../../../../hooks/api/auth/useChangePassword";
 import { colors } from "../../../../constants/Colors";
 import { fonts } from "../../../../constants/Fonts";
+import { layout, window } from "../../../../constants/Layout";
 
 export function Settings() {
   const [securePassword, setSecurePassword] = useState(true);
@@ -44,16 +45,19 @@ export function Settings() {
           changePassoword(values, resetForm);
         }}>
         {({ handleChange, handleBlur, handleSubmit, errors, values, touched }) => (
-          <View>
+          <>
             <TextInput
               onChangeText={handleChange("password")}
               value={values.password}
               label="Password"
               theme={{
+                roundness: 30,
                 fonts: { bodyLarge: { fontFamily: fonts.regular } },
               }}
+              activeOutlineColor={colors.black}
               onBlur={handleBlur("password")}
               returnKeyType="done"
+              mode="outlined"
               secureTextEntry={securePassword}
               right={
                 <TextInput.Icon
@@ -62,7 +66,7 @@ export function Settings() {
                 />
               }
               error={!!errors.password && touched.password}
-              // style={styles.passwordInput}
+              style={styles.passwordInput}
             />
             {!!errors.password && touched.password && (
               <HelperText type="error" visible={!!errors.password && touched.password}>
@@ -75,7 +79,10 @@ export function Settings() {
               value={values.confirmPassword}
               label="Confirm Password"
               returnKeyType="done"
+              mode="outlined"
+              activeOutlineColor={colors.black}
               theme={{
+                roundness: 30,
                 fonts: { bodyLarge: { fontFamily: fonts.regular } },
               }}
               secureTextEntry={secureConfirmPassword}
@@ -86,7 +93,7 @@ export function Settings() {
                 />
               }
               error={!!errors.confirmPassword && touched.confirmPassword}
-              // style={styles.passwordInput}
+              style={styles.passwordInput}
             />
             {!!errors.confirmPassword && touched.confirmPassword && (
               <HelperText type="error" visible={!!errors.confirmPassword && touched.confirmPassword}>
@@ -99,17 +106,16 @@ export function Settings() {
               </HelperText>
             )}
             <Button
-              mode="contained"
               //@ts-ignore
               onPress={handleSubmit}
               loading={isLoading}
-              // style={styles.button}
+              style={styles.buttonSubmit}
               textColor={colors.white}
               labelStyle={{ fontFamily: fonts.bold }}
               buttonColor={colors.brown}>
               Submit
             </Button>
-          </View>
+          </>
         )}
       </Formik>
     </View>
@@ -117,7 +123,10 @@ export function Settings() {
 }
 
 const styles = StyleSheet.create({
-  map: {
-    ...StyleSheet.absoluteFillObject,
+  buttonSubmit: { marginHorizontal: layout.publicScreenHorizontalPadding, marginTop: 30 },
+  passwordInput: {
+    backgroundColor: colors.lightCream,
+    marginTop: 10,
+    marginHorizontal: layout.publicScreenHorizontalPadding,
   },
 });

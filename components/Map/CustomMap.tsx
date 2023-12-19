@@ -55,6 +55,7 @@ export function CustomMap({ stadiums, onMarkerPress }: MapProps) {
         scrollEnabled={true}
         zoomEnabled={true}
         pitchEnabled={true}
+        loadingIndicatorColor={colors.black}
         rotateEnabled={true}
         loadingEnabled={true}>
         {stadiums.map((stadium) => {
