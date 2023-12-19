@@ -7,3 +7,6 @@ Icons:
 
 Fonts:
 <a href="https://fonts.google.com/specimen/Kanit">Fonts</a>
+
+App icon:
+<a href="https://www.flaticon.com/free-icons/sports-and-competition" title="sports and competition icons">Sports and competition icons created by Rashad - Flaticon</a>

@@ -7,7 +7,7 @@ import { MapButton } from "../../components/Map/MapButton";
 import { Row } from "../../components/Containers/Row";
 import { useNavigation } from "@react-navigation/native";
 import { NotLoggedNavigationProp } from "../../navigation/NotLogged";
-import WelcomeIcon from "../../assets/icons/default.svg";
+import WelcomeIcon from "../../assets/icons/logo.svg";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { CustomMap } from "../../components/Map/CustomMap";
 import { LocationCard } from "../../components/Map/LocationCard";
@@ -43,7 +43,9 @@ export function Welcome() {
         <>
           <CustomMap stadiums={stadiumsData} onMarkerPress={updateLocationDetails} />
           <View style={styles.welcomeContainer}>
-            <WelcomeIcon width={300} height={50} />
+            <Text style={styles.title}>Football</Text>
+            <WelcomeIcon width={70} height={50} />
+            <Text style={styles.title}>Finder</Text>
           </View>
 
           {!!locationDetails ? (
@@ -77,30 +79,45 @@ const styles = StyleSheet.create({
     textAlign: "center",
     alignItems: "center",
   },
+  title: {
+    fontFamily: fonts.medium,
+    color: colors.white,
+    fontSize: window.width * 0.1,
+    textAlign: "center",
+    alignItems: "center",
+  },
   welcomeContainer: {
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    paddingVertical: 5,
     marginHorizontal: layout.screenHorizontalPadding,
     marginTop: Platform.OS === "android" ? 40 : 0,
     borderRadius: 60,
-    backgroundColor: "rgba(255, 255, 255, 0.5)",
+    backgroundColor: "rgba(238, 222, 200, 0.9)",
+    borderWidth: 3,
+    borderColor: colors.brown,
   },
   welcomeTextContainer: {
-    backgroundColor: "rgba(255, 255, 255, 0.8)",
+    marginHorizontal: layout.publicScreenHorizontalPadding,
     borderRadius: 60,
-    marginHorizontal: 15,
+    padding: 15,
+    backgroundColor: "rgba(238, 222, 200, 1)",
+    borderWidth: 3,
+    borderColor: colors.brown,
   },
   welcomeText: {
     textAlign: "center",
     alignItems: "center",
     paddingHorizontal: layout.screenHorizontalPadding,
-    color: colors.darkBlue,
     fontFamily: fonts.medium,
+    color: colors.white,
   },
   buttonsContainer: {
     width: "100%",
+    justifyContent: "space-around",
   },
   button: {
-    width: window.width * 0.5,
+    width: window.width * 0.45,
   },
 });

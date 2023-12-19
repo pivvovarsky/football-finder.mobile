@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, Text, View } from "react-native";
 import { colors } from "../../constants/Colors";
 import { Appbar } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -23,8 +23,8 @@ export const Topbar = ({ title, arrowIcon = false, onPress }: TopbarProps) => {
         //@ts-ignore
         colors: colors.white,
       }}>
-      {arrowIcon && <Appbar.BackAction onPress={onPress} iconColor={colors.darkBlue} />}
-      <Appbar.Content title={title} titleStyle={styles.title} />
+      {arrowIcon && <Appbar.BackAction onPress={onPress} iconColor={colors.black} />}
+      <Appbar.Content title={title} titleStyle={[styles.title, { marginRight: Platform.OS === "android" ? 40 : 0 }]} />
     </Appbar.Header>
   );
 };
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   title: {
-    color: colors.darkBlue,
+    color: colors.darkBrown,
     alignSelf: "center",
     paddingRight: 15,
     fontFamily: fonts.medium,

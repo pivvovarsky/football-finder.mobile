@@ -24,5 +24,7 @@ export const colors = {
   blueViolet: "#8A2BE2",
   lightBlue: "#D5E4FF",
   orange: "#ffcc00",
-  brown: "#c3b091",
+  lightBrown: "#c3b091",
+  brown: "#9c7248",
+  darkBrown: "#5C4033",
 };

@@ -22,7 +22,10 @@ export function Account() {
       value: NavTab.Settings,
       label: NavTab.Settings,
       icon: "cog",
-      style: { ...styles.segmentButtons, backgroundColor: value === NavTab.Settings ? colors.brown : colors.cream },
+      style: {
+        ...styles.segmentButtons,
+        backgroundColor: value === NavTab.Settings ? colors.lightBrown : colors.cream,
+      },
     },
     {
       value: NavTab.Contact,

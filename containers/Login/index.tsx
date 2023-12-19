@@ -11,6 +11,7 @@ import { NotLoggedNavigationProp } from "../../navigation/NotLogged";
 import { Topbar } from "../../components/Topbar/Topbar";
 import { Row } from "../../components/Containers/Row";
 import { fonts } from "../../constants/Fonts";
+import { layout } from "../../constants/Layout";
 
 export function Login() {
   const navigation = useNavigation<NotLoggedNavigationProp>();
@@ -53,7 +54,7 @@ export function Login() {
         </Snackbar>
         <Formik initialValues={initLoginFormData} onSubmit={login}>
           {({ handleChange, handleSubmit, values }) => (
-            <View style={styles.formikContainer}>
+            <>
               <TextInput
                 label="Email"
                 returnKeyType="next"
@@ -62,21 +63,25 @@ export function Login() {
                 autoCapitalize="none"
                 textContentType="emailAddress"
                 keyboardType="email-address"
+                mode="outlined"
+                activeOutlineColor={colors.black}
                 autoFocus
                 error={isError}
                 theme={{
+                  roundness: 30,
                   fonts: { bodyLarge: { fontFamily: fonts.regular } },
                 }}
-                style={{
-                  backgroundColor: colors.lightBlue,
-                }}
+                style={styles.emailInput}
               />
               <TextInput
                 onChangeText={handleChange("password")}
                 value={values.password}
                 label="Password"
                 returnKeyType="done"
+                mode="outlined"
+                activeOutlineColor={colors.black}
                 theme={{
+                  roundness: 30,
                   fonts: { bodyLarge: { fontFamily: fonts.regular } },
                 }}
                 secureTextEntry={securePassword}
@@ -97,19 +102,19 @@ export function Login() {
                 //@ts-ignore
                 onPress={handleSubmit}
                 loading={isLoading}
-                labelStyle={{ fontFamily: fonts.bold }}
-                style={styles.button}
+                style={styles.buttonSubmit}
                 textColor={colors.white}
-                buttonColor={colors.darkBlue}>
+                labelStyle={{ fontFamily: fonts.bold }}
+                buttonColor={colors.brown}>
                 Submit
               </Button>
               <Row style={styles.signUpRow}>
                 <Text style={styles.textStyle}>Don't have an account?</Text>
-                <Button mode="text" labelStyle={styles.signUp} onPress={navigateSignUp} textColor={colors.darkBlue}>
+                <Button mode="text" labelStyle={styles.signUp} onPress={navigateSignUp} textColor={colors.brown}>
                   Sign up
                 </Button>
               </Row>
-            </View>
+            </>
           )}
         </Formik>
       </View>
@@ -124,18 +129,21 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     marginHorizontal: 30,
   },
-  text: { fontSize: 20 },
-  formikContainer: {},
-  passwordInput: {
+  emailInput: {
+    backgroundColor: colors.lightCream,
     marginTop: 10,
-    backgroundColor: "#D5E4FF",
   },
+
+  passwordInput: {
+    backgroundColor: colors.lightCream,
+    marginTop: 10,
+  },
+  buttonSubmit: { marginHorizontal: layout.publicScreenHorizontalPadding, marginTop: 10 },
   signUpRow: {
-    justifyContent: "flex-end",
+    justifyContent: "center",
     alignItems: "center",
-    paddingTop: 5,
+    paddingTop: 25,
   },
   signUp: { textDecorationLine: "underline", paddingBottom: 1, fontFamily: fonts.medium },
-  button: { marginTop: 10 },
   textStyle: { fontFamily: fonts.regular },
 });

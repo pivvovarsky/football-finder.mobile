@@ -17,9 +17,9 @@ function App(): JSX.Element {
     fonts: configureFonts({ config: fontConfig }),
     colors: {
       ...DefaultTheme.colors,
-      primary: colors.darkBlue,
+      primary: colors.lightBrown,
       secondaryContainer: colors.cream,
-      text: colors.darkBlue,
+      text: colors.brown,
     },
   };
 
