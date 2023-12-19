@@ -133,16 +133,15 @@ const styles = StyleSheet.create({
     backgroundColor: colors.lightCream,
     marginTop: 10,
   },
-
   passwordInput: {
     backgroundColor: colors.lightCream,
     marginTop: 10,
   },
-  buttonSubmit: { marginHorizontal: layout.publicScreenHorizontalPadding, marginTop: 10 },
+  buttonSubmit: { marginTop: 10 },
   signUpRow: {
-    justifyContent: "center",
+    justifyContent: "flex-end",
     alignItems: "center",
-    paddingTop: 25,
+    paddingTop: 20,
   },
   signUp: { textDecorationLine: "underline", paddingBottom: 1, fontFamily: fonts.medium },
   textStyle: { fontFamily: fonts.regular },

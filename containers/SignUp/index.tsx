@@ -76,12 +76,13 @@ export function SignUp() {
                 keyboardType="email-address"
                 onBlur={handleBlur("email")}
                 error={!!errors.email && touched.email}
-                style={{
-                  backgroundColor: colors.lightBlue,
-                }}
+                mode="outlined"
+                activeOutlineColor={colors.black}
                 theme={{
+                  roundness: 30,
                   fonts: { bodyLarge: { fontFamily: fonts.regular } },
                 }}
+                style={styles.emailInput}
               />
               {!!errors.email && touched.email && (
                 <HelperText type="error" visible={!!errors.email && !!touched.email}>
@@ -92,7 +93,10 @@ export function SignUp() {
                 onChangeText={handleChange("password")}
                 value={values.password}
                 label="Password"
+                mode="outlined"
+                activeOutlineColor={colors.black}
                 theme={{
+                  roundness: 30,
                   fonts: { bodyLarge: { fontFamily: fonts.regular } },
                 }}
                 onBlur={handleBlur("password")}
@@ -117,8 +121,10 @@ export function SignUp() {
                 onBlur={handleBlur("confirmPassword")}
                 value={values.confirmPassword}
                 label="Confirm Password"
-                returnKeyType="done"
+                mode="outlined"
+                activeOutlineColor={colors.black}
                 theme={{
+                  roundness: 30,
                   fonts: { bodyLarge: { fontFamily: fonts.regular } },
                 }}
                 secureTextEntry={secureConfirmPassword}
@@ -149,12 +155,12 @@ export function SignUp() {
                 style={styles.button}
                 textColor={colors.white}
                 labelStyle={{ fontFamily: fonts.bold }}
-                buttonColor={colors.darkBlue}>
+                buttonColor={colors.brown}>
                 Submit
               </Button>
-              <Row style={styles.signUpRow}>
+              <Row style={styles.loginRow}>
                 <Text style={{ fontFamily: fonts.regular }}>Already have an account?</Text>
-                <Button mode="text" labelStyle={styles.login} onPress={navigateLogin} textColor={colors.darkBlue}>
+                <Button mode="text" labelStyle={styles.login} onPress={navigateLogin} textColor={colors.brown}>
                   Login
                 </Button>
               </Row>
@@ -174,15 +180,19 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
   },
   text: { fontSize: 20 },
-  passwordInput: {
+  emailInput: {
+    backgroundColor: colors.lightCream,
     marginTop: 10,
-    backgroundColor: colors.lightBlue,
   },
-  signUpRow: {
+  passwordInput: {
+    backgroundColor: colors.lightCream,
+    marginTop: 10,
+  },
+  loginRow: {
     justifyContent: "flex-end",
     alignItems: "center",
     paddingTop: 5,
   },
   login: { textDecorationLine: "underline", paddingBottom: 1, fontFamily: fonts.medium },
-  button: { marginTop: 10 },
+  button: { marginTop: 40 },
 });

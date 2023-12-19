@@ -24,7 +24,10 @@ export const Topbar = ({ title, arrowIcon = false, onPress }: TopbarProps) => {
         colors: colors.white,
       }}>
       {arrowIcon && <Appbar.BackAction onPress={onPress} iconColor={colors.black} />}
-      <Appbar.Content title={title} titleStyle={[styles.title, { marginRight: Platform.OS === "android" ? 40 : 0 }]} />
+      <Appbar.Content
+        title={title}
+        titleStyle={[styles.title, { marginRight: !arrowIcon ? 0 : Platform.OS === "android" ? 40 : 0 }]}
+      />
     </Appbar.Header>
   );
 };
