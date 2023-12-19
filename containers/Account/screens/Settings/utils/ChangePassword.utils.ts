@@ -12,6 +12,9 @@ export const ChangePasswordValidationSchema: Yup.Schema<ChangePasswordEntry> = Y
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
       "Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 digit, and 1 special character",
-    ),
-  confirmPassword: Yup.string().oneOf([Yup.ref("password")], "Passwords must match"),
+    )
+    .required(),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref("password")], "Passwords must match")
+    .required(),
 });

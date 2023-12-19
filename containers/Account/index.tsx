@@ -8,6 +8,7 @@ import { Contact } from "./screens/Contact";
 import { Settings } from "./screens/Settings";
 import { fonts } from "../../constants/Fonts";
 import { colors } from "../../constants/Colors";
+import { layout } from "../../constants/Layout";
 enum NavTab {
   Settings = "Settings",
   Contact = "Contact",
@@ -47,7 +48,6 @@ export function Account() {
       <View style={styles.container}>
         {value === NavTab.Settings && <Settings />}
         {value === NavTab.Contact && <Contact />}
-
         <Button labelStyle={styles.logout} style={styles.buttonLogout} onPress={logout}>
           Logout
         </Button>
@@ -57,7 +57,7 @@ export function Account() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "space-around" },
+  container: { flex: 1, justifyContent: "space-between", marginVertical: layout.publicScreenHorizontalPadding },
   buttonLogout: { width: "40%", alignSelf: "center", borderColor: colors.brown, borderWidth: 2 },
   logout: { fontFamily: fonts.bold },
   segmentButtons: {

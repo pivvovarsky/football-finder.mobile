@@ -4,6 +4,7 @@ import { Button } from "react-native-paper";
 import { openEmailbox } from "../account.utils";
 import { colors } from "../../../constants/Colors";
 import { fonts } from "../../../constants/Fonts";
+import { layout } from "../../../constants/Layout";
 
 export function Contact() {
   return (
@@ -34,8 +35,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: fonts.regular,
   },
-  button: { backgroundColor: colors.brown },
+  button: {
+    backgroundColor: colors.brown,
+    marginHorizontal: layout.publicScreenHorizontalPadding,
+    marginTop: layout.publicScreenHorizontalPadding,
+  },
   formContainer: {
     padding: 20,
+    flex: 1,
   },
 });
