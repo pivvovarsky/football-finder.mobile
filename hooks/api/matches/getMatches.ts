@@ -7,7 +7,7 @@ import { StadiumData } from "../stadiums/getStadiums";
 interface TeamDetails {
   name: string;
   imageUrl: string;
-  stadium: { name: string };
+  stadium: { name: string; websiteUrl: string };
   league: string;
   country: string;
 }

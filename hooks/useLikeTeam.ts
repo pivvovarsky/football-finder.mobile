@@ -4,7 +4,7 @@ import { useGetFavouriteTeam } from "./api/favourites/useGetFavouriteTeam";
 import { usePutFavouriteTeam } from "./api/favourites/usePutFavouriteTeam";
 
 export const useLikeTeam = (teamId: string) => {
-  const { refresh: refreshFavouriteTeams } = useRefreshQuery([["getFavouriteTeams"]]);
+  const { refresh: refreshFavouriteTeams } = useRefreshQuery([["getFavouriteTeams", { id: teamId }]]);
   const {
     data: favouriteInfo,
     isLoading: isLoadingFavouriteInfo,

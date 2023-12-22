@@ -8,10 +8,11 @@ import { layout } from "../../constants/Layout";
 import dayjs from "dayjs";
 import { Row } from "../../components/Containers/Row";
 import { colors } from "../../constants/Colors";
-import { ActivityIndicator, IconButton } from "react-native-paper";
+import { ActivityIndicator, Chip, IconButton } from "react-native-paper";
 import { fonts } from "../../constants/Fonts";
 import { useLikeStadium } from "../../hooks/useLikeStadium";
 import { StadiumItem } from "./components/StadiumItem";
+import { openLocationWebsite } from "./utils/Home.utils";
 
 type Section = {
   title: string;
@@ -62,6 +63,12 @@ export function Home() {
               <Text style={styles.fontFamily}>{item?.host.stadium?.name}</Text>
               <Text style={styles.fontFamily}>{dayjs(item?.date).format("DD/MM/YYYY, HH:mm")}</Text>
             </View>
+            <Row style={styles.rowChip}>
+              <Chip icon={"ticket"} onPress={() => openLocationWebsite(item.host?.stadium?.websiteUrl)}>
+                Buy tickets
+              </Chip>
+              <Chip icon={"information"}>More Details</Chip>
+            </Row>
           </View>
         ),
       });
@@ -145,4 +152,5 @@ const styles = StyleSheet.create({
   scoreSeparator: { alignSelf: "center", fontSize: 40 },
   fontFamily: { fontFamily: fonts.regular },
   fontFamilyBold: { fontFamily: fonts.bold },
+  rowChip: { justifyContent: "space-around" },
 });

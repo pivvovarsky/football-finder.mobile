@@ -3,7 +3,7 @@ import { Platform, StyleSheet, View } from "react-native";
 import { ActivityIndicator, Text } from "react-native-paper";
 import { layout, window } from "../../constants/Layout";
 import { colors } from "../../constants/Colors";
-import { MapButton } from "../../components/Map/MapButton";
+import { MapButton } from "../../components/Public/MapButton";
 import { Row } from "../../components/Containers/Row";
 import { useNavigation } from "@react-navigation/native";
 import { NotLoggedNavigationProp } from "../../navigation/NotLogged";

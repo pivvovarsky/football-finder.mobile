@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { Row } from "../Containers/Row";
 
 export const StarsRating = () => {
   const [rating, setRating] = useState(0);
@@ -10,7 +11,6 @@ export const StarsRating = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Ocena: {rating}</Text>
       <View style={styles.starContainer}>
         {[1, 2, 3, 4, 5].map((star) => (
           <TouchableOpacity key={star} onPress={() => handleStarPress(star)} activeOpacity={0.7}>
@@ -25,17 +25,16 @@ export const StarsRating = () => {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    marginTop: 20,
+    marginVertical: 20,
   },
   text: {
-    fontSize: 18,
     marginBottom: 10,
   },
   starContainer: {
     flexDirection: "row",
   },
   star: {
-    fontSize: 30,
+    fontSize: 20,
     color: "#888",
     marginRight: 5,
   },
