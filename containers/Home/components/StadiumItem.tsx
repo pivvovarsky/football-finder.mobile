@@ -1,24 +1,31 @@
 import React from "react";
-import { SectionList, StatusBar, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { StadiumData } from "../../../hooks/api/stadiums/getStadiums";
+import { IconButton } from "react-native-paper";
+import { colors } from "../../../constants/Colors";
+import { fonts } from "../../../constants/Fonts";
+import { useLikeStadium } from "../../../hooks/useLikeStadium";
 
-interface TeamItem {
-  id: string;
-  name: String;
-  imageUrl: String;
-  description?: string;
-  league: string;
-  country: string;
-  stadium: StadiumData;
+interface StadiumItem {
+  item: StadiumData;
 }
-export function TeamItem({}: TeamItem) {
-  return <></>;
+
+export function StadiumItem({ item }: StadiumItem) {
+  const { icon: heartIcon, like: likeStadium } = useLikeStadium(item.id);
+  return (
+    <View style={styles.stadiumItem}>
+      <Text style={styles.fontFamily}>{item?.name}</Text>
+      <IconButton icon={heartIcon} onPress={likeStadium} />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: StatusBar.currentHeight,
-    marginHorizontal: 16,
+  stadiumItem: {
+    backgroundColor: colors.cream,
+    padding: 20,
+    marginVertical: 8,
+    borderRadius: 30,
   },
+  fontFamily: { fontFamily: fonts.regular },
 });

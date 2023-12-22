@@ -8,8 +8,10 @@ import { layout } from "../../constants/Layout";
 import dayjs from "dayjs";
 import { Row } from "../../components/Containers/Row";
 import { colors } from "../../constants/Colors";
-import { ActivityIndicator } from "react-native-paper";
+import { ActivityIndicator, IconButton } from "react-native-paper";
 import { fonts } from "../../constants/Fonts";
+import { useLikeStadium } from "../../hooks/useLikeStadium";
+import { StadiumItem } from "./components/StadiumItem";
 
 type Section = {
   title: string;
@@ -23,6 +25,7 @@ export function Home() {
   const { data: stadiumsData, isLoading: stadiumsLoading } = useGetStadiums();
   const { data: teamsData, isLoading: teamsLoading } = useGetTeams();
   const [sections, setSections] = useState<Section[]>([]);
+
   useEffect(() => {
     const newSections: object[] = [];
 
@@ -69,11 +72,7 @@ export function Home() {
         title: "Stadiums",
         data: stadiumsData?.data,
         isLoading: stadiumsLoading,
-        renderItem: ({ item }: { item: StadiumData }) => (
-          <View style={styles.stadiumItem}>
-            <Text style={styles.fontFamily}>{item?.name}</Text>
-          </View>
-        ),
+        renderItem: ({ item }: { item: StadiumData }) => <StadiumItem item={item} />,
       });
     }
 
@@ -134,12 +133,6 @@ const styles = StyleSheet.create({
   itemImage: { backgroundColor: colors.transparent, width: 50, height: 50 },
   teamItem: {
     backgroundColor: colors.brown,
-    padding: 20,
-    marginVertical: 8,
-    borderRadius: 30,
-  },
-  stadiumItem: {
-    backgroundColor: colors.cream,
     padding: 20,
     marginVertical: 8,
     borderRadius: 30,
