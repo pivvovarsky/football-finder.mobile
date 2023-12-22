@@ -61,7 +61,7 @@ export function LocationCard({ locationDetails, version, style, updateLocationDe
               rippleColor={colors.orange}
               style={styles.likeChip}
               onPress={likeStadium}>
-              Add to favourites
+              {`${heartIcon === "cards-heart" ? "Remove from favourites" : "Add to favourites"}`}
             </Chip>
             {/* <Chip icon={"information"}>
               <StarsRating />
