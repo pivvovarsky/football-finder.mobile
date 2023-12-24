@@ -31,7 +31,7 @@ export function Account() {
       value: NavTab.Contact,
       label: NavTab.Contact,
       icon: "comment-processing",
-      style: { ...styles.segmentButtons, backgroundColor: value === NavTab.Contact ? colors.brown : colors.cream },
+      style: { ...styles.segmentButtons, backgroundColor: value === NavTab.Contact ? colors.lightBrown : colors.cream },
     },
   ];
 

@@ -5,39 +5,37 @@ import { TeamData } from "../../../hooks/api/teams/getTeams";
 import { colors } from "../../../constants/Colors";
 import { window } from "../../../constants/Layout";
 import { fonts } from "../../../constants/Fonts";
-import { Chip } from "react-native-paper";
+import { Chip, IconButton } from "react-native-paper";
+import { Row } from "../../../components/Containers/Row";
+import { useLikeTeam } from "../../../hooks/useLikeTeam";
 
 interface TeamItemProps {
   team: TeamData;
 }
 export function TeamItem({ team }: TeamItemProps) {
+  const { icon: heartIcon, like: likeTeam } = useLikeTeam(team.id);
   return (
     <View style={styles.container}>
+      <IconButton style={styles.heartIcon} icon={heartIcon} onPress={likeTeam} />
       <Image source={{ uri: team?.imageUrl ?? "" }} resizeMethod="resize" resizeMode="cover" style={styles.itemImage} />
-      <View>
-        <Text style={styles.nameText}>{team.name}</Text>
-        <Chip icon={"information"}>
-          <Text style={styles.details}>
-            {team.league}
-            {team.country}
-          </Text>
-        </Chip>
-      </View>
+      <Text style={styles.nameText} numberOfLines={2}>
+        {team.name}
+      </Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
+    width: window.width * 0.44,
+    justifyContent: "center",
     alignItems: "center",
-    width: window.width * 0.3,
     height: 120,
     backgroundColor: "#dedede",
-    borderRadius: 15,
+    borderRadius: 20,
     margin: 5,
   },
-  nameText: { fontSize: window.height * 0.03, fontFamily: fonts.regular },
-  details: {},
+  heartIcon: { position: "absolute", right: 0, top: 0 },
+  nameText: { fontSize: window.height * 0.02, fontFamily: fonts.regular, textAlign: "center", paddingHorizontal: 20 },
   itemImage: { backgroundColor: colors.transparent, width: 50, height: 50 },
 });

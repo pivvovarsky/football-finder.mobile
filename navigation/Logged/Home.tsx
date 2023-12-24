@@ -1,10 +1,6 @@
-import React, { useEffect } from "react";
-import {
-  createStackNavigator,
-  StackNavigationProp,
-} from "@react-navigation/stack";
+import React from "react";
+import { createStackNavigator, StackNavigationProp } from "@react-navigation/stack";
 import { Home } from "../../containers/Home";
-import { Favorites } from "../../containers/Favorites";
 
 export type HomeScreenNavigationProp = StackNavigationProp<HomeStackList>;
 const HomeStack = createStackNavigator<HomeStackList>();
@@ -19,10 +15,8 @@ export const HomeNavigator = () => {
     <HomeStack.Navigator
       screenOptions={{
         headerShown: false,
-      }}
-    >
+      }}>
       <HomeStack.Screen name="Home" component={Home} />
-      <HomeStack.Screen name="Favorites" component={Favorites} />
     </HomeStack.Navigator>
   );
 };

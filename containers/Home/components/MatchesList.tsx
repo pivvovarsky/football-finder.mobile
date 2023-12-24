@@ -5,38 +5,34 @@ import { fonts } from "../../../constants/Fonts";
 import { MatchData } from "../../../hooks/api/matches/getMatches";
 import { MatchItem } from "./MatchItem";
 import { window } from "../../../constants/Layout";
+import { ActivityIndicator } from "react-native-paper";
 interface MatchesListProps {
   items: MatchData[];
-  title: string;
+  loading: boolean;
 }
-export function MatchesList({ items, title }: MatchesListProps) {
+export function MatchesList({ items, loading }: MatchesListProps) {
   return (
     <FlatList
       data={items}
       renderItem={(data) => <MatchItem match={data.item} />}
-      ListHeaderComponent={<Text style={styles.title}>{title}</Text>}
-      // onScrollBeginDrag={Keyboard.dismiss}
-      // ListFooterComponent={
-      //   <Conditional
-      //     condition={isFetching}
-      //     trueRender={<QueryLoader isLoading={true} isError={false} style={styles.fetchLoader} />}
-      //   />
-      // }
+      contentContainerStyle={styles.listStyle}
+      ListEmptyComponent={
+        <Text style={styles.listEmptyText}>
+          {"We strongly encourage you to like the stadium or the match to see the upcoming matches."}
+        </Text>
+      }
+      keyExtractor={(item, index) => item.id + index}
+      ListFooterComponent={() => loading && <ActivityIndicator size="large" />}
     />
   );
 }
 
 const styles = StyleSheet.create({
+  listStyle: { marginTop: 10 },
   title: {
     alignSelf: "center",
     fontFamily: fonts.regular,
     fontSize: window.height * 0.035,
   },
-  stadiumItem: {
-    backgroundColor: colors.cream,
-    padding: 20,
-    marginVertical: 8,
-    borderRadius: 30,
-  },
-  fontFamily: { fontFamily: fonts.regular },
+  listEmptyText: { fontFamily: fonts.bold, fontSize: 15, paddingHorizontal: 20, textAlign: "center", paddingTop: 10 },
 });

@@ -5,24 +5,41 @@ import { MatchData } from "../../hooks/api/matches/getMatches";
 import { TeamData, useGetTeams } from "../../hooks/api/teams/getTeams";
 import { layout } from "../../constants/Layout";
 import { colors } from "../../constants/Colors";
-import { ActivityIndicator } from "react-native-paper";
+import { ActivityIndicator, SegmentedButtons } from "react-native-paper";
 import { fonts } from "../../constants/Fonts";
 import { useGetUpcomingMatches } from "../../hooks/api/matches/getUpcomingMatches";
 import { TeamItem } from "./components/TeamItem";
 import { MatchesList } from "./components/MatchesList";
+import { TeamsList } from "./components/TeamsList";
 
-type Section = {
-  title: string;
-  data: any[];
-  isLoading: boolean;
-  renderItem: ({ item }: { item: any }) => JSX.Element;
-};
+enum HomeTab {
+  Matches = "Upcoming Matches",
+  Teams = "Teams",
+}
 
 export function Home() {
   const { data: upcomingMatchesData, isLoading: upcomingMatchesLoading } = useGetUpcomingMatches();
-  const { data: teamsData, isLoading: teamsLoading } = useGetTeams();
+  const { data: teamsData, isLoading: teamsLoading, isError: isErrorTeams } = useGetTeams();
   const [upcomingMatches, setUpcomingMatches] = useState<MatchData[]>([]);
   const [teams, setTeams] = useState<TeamData[]>([]);
+  const [value, setValue] = useState<HomeTab>(HomeTab.Matches);
+  const HEADER_BUTTONS = [
+    {
+      value: HomeTab.Matches,
+      label: HomeTab.Matches,
+      icon: "volleyball",
+      style: {
+        ...styles.segmentButtons,
+        backgroundColor: value === HomeTab.Matches ? colors.lightBrown : colors.cream,
+      },
+    },
+    {
+      value: HomeTab.Teams,
+      label: HomeTab.Teams,
+      icon: "vuetify",
+      style: { ...styles.segmentButtons, backgroundColor: value === HomeTab.Teams ? colors.lightBrown : colors.cream },
+    },
+  ];
 
   useEffect(() => {
     if (upcomingMatchesData) setUpcomingMatches(upcomingMatchesData.data);
@@ -32,19 +49,21 @@ export function Home() {
   return (
     <View style={styles.container}>
       <Topbar title={"Home"} arrowIcon={false} />
-      <MatchesList items={upcomingMatches} title={"Upcoming matches"} />
-      {/* <SectionList
-        sections={sections}
-        renderSectionHeader={({ section: { title } }) => <Text style={styles.header}>{title}</Text>}
-        renderSectionFooter={({ section: { isLoading } }) => {
-          if (isLoading) {
-            return <ActivityIndicator />;
-          }
-          return null;
-        }}
-        ListEmptyComponent={<ActivityIndicator size="large" />}
-        keyExtractor={(item, index) => item.id + index}
-      /> */}
+      <SegmentedButtons
+        value={value}
+        //@ts-ignore
+        onValueChange={setValue}
+        checkedColor={colors.darkBlue}
+        uncheckedColor={colors.darkBlue}
+        density="regular"
+        style={{ paddingHorizontal: 5 }}
+        buttons={HEADER_BUTTONS}
+      />
+      {value === HomeTab.Matches ? (
+        <MatchesList loading={teamsLoading || isErrorTeams} items={upcomingMatches} />
+      ) : (
+        <TeamsList items={teams} title={"Teams"} />
+      )}
     </View>
   );
 }
@@ -58,5 +77,8 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontFamily: fonts.regular,
     alignSelf: "center",
+  },
+  segmentButtons: {
+    borderColor: colors.white,
   },
 });
