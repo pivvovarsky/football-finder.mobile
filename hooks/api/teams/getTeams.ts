@@ -9,13 +9,11 @@ export interface TeamData {
   imageUrl?: string;
   league: string;
   country: string;
-  //   stadium: Pick<StadiumData, "name" | "teamId">;
 }
 
 const getTeams = async () => {
   const url = "/teams";
   const { data } = await api.get<unknown, ListResponseData<TeamData>>(url);
-  console.log(data.count);
   return data;
 };
 

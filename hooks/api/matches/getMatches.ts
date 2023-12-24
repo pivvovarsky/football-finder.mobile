@@ -4,7 +4,8 @@ import { api } from "../../../services/API";
 import { TeamData } from "../teams/getTeams";
 import { StadiumData } from "../stadiums/getStadiums";
 
-interface TeamDetails {
+export interface TeamDetails {
+  id: string;
   name: string;
   imageUrl: string;
   stadium: { name: string; websiteUrl: string };

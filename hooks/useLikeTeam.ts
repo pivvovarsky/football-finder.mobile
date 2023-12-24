@@ -4,7 +4,8 @@ import { useGetFavouriteTeam } from "./api/favourites/useGetFavouriteTeam";
 import { usePutFavouriteTeam } from "./api/favourites/usePutFavouriteTeam";
 
 export const useLikeTeam = (teamId: string) => {
-  const { refresh: refreshFavouriteTeams } = useRefreshQuery([["getFavouriteTeams", { id: teamId }]]);
+  const { refresh: refreshFavouriteTeams } = useRefreshQuery([["getFavouriteTeams"]]);
+  const { refresh: refreshFavouriteUpcomingMatches } = useRefreshQuery([["getUpcomingMatches"]]);
   const {
     data: favouriteInfo,
     isLoading: isLoadingFavouriteInfo,
@@ -19,15 +20,16 @@ export const useLikeTeam = (teamId: string) => {
     putLikeTeam(teamId, {
       onSuccess: async () => {
         await refetchFavouriteInfo();
+        refreshFavouriteUpcomingMatches();
         refreshFavouriteTeams();
       },
     });
   };
 
-  const heartIcon = useMemo(() => (favouriteInfo?.liked ? "Favorite" : "FavoriteBorder"), [favouriteInfo]);
+  const heartIcon = useMemo(() => (favouriteInfo?.liked ? "cards-heart" : "cards-heart-outline"), [favouriteInfo]);
 
   return {
-    // icon: heartIcon,
+    icon: heartIcon,
     isLoading: isLoadingFavouriteInfo || isLoadingPutLikeTeam || isFetchingFavouriteInfo,
     isError: isErrorFavouriteInfo || isErrorPutLikeTeam,
     like: likeTeam,
