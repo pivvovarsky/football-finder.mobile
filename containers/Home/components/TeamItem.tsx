@@ -5,8 +5,7 @@ import { TeamData } from "../../../hooks/api/teams/getTeams";
 import { colors } from "../../../constants/Colors";
 import { window } from "../../../constants/Layout";
 import { fonts } from "../../../constants/Fonts";
-import { Chip, IconButton } from "react-native-paper";
-import { Row } from "../../../components/Containers/Row";
+import { IconButton } from "react-native-paper";
 import { useLikeTeam } from "../../../hooks/useLikeTeam";
 
 interface TeamItemProps {
@@ -14,10 +13,10 @@ interface TeamItemProps {
 }
 
 export function TeamItem({ team }: TeamItemProps) {
-  const { icon: heartIcon, like: likeTeam } = useLikeTeam(team.id);
+  const { icon: heartIcon, like: likeTeam, isLoading } = useLikeTeam(team.id);
   return (
     <View style={styles.container}>
-      <IconButton style={styles.heartIcon} icon={heartIcon} onPress={likeTeam} />
+      <IconButton style={styles.heartIcon} icon={heartIcon} onPress={likeTeam} disabled={isLoading} />
       <Image source={{ uri: team?.imageUrl ?? "" }} resizeMethod="resize" resizeMode="cover" style={styles.itemImage} />
       <Text style={styles.nameText} numberOfLines={2}>
         {team.name}

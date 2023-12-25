@@ -4,8 +4,8 @@ import { useGetFavouriteStadium } from "./api/favourites/useGetFavouriteStadium"
 import { usePutFavouriteStadium } from "./api/favourites/usePutFavouriteStadium";
 
 export const useLikeStadium = (stadiumId: string) => {
-  const { refresh: refreshFavouriteStadiums } = useRefreshQuery([["getFavouriteStadiums"]]);
-  const { refresh: refreshFavouriteUpcomingMatches } = useRefreshQuery([["getUpcomingMatches"]]);
+  const { refresh: refreshData } = useRefreshQuery([["getFavouriteStadiums"], ["getUpcomingMatches"]]);
+
   const {
     data: favouriteInfo,
     isLoading: isLoadingFavouriteInfo,
@@ -24,8 +24,7 @@ export const useLikeStadium = (stadiumId: string) => {
     putLikeStadium(stadiumId, {
       onSuccess: async () => {
         await refetchFavouriteInfo();
-        refreshFavouriteStadiums();
-        refreshFavouriteUpcomingMatches();
+        refreshData();
       },
     });
   };

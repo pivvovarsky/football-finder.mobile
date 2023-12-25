@@ -14,6 +14,7 @@ import { openLocationWebsite } from "../../containers/Home/utils/Home.utils";
 import { LoggedScreenNavigationProp } from "../../navigation/Logged";
 import { HomeScreenNavigationProp } from "../../navigation/Logged/Home";
 import { useNavigation } from "@react-navigation/native";
+import { Skeleton } from "../Loaders/MySkeletonContent";
 interface MapButtonProps extends ViewProps {
   locationDetails: StadiumData | null;
   updateLocationDetails: (stadium: StadiumData | null) => void;
@@ -63,17 +64,17 @@ export function LocationCard({ locationDetails, version, style, updateLocationDe
               onPress={likeStadium}>
               {`${heartIcon === "cards-heart" ? "Remove from favourites" : "Add to favourites"}`}
             </Chip>
-            {/* <Chip icon={"information"}>
-              <StarsRating />
-            </Chip> */}
           </Row>
-          <Card.Cover
-            source={{ uri: locationDetails?.imageUrl ?? "" }}
-            resizeMethod="resize"
-            resizeMode="cover"
-            style={styles.cardImage}
-          />
-          {/* <Chip icon="information">Opinions:</Chip> */}
+          {!locationDetails?.imageUrl ? (
+            <Skeleton style={[styles.cardImage, { backgroundColor: "gray" }]} loading={!locationDetails?.imageUrl} />
+          ) : (
+            <Card.Cover
+              source={{ uri: locationDetails?.imageUrl ?? "" }}
+              resizeMethod="resize"
+              resizeMode="cover"
+              style={styles.cardImage}
+            />
+          )}
           <Chip
             icon={"information"}
             textStyle={styles.chipText}

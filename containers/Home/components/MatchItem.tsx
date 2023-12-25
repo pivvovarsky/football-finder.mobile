@@ -6,6 +6,7 @@ import { fonts } from "../../../constants/Fonts";
 import { colors } from "../../../constants/Colors";
 import { TeamContainer } from "../containers/TeamContainer";
 import { MatchDetails } from "./MatchDetails";
+import { Skeleton } from "../../../components/Loaders/MySkeletonContent";
 
 interface MatchItemProps {
   match: MatchData;

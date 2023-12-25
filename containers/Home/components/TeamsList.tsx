@@ -10,18 +10,22 @@ import { TeamData } from "../../../hooks/api/teams/getTeams";
 import { TeamItem } from "./TeamItem";
 interface TeamsListProps {
   items: TeamData[];
+  loading: boolean;
 }
-export function TeamsList({ items }: TeamsListProps) {
+export function TeamsList({ items, loading }: TeamsListProps) {
   return (
     <FlatList
       data={items}
       horizontal
-      contentContainerStyle={{ width: "100%", justifyContent: "space-between" }}
+      contentContainerStyle={styles.container}
       renderItem={(data) => <TeamItem team={data.item} />}
-      ListEmptyComponent={<ActivityIndicator size="large" />}
+      ListEmptyComponent={<ActivityIndicator size="large" style={styles.activityIndicator} />}
       keyExtractor={(item, index) => item.id + index}
     />
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: { flex: 1, justifyContent: "center" },
+  activityIndicator: {},
+});
