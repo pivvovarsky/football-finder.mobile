@@ -62,7 +62,7 @@ export function Home() {
       {value === HomeTab.Matches ? (
         <MatchesList loading={teamsLoading || isErrorTeams} items={upcomingMatches} />
       ) : (
-        <TeamsList items={teams} title={"Teams"} />
+        <TeamsList items={teams} />
       )}
     </View>
   );

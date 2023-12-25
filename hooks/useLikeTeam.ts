@@ -4,8 +4,12 @@ import { useGetFavouriteTeam } from "./api/favourites/useGetFavouriteTeam";
 import { usePutFavouriteTeam } from "./api/favourites/usePutFavouriteTeam";
 
 export const useLikeTeam = (teamId: string) => {
-  const { refresh: refreshFavouriteTeams } = useRefreshQuery([["getFavouriteTeams"]]);
-  const { refresh: refreshFavouriteUpcomingMatches } = useRefreshQuery([["getUpcomingMatches"]]);
+  const { refresh: refreshFavouriteData } = useRefreshQuery([
+    ["getFavouriteTeams"],
+    ["getUpcomingMatches"],
+    ["getTeams"],
+  ]);
+
   const {
     data: favouriteInfo,
     isLoading: isLoadingFavouriteInfo,
@@ -20,8 +24,7 @@ export const useLikeTeam = (teamId: string) => {
     putLikeTeam(teamId, {
       onSuccess: async () => {
         await refetchFavouriteInfo();
-        refreshFavouriteUpcomingMatches();
-        refreshFavouriteTeams();
+        refreshFavouriteData();
       },
     });
   };

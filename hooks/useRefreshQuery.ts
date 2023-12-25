@@ -1,7 +1,7 @@
 import { QueryKey, useQueryClient } from "@tanstack/react-query";
 import { useCallback } from "react";
 
-export const useRefreshQuery = (queryKeys?: Array<Array<QueryKey | undefined | Record<string, unknown>>>) => {
+export const useRefreshQuery = (queryKeys?: Array<Array<string>> | undefined) => {
   const queryClient = useQueryClient();
 
   const refresh = useCallback(() => {

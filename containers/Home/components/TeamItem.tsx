@@ -12,6 +12,7 @@ import { useLikeTeam } from "../../../hooks/useLikeTeam";
 interface TeamItemProps {
   team: TeamData;
 }
+
 export function TeamItem({ team }: TeamItemProps) {
   const { icon: heartIcon, like: likeTeam } = useLikeTeam(team.id);
   return (
