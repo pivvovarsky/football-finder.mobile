@@ -4,6 +4,7 @@ import navigation from "../navigation";
 import { BackHandler } from "react-native";
 import { NotLoggedNavigationProp } from "../navigation/NotLogged";
 import { useNavigation } from "@react-navigation/native";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface LoginEntry {
   email: string;
@@ -35,6 +36,7 @@ export function UserProvider({ children }: React.PropsWithChildren<unknown>) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setError] = useState<boolean>(false);
   const [isCreatedAccount, setIsCreatedAccount] = useState<boolean>(false);
+  const queryClient = useQueryClient();
 
   const cleanState = () => {
     setError(false);
@@ -84,6 +86,10 @@ export function UserProvider({ children }: React.PropsWithChildren<unknown>) {
     setIsLoading(true);
     auth()
       .signOut()
+      .then(async () => {
+        queryClient.removeQueries();
+        setUser(null);
+      })
       .catch((error: Error) => console.error(error.message))
       .finally(() => setIsLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps

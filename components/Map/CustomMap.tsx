@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Image, StyleSheet, TouchableOpacity } from "react-native";
 import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { colors } from "../../constants/Colors";
 import { StadiumData } from "../../hooks/api/stadiums/getStadiums";
+import Geolocation from "@react-native-community/geolocation";
 
 interface MapProps {
   stadiums: StadiumData[];
@@ -16,24 +17,24 @@ export function CustomMap({ stadiums, onMarkerPress }: MapProps) {
     longitudeDelta: 0.0421, //to change
   });
 
-  // useEffect(() => {
-  //   Geolocation.getCurrentPosition(
-  //     (pos) => {
-  //       const crd = pos.coords;
-  //       setPosition({
-  //         latitude: crd.latitude,
-  //         longitude: crd.longitude,
-  //         latitudeDelta: 0.0421,
-  //         longitudeDelta: 0.0421,
-  //       });
-  //     },
-  //     () => {},
-  //     {
-  //       enableHighAccuracy: true,
-  //       timeout: 10000,
-  //     },
-  //   );
-  // }, []);
+  useEffect(() => {
+    Geolocation.getCurrentPosition(
+      (pos) => {
+        const crd = pos.coords;
+        setPosition({
+          latitude: crd.latitude,
+          longitude: crd.longitude,
+          latitudeDelta: 0.0421,
+          longitudeDelta: 0.0421,
+        });
+      },
+      () => {},
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+      },
+    );
+  }, []);
 
   return (
     <>

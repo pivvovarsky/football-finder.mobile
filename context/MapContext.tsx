@@ -11,6 +11,7 @@ export const MapContext = createContext<ContextProps | null>(null);
 
 export function MapProvider({ children }: React.PropsWithChildren<unknown>) {
   const { data: stadiums, isLoading } = useGetStadiums();
+
   const [stadiumsData, setStadiumsData] = useState<StadiumData[]>([]);
 
   useEffect(() => {

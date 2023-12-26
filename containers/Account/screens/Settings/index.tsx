@@ -9,11 +9,13 @@ import { colors } from "../../../../constants/Colors";
 import { fonts } from "../../../../constants/Fonts";
 import { layout, window } from "../../../../constants/Layout";
 import { Row } from "../../../../components/Containers/Row";
+import { useUser } from "../../../../hooks/context/useUser";
 
 export function Settings() {
   const [securePassword, setSecurePassword] = useState(true);
   const [secureConfirmPassword, setSecureConfirmPassword] = useState(true);
   const { mutate: chPassword, isLoading } = useChangePassword();
+  const { logout } = useUser();
   const [errorText, setErrorText] = useState<string | null>(null);
   const [isSwitchOn, setIsSwitchOn] = useState(false);
 
@@ -31,6 +33,7 @@ export function Settings() {
     chPassword(changePasswordData, {
       onSuccess: () => {
         resetForm();
+        logout();
       },
       onError: (error: any) => {
         setErrorText("Something went wrong. Try again later.");

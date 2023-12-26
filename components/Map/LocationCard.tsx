@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Linking, StyleSheet, ViewProps, Text } from "react-native";
-import { Card, Chip } from "react-native-paper";
+import { ActivityIndicator, Card, Chip } from "react-native-paper";
 import { colors } from "../../constants/Colors";
 import { StadiumData } from "../../hooks/api/stadiums/getStadiums";
 import { openAddressOnMap } from "../../containers/Map/map.utils";
@@ -11,10 +11,13 @@ import { CardButton } from "../Buttons/CardButton";
 import { useLikeStadium } from "../../hooks/useLikeStadium";
 import { window } from "../../constants/Layout";
 import { openLocationWebsite } from "../../containers/Home/utils/Home.utils";
-import { LoggedScreenNavigationProp } from "../../navigation/Logged";
 import { HomeScreenNavigationProp } from "../../navigation/Logged/Home";
 import { useNavigation } from "@react-navigation/native";
 import { Skeleton } from "../Loaders/MySkeletonContent";
+import { usePutStadiumRating } from "../../hooks/usePutRating";
+import { useGetNextMatch } from "../../hooks/api/stadiums/getNextMatch";
+import dayjs from "dayjs";
+import { MatchData } from "../../hooks/api/matches/getMatches";
 interface MapButtonProps extends ViewProps {
   locationDetails: StadiumData | null;
   updateLocationDetails: (stadium: StadiumData | null) => void;
@@ -22,11 +25,24 @@ interface MapButtonProps extends ViewProps {
 }
 export function LocationCard({ locationDetails, version, style, updateLocationDetails }: MapButtonProps) {
   const { icon: heartIcon, like: likeStadium, isLoading, isError } = useLikeStadium(locationDetails?.id ?? "");
+  const [nextMatchInfo, setNextMatchInfo] = useState<MatchData | null>(null);
+  const {
+    data: nextMatchData,
+    isLoading: isLoadingNextMatch,
+    isError: isErrorNextMatch,
+  } = useGetNextMatch(locationDetails?.id ?? "");
+  const { avgRating } = usePutStadiumRating(locationDetails?.id ?? "");
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
   const navigateToHome = () => {
     navigation.navigate("Home");
   };
+
+  useEffect(() => {
+    console.log(nextMatchData);
+    if (nextMatchData) setNextMatchInfo(nextMatchData);
+    console.log(nextMatchData);
+  }, [nextMatchData]);
 
   return (
     <>
@@ -54,7 +70,7 @@ export function LocationCard({ locationDetails, version, style, updateLocationDe
           </Card.Content>
           <Row style={styles.chipRow}>
             <Chip icon={"information"} textStyle={styles.chipText} rippleColor={colors.orange} style={styles.likeChip}>
-              Rating <Text style={styles.ratingScore}>{3.7}</Text>
+              Rating <Text style={styles.ratingScore}>{avgRating}</Text>
             </Chip>
             <Chip
               icon={heartIcon}
@@ -75,15 +91,22 @@ export function LocationCard({ locationDetails, version, style, updateLocationDe
               style={styles.cardImage}
             />
           )}
-          <Chip
-            icon={"information"}
-            textStyle={styles.chipText}
-            rippleColor={colors.orange}
-            style={styles.nextMatchChip}
-            disabled={isLoading || isError || heartIcon === "cards-heart-outline"}
-            onPress={navigateToHome}>
-            Next match: {"GKS Katowice vs Tychy 18.02.2023, 18:30"}
-          </Chip>
+          {nextMatchInfo ? (
+            <Chip
+              icon={"information"}
+              textStyle={styles.chipText}
+              rippleColor={colors.orange}
+              style={styles.nextMatchChip}
+              disabled={isLoading || isError || heartIcon === "cards-heart-outline"}
+              onPress={navigateToHome}>
+              Next match: {nextMatchInfo?.host?.name ?? ""} vs {nextMatchInfo?.guest?.name ?? ""} -
+              {nextMatchInfo?.date ? " " + dayjs(nextMatchInfo.date).format("DD/MM/YYYY, HH:mm") : ""}
+            </Chip>
+          ) : (
+            <ActivityIndicator size={"small"} />
+          )}
+
+          {locationDetails?.id && <StarsRating stadiumId={locationDetails.id} />}
           <Card.Actions>
             <Row
               style={{

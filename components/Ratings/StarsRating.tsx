@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Row } from "../Containers/Row";
-
-export const StarsRating = () => {
-  const [rating, setRating] = useState(0);
-
-  const handleStarPress = (selectedRating: number) => {
-    setRating(selectedRating);
-  };
-
+import { usePutStadiumRating } from "../../hooks/usePutRating";
+interface StartsRatingProps {
+  stadiumId: string;
+}
+export const StarsRating = ({ stadiumId }: StartsRatingProps) => {
+  const { rating, handleStarPress } = usePutStadiumRating(stadiumId);
   return (
     <View style={styles.container}>
+      <Text>Your opinion of the stadium</Text>
       <View style={styles.starContainer}>
         {[1, 2, 3, 4, 5].map((star) => (
           <TouchableOpacity key={star} onPress={() => handleStarPress(star)} activeOpacity={0.7}>
@@ -34,11 +33,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   star: {
-    fontSize: 20,
+    fontSize: 30,
     color: "#888",
     marginRight: 5,
   },
   selectedStar: {
-    color: "#ffcc00", // Kolor gwiazdek po zaznaczeniu
+    color: "#ffcc00",
   },
 });
