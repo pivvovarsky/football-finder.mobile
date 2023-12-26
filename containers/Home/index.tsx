@@ -23,7 +23,7 @@ export function Home() {
     isError: isErrorUpcomingMatches,
     isFetched: isFetchedUpcomingMatches,
   } = useGetUpcomingMatches();
-  const { data: teamsData, isLoading: teamsLoading, isError: isErrorTeams } = useGetTeams();
+  const { data: teamsData } = useGetTeams();
   const [upcomingMatches, setUpcomingMatches] = useState<MatchData[]>([]);
   const [teams, setTeams] = useState<TeamData[]>([]);
   const [value, setValue] = useState<string>(HomeTab.Matches);
@@ -57,7 +57,7 @@ export function Home() {
         value={value}
         onValueChange={setValue}
         density="regular"
-        style={{ paddingHorizontal: 5 }}
+        style={{ paddingHorizontal: 5, paddingBottom: 5 }}
         buttons={HEADER_BUTTONS}
       />
       {value === HomeTab.Matches ? (
@@ -67,7 +67,7 @@ export function Home() {
           items={upcomingMatches}
         />
       ) : (
-        <TeamsList loading={teamsLoading || isErrorTeams} items={teams} />
+        <TeamsList items={teams} />
       )}
     </View>
   );

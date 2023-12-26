@@ -1,12 +1,11 @@
 import React from "react";
 import { FlatList, RefreshControl, StyleSheet, Text } from "react-native";
-import { colors } from "../../../constants/Colors";
 import { fonts } from "../../../constants/Fonts";
 import { MatchData } from "../../../hooks/api/matches/getMatches";
 import { MatchItem } from "./MatchItem";
 import { window } from "../../../constants/Layout";
-import { Skeleton } from "../../../components/Loaders/MySkeletonContent";
 import { useRefreshQuery } from "../../../hooks/useRefreshQuery";
+import { ActivityIndicator } from "react-native-paper";
 interface MatchesListProps {
   items: MatchData[];
   loading: boolean;
@@ -27,7 +26,7 @@ export function MatchesList({ items, loading }: MatchesListProps) {
           {"We strongly encourage you to like the stadium or the match to see the upcoming matches."}
         </Text>
       }
-      ListFooterComponent={() => loading && <Skeleton loading={loading} style={styles.skeleton} />}
+      ListFooterComponent={() => loading && <ActivityIndicator size={"large"} />}
     />
   );
 }

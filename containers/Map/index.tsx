@@ -18,11 +18,7 @@ export function Map() {
         <>
           <CustomMap stadiums={stadiumsData} onMarkerPress={updateLocationDetails} />
           {!!locationDetails && (
-            <LocationCard
-              locationDetails={locationDetails}
-              updateLocationDetails={updateLocationDetails}
-              version={"logged"}
-            />
+            <LocationCard locationDetails={locationDetails} updateLocationDetails={updateLocationDetails} />
           )}
         </>
       )}

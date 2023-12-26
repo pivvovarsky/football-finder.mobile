@@ -13,24 +13,17 @@ import { window } from "../../constants/Layout";
 import { openLocationWebsite } from "../../containers/Home/utils/Home.utils";
 import { HomeScreenNavigationProp } from "../../navigation/Logged/Home";
 import { useNavigation } from "@react-navigation/native";
-import { Skeleton } from "../Loaders/MySkeletonContent";
 import { usePutStadiumRating } from "../../hooks/usePutRating";
 import { useGetNextMatch } from "../../hooks/api/stadiums/getNextMatch";
-import dayjs from "dayjs";
 import { MatchData } from "../../hooks/api/matches/getMatches";
 interface MapButtonProps extends ViewProps {
   locationDetails: StadiumData | null;
   updateLocationDetails: (stadium: StadiumData | null) => void;
-  version: "public" | "logged";
 }
-export function LocationCard({ locationDetails, version, style, updateLocationDetails }: MapButtonProps) {
+export function LocationCard({ locationDetails, style, updateLocationDetails }: MapButtonProps) {
   const { icon: heartIcon, like: likeStadium, isLoading, isError } = useLikeStadium(locationDetails?.id ?? "");
   const [nextMatchInfo, setNextMatchInfo] = useState<MatchData | null>(null);
-  const {
-    data: nextMatchData,
-    isLoading: isLoadingNextMatch,
-    isError: isErrorNextMatch,
-  } = useGetNextMatch(locationDetails?.id ?? "");
+  const { data: nextMatchData } = useGetNextMatch(locationDetails?.id ?? "");
   const { avgRating } = usePutStadiumRating(locationDetails?.id ?? "");
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
@@ -43,93 +36,73 @@ export function LocationCard({ locationDetails, version, style, updateLocationDe
   }, [nextMatchData]);
 
   return (
-    <>
-      {version === "public" ? (
-        <Card style={[styles.container, style]}>
-          <Card.Content>
-            <Text style={styles.cardTitle}>{locationDetails?.name ?? ""}</Text>
-            <Text style={styles.description}>{locationDetails?.description ?? ""}</Text>
-          </Card.Content>
-          <Card.Cover
-            source={{ uri: locationDetails?.imageUrl ?? "" }}
-            resizeMethod="resize"
-            resizeMode="cover"
-            style={styles.cardImage}
-          />
-          <Card.Actions>
-            <CardButton label="Close" onPress={() => updateLocationDetails(null)} />
-          </Card.Actions>
-        </Card>
+    <Card style={[styles.container, style]}>
+      <Card.Content>
+        <Text style={styles.cardTitle}>{locationDetails?.name ?? ""}</Text>
+        <Text style={styles.description}>{locationDetails?.description ?? ""}</Text>
+      </Card.Content>
+      <Row style={styles.chipRow}>
+        <Chip icon={"information"} textStyle={styles.chipText} rippleColor={colors.orange} style={styles.likeChip}>
+          Rating <Text style={styles.ratingScore}>{avgRating}</Text>
+        </Chip>
+        <Chip
+          icon={heartIcon}
+          textStyle={styles.chipText}
+          rippleColor={colors.orange}
+          style={styles.likeChip}
+          onPress={likeStadium}>
+          {`${heartIcon === "cards-heart" ? "Remove from favourites" : "Add to favourites"}`}
+        </Chip>
+      </Row>
+      {nextMatchInfo ? (
+        !!nextMatchInfo?.host?.name && (
+          <Chip
+            icon={"information"}
+            textStyle={styles.chipText}
+            rippleColor={colors.orange}
+            style={styles.nextMatchChip}
+            disabled={isLoading || isError || heartIcon === "cards-heart-outline"}
+            onPress={navigateToHome}>
+            <Text>
+              Next match: {nextMatchInfo?.host?.name ?? ""} vs {nextMatchInfo?.guest?.name ?? ""}
+            </Text>
+          </Chip>
+        )
       ) : (
-        <Card style={[styles.container, style]}>
-          <Card.Content>
-            <Text style={styles.cardTitle}>{locationDetails?.name ?? ""}</Text>
-            <Text style={styles.description}>{locationDetails?.description ?? ""}</Text>
-          </Card.Content>
-          <Row style={styles.chipRow}>
-            <Chip icon={"information"} textStyle={styles.chipText} rippleColor={colors.orange} style={styles.likeChip}>
-              Rating <Text style={styles.ratingScore}>{avgRating}</Text>
-            </Chip>
-            <Chip
-              icon={heartIcon}
-              textStyle={styles.chipText}
-              rippleColor={colors.orange}
-              style={styles.likeChip}
-              onPress={likeStadium}>
-              {`${heartIcon === "cards-heart" ? "Remove from favourites" : "Add to favourites"}`}
-            </Chip>
-          </Row>
-          {nextMatchInfo ? (
-            !!nextMatchInfo?.host?.name && (
-              <Chip
-                icon={"information"}
-                textStyle={styles.chipText}
-                rippleColor={colors.orange}
-                style={styles.nextMatchChip}
-                disabled={isLoading || isError || heartIcon === "cards-heart-outline"}
-                onPress={navigateToHome}>
-                <Text>
-                  Next match: {nextMatchInfo?.host?.name ?? ""} vs {nextMatchInfo?.guest?.name ?? ""}
-                </Text>
-              </Chip>
-            )
-          ) : (
-            <ActivityIndicator size={"small"} />
-          )}
-          {!locationDetails?.imageUrl ? (
-            <Skeleton style={[styles.cardImage, { backgroundColor: "gray" }]} loading={!locationDetails?.imageUrl} />
-          ) : (
-            <Card.Cover
-              source={{ uri: locationDetails?.imageUrl ?? "" }}
-              resizeMethod="resize"
-              resizeMode="cover"
-              style={styles.cardImage}
-            />
-          )}
-          {locationDetails?.id && <StarsRating stadiumId={locationDetails.id} />}
-          <Card.Actions>
-            <Row
-              style={{
-                justifyContent: "space-around",
-                width: "100%",
-              }}>
-              <CardButton
-                label="Navigate"
-                onPress={() =>
-                  openAddressOnMap(
-                    locationDetails?.name ?? "",
-                    locationDetails?.latitude ?? 0,
-                    locationDetails?.longitude ?? 0,
-                  )
-                }
-              />
-              <CardButton label="Buy ticket" onPress={() => openLocationWebsite(locationDetails?.websiteUrl ?? "")} />
-              <CardButton label="Close" onPress={() => updateLocationDetails(null)} />
-            </Row>
-          </Card.Actions>
-        </Card>
+        <ActivityIndicator size={"small"} />
       )}
-    </>
+      {!locationDetails?.imageUrl ? (
+        <ActivityIndicator size={"small"} />
+      ) : (
+        <Card.Cover
+          source={{ uri: locationDetails?.imageUrl ?? "" }}
+          resizeMethod="resize"
+          resizeMode="cover"
+          style={styles.cardImage}
+        />
+      )}
+      {locationDetails?.id && <StarsRating stadiumId={locationDetails.id} />}
+      <Card.Actions>
+        <Row
+          style={{
+            justifyContent: "space-around",
+            width: "100%",
+          }}>
+          <CardButton
+            label="Navigate"
+            onPress={() =>
+              openAddressOnMap(
+                locationDetails?.name ?? "",
+                locationDetails?.latitude ?? 0,
+                locationDetails?.longitude ?? 0,
+              )
+            }
+          />
+          <CardButton label="Buy ticket" onPress={() => openLocationWebsite(locationDetails?.websiteUrl ?? "")} />
+          <CardButton label="Close" onPress={() => updateLocationDetails(null)} />
+        </Row>
+      </Card.Actions>
+    </Card>
   );
 }
 

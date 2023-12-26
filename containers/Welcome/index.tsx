@@ -14,6 +14,7 @@ import { LocationCard } from "../../components/Map/LocationCard";
 import { useMap } from "../../hooks/context/useMap";
 import { StadiumData } from "../../hooks/api/stadiums/getStadiums";
 import { fonts } from "../../constants/Fonts";
+import { PublicLocationCard } from "../../components/Map/PublicLocationCard";
 
 export function Welcome() {
   const navigation = useNavigation<NotLoggedNavigationProp>();
@@ -49,11 +50,7 @@ export function Welcome() {
           </View>
 
           {!!locationDetails ? (
-            <LocationCard
-              version="public"
-              locationDetails={locationDetails}
-              updateLocationDetails={updateLocationDetails}
-            />
+            <PublicLocationCard locationDetails={locationDetails} updateLocationDetails={updateLocationDetails} />
           ) : (
             <View style={{ marginBottom: Platform.OS === "android" ? 60 : window.width * 0.27 }}>
               <View style={styles.welcomeTextContainer}>

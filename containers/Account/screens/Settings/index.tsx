@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { StyleSheet, Text, View, Switch } from "react-native";
 import { Formik, FormikState } from "formik";
 import { HelperText, TextInput } from "react-native-paper";
@@ -10,6 +10,8 @@ import { fonts } from "../../../../constants/Fonts";
 import { layout, window } from "../../../../constants/Layout";
 import { Row } from "../../../../components/Containers/Row";
 import { useUser } from "../../../../hooks/context/useUser";
+import { useGetSubscription } from "../../../../hooks/api/newsletters/useGetSubscription";
+import { usePutSubscriptionNewsletter } from "../../../../hooks/api/newsletters/usePutSubscription";
 
 export function Settings() {
   const [securePassword, setSecurePassword] = useState(true);
@@ -18,8 +20,27 @@ export function Settings() {
   const { logout } = useUser();
   const [errorText, setErrorText] = useState<string | null>(null);
   const [isSwitchOn, setIsSwitchOn] = useState(false);
+  const { user } = useUser();
+  const { data: subscriptionInfo, isLoading: isLoadingSubscription } = useGetSubscription(user?.uid ?? null);
+  const { mutate: putSubscribtion } = usePutSubscriptionNewsletter();
 
-  const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+  useEffect(() => {
+    if (subscriptionInfo?.newsletterSubscribed) {
+      setIsSwitchOn(subscriptionInfo?.newsletterSubscribed);
+    }
+  }, [subscriptionInfo]);
+
+  const onToggleSwitch = useCallback(() => {
+    setIsSwitchOn(!isSwitchOn);
+    putSubscribtion(
+      { newsletterSubscribed: !isSwitchOn },
+      {
+        onError: () => {
+          setIsSwitchOn(isSwitchOn);
+        },
+      },
+    );
+  }, []);
 
   const changePassoword = (
     values: ChangePasswordEntry,
