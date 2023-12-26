@@ -8,7 +8,7 @@ export interface TeamDetails {
   id: string;
   name: string;
   imageUrl: string;
-  stadium: { name: string; websiteUrl: string };
+  stadium: StadiumData;
   league: string;
   country: string;
 }

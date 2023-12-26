@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Row } from "../Containers/Row";
 import { usePutStadiumRating } from "../../hooks/usePutRating";
+import { fonts } from "../../constants/Fonts";
 interface StartsRatingProps {
   stadiumId: string;
 }
@@ -9,7 +10,7 @@ export const StarsRating = ({ stadiumId }: StartsRatingProps) => {
   const { rating, handleStarPress } = usePutStadiumRating(stadiumId);
   return (
     <View style={styles.container}>
-      <Text>Your opinion of the stadium</Text>
+      <Text style={styles.text}>Your opinion of the stadium</Text>
       <View style={styles.starContainer}>
         {[1, 2, 3, 4, 5].map((star) => (
           <TouchableOpacity key={star} onPress={() => handleStarPress(star)} activeOpacity={0.7}>
@@ -24,10 +25,10 @@ export const StarsRating = ({ stadiumId }: StartsRatingProps) => {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    marginVertical: 20,
+    marginBottom: 20,
   },
   text: {
-    marginBottom: 10,
+    fontFamily: fonts.medium,
   },
   starContainer: {
     flexDirection: "row",

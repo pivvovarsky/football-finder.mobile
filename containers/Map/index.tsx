@@ -4,20 +4,12 @@ import { useMap } from "../../hooks/context/useMap";
 import { StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { ActivityIndicator } from "react-native-paper";
-import { colors } from "../../constants/Colors";
 import { LocationCard } from "../../components/Map/LocationCard";
-import { StadiumData } from "../../hooks/api/stadiums/getStadiums";
 
 export function Map() {
-  const { stadiumsData, isLoadingStadiumsData } = useMap();
-  const [locationDetails, setLocationDetails] = useState<StadiumData | null>(null);
-
-  const updateLocationDetails = (stadium: StadiumData | null) => {
-    if (!stadium) {
-      setLocationDetails(null);
-    } else setLocationDetails(stadium);
-  };
+  const { stadiumsData, isLoadingStadiumsData, locationDetails, updateLocationDetails } = useMap();
   const insets = useSafeAreaInsets();
+
   return (
     <View style={[styles.container, { paddingTop: Math.max(insets.top, 15) }]}>
       {isLoadingStadiumsData ? (
@@ -25,15 +17,12 @@ export function Map() {
       ) : (
         <>
           <CustomMap stadiums={stadiumsData} onMarkerPress={updateLocationDetails} />
-          {!!locationDetails ? (
+          {!!locationDetails && (
             <LocationCard
-              style={styles.card}
               locationDetails={locationDetails}
               updateLocationDetails={updateLocationDetails}
               version={"logged"}
             />
-          ) : (
-            <></>
           )}
         </>
       )}
@@ -42,5 +31,4 @@ export function Map() {
 }
 const styles = StyleSheet.create({
   container: { flex: 1, ...StyleSheet.absoluteFillObject, justifyContent: "flex-end" },
-  card: {},
 });

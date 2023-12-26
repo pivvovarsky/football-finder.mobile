@@ -39,9 +39,7 @@ export function LocationCard({ locationDetails, version, style, updateLocationDe
   };
 
   useEffect(() => {
-    console.log(nextMatchData);
     if (nextMatchData) setNextMatchInfo(nextMatchData);
-    console.log(nextMatchData);
   }, [nextMatchData]);
 
   return (
@@ -81,6 +79,23 @@ export function LocationCard({ locationDetails, version, style, updateLocationDe
               {`${heartIcon === "cards-heart" ? "Remove from favourites" : "Add to favourites"}`}
             </Chip>
           </Row>
+          {nextMatchInfo ? (
+            !!nextMatchInfo?.host?.name && (
+              <Chip
+                icon={"information"}
+                textStyle={styles.chipText}
+                rippleColor={colors.orange}
+                style={styles.nextMatchChip}
+                disabled={isLoading || isError || heartIcon === "cards-heart-outline"}
+                onPress={navigateToHome}>
+                <Text>
+                  Next match: {nextMatchInfo?.host?.name ?? ""} vs {nextMatchInfo?.guest?.name ?? ""}
+                </Text>
+              </Chip>
+            )
+          ) : (
+            <ActivityIndicator size={"small"} />
+          )}
           {!locationDetails?.imageUrl ? (
             <Skeleton style={[styles.cardImage, { backgroundColor: "gray" }]} loading={!locationDetails?.imageUrl} />
           ) : (
@@ -91,21 +106,6 @@ export function LocationCard({ locationDetails, version, style, updateLocationDe
               style={styles.cardImage}
             />
           )}
-          {nextMatchInfo ? (
-            <Chip
-              icon={"information"}
-              textStyle={styles.chipText}
-              rippleColor={colors.orange}
-              style={styles.nextMatchChip}
-              disabled={isLoading || isError || heartIcon === "cards-heart-outline"}
-              onPress={navigateToHome}>
-              Next match: {nextMatchInfo?.host?.name ?? ""} vs {nextMatchInfo?.guest?.name ?? ""} -
-              {nextMatchInfo?.date ? " " + dayjs(nextMatchInfo.date).format("DD/MM/YYYY, HH:mm") : ""}
-            </Chip>
-          ) : (
-            <ActivityIndicator size={"small"} />
-          )}
-
           {locationDetails?.id && <StarsRating stadiumId={locationDetails.id} />}
           <Card.Actions>
             <Row
@@ -123,7 +123,6 @@ export function LocationCard({ locationDetails, version, style, updateLocationDe
                   )
                 }
               />
-
               <CardButton label="Buy ticket" onPress={() => openLocationWebsite(locationDetails?.websiteUrl ?? "")} />
               <CardButton label="Close" onPress={() => updateLocationDetails(null)} />
             </Row>
@@ -160,12 +159,14 @@ const styles = StyleSheet.create({
   },
   chipText: {
     fontSize: window.height * 0.015,
+    fontFamily: fonts.regular,
   },
   ratingScore: {
     fontFamily: fonts.bold,
   },
   nextMatchChip: {
-    marginBottom: 20,
+    marginTop: 5,
+    marginHorizontal: 10,
     backgroundColor: colors.lightCream,
   },
 });

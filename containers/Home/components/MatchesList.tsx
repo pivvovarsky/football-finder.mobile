@@ -1,20 +1,24 @@
 import React from "react";
-import { FlatList, StyleSheet, Text } from "react-native";
+import { FlatList, RefreshControl, StyleSheet, Text } from "react-native";
 import { colors } from "../../../constants/Colors";
 import { fonts } from "../../../constants/Fonts";
 import { MatchData } from "../../../hooks/api/matches/getMatches";
 import { MatchItem } from "./MatchItem";
 import { window } from "../../../constants/Layout";
 import { Skeleton } from "../../../components/Loaders/MySkeletonContent";
+import { useRefreshQuery } from "../../../hooks/useRefreshQuery";
 interface MatchesListProps {
   items: MatchData[];
   loading: boolean;
   isFetched: boolean;
 }
-export function MatchesList({ items, loading, isFetched }: MatchesListProps) {
+export function MatchesList({ items, loading }: MatchesListProps) {
+  const { refresh, isFetching } = useRefreshQuery([["getUpcomingMatches"]]);
+
   return (
     <FlatList
       data={items}
+      refreshControl={<RefreshControl refreshing={isFetching} onRefresh={refresh} />}
       renderItem={(data) => <MatchItem match={data.item} />}
       contentContainerStyle={styles.listStyle}
       keyExtractor={(item, index) => item.id + index}
