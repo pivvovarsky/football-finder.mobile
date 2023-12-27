@@ -32,7 +32,7 @@ export function MatchesList({ items, loading }: MatchesListProps) {
 }
 
 const styles = StyleSheet.create({
-  listStyle: { marginTop: 10 },
+  listStyle: { marginTop: 10, paddingBottom: 20 },
   title: {
     alignSelf: "center",
     fontFamily: fonts.regular,

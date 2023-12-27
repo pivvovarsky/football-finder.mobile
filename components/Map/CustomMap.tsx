@@ -4,18 +4,23 @@ import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { colors } from "../../constants/Colors";
 import { StadiumData } from "../../hooks/api/stadiums/getStadiums";
 import Geolocation from "@react-native-community/geolocation";
-
+interface MapCoordinates {
+  latitude: number;
+  latitudeDelta: number;
+  longitude: number;
+  longitudeDelta: number;
+}
 interface MapProps {
   stadiums: StadiumData[];
   onMarkerPress: (stadium: StadiumData | null) => void;
 }
 export function CustomMap({ stadiums, onMarkerPress }: MapProps) {
-  const [position, setPosition] = useState({
-    latitude: 50.19293799535422,
+  const [position, setPosition] = useState<MapCoordinates>({
+    latitude: 50.266224524369505,
+    longitude: 19.025359168395223,
     latitudeDelta: 0.0421,
-    longitude: 18.974965056422143,
-    longitudeDelta: 0.0421, //to change
-  });
+    longitudeDelta: 0.0421,
+  }); //spodek
 
   useEffect(() => {
     Geolocation.getCurrentPosition(

@@ -6,6 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Navigation from "./navigation";
 import { colors } from "./constants/Colors";
 import { fonts } from "./constants/Fonts";
+import { OfflineInfo } from "./components/OfflineInfo";
 const fontConfig = {
   fontFamily: fonts.regular,
 };
@@ -28,6 +29,7 @@ function App(): JSX.Element {
       <SafeAreaView style={styles.safeArea} edges={["left", "right"]}>
         <PaperProvider theme={theme}>
           <StatusBar barStyle="dark-content" />
+          <OfflineInfo />
           <Navigation />
         </PaperProvider>
       </SafeAreaView>

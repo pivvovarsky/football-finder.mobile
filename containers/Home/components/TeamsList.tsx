@@ -23,5 +23,5 @@ export function TeamsList({ items }: TeamsListProps) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, marginTop: 10 },
+  container: { flex: 1, marginTop: 10, paddingBottom: 20 },
 });
