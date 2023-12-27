@@ -31,16 +31,10 @@ export function Settings() {
   }, [subscriptionInfo]);
 
   const onToggleSwitch = useCallback(() => {
-    setIsSwitchOn(!isSwitchOn);
-    putSubscribtion(
-      { newsletterSubscribed: !isSwitchOn },
-      {
-        onError: () => {
-          setIsSwitchOn(isSwitchOn);
-        },
-      },
-    );
-  }, []);
+    const value = !isSwitchOn;
+    putSubscribtion({ newsletterSubscribed: value });
+    setIsSwitchOn(value);
+  }, [isSwitchOn]);
 
   const changePassoword = (
     values: ChangePasswordEntry,
@@ -156,22 +150,12 @@ export function Settings() {
         <Text adjustsFontSizeToFit style={styles.title}>
           Settings
         </Text>
-        <Row>
+        <Row style={{ justifyContent: "space-evenly", width: "50%" }}>
           <Text style={styles.text}>Newsletters</Text>
           <Switch
             trackColor={{ true: colors.cream }}
             style={styles.switch}
             thumbColor={colors.brown}
-            value={isSwitchOn}
-            onValueChange={onToggleSwitch}
-          />
-        </Row>
-        <Row>
-          <Text style={styles.text}>Notifications</Text>
-          <Switch
-            trackColor={{ true: colors.cream }}
-            thumbColor={colors.brown}
-            style={styles.switch}
             value={isSwitchOn}
             onValueChange={onToggleSwitch}
           />
@@ -189,7 +173,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginHorizontal: layout.publicScreenHorizontalPadding,
   },
-  switch: { width: 100 },
+  switch: { alignSelf: "center" },
   text: { fontFamily: fonts.light, marginVertical: 10, fontSize: window.width * 0.05 },
-  switchContainer: { justifyContent: "center", alignItems: "center", marginTop: 30 },
+  switchContainer: { alignItems: "center", marginTop: 30 },
 });
