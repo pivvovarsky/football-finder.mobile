@@ -18,7 +18,6 @@ export function OfflineInfo() {
 
 const styles = StyleSheet.create({
   container: {
-    height: 30,
     backgroundColor: colors.cream,
   },
   text: {
