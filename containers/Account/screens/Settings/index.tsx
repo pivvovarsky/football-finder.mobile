@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { StyleSheet, Text, View, Switch } from "react-native";
+import { StyleSheet, Text, View, Switch, Platform } from "react-native";
 import { Formik, FormikState } from "formik";
 import { HelperText, TextInput } from "react-native-paper";
 import { Button } from "react-native-paper";
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginHorizontal: layout.publicScreenHorizontalPadding,
   },
-  switch: { alignSelf: "center" },
+  switch: { alignSelf: "center", marginTop: Platform.OS === "android" ? 5 : 0 },
   text: { fontFamily: fonts.light, marginVertical: 10, fontSize: window.width * 0.05 },
   switchContainer: { alignItems: "center", marginTop: 30 },
 });

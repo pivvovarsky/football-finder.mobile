@@ -3,6 +3,7 @@ import { createStackNavigator, StackNavigationProp } from "@react-navigation/sta
 import { Login } from "../../containers/Login";
 import { SignUp } from "../../containers/SignUp";
 import { Welcome } from "../../containers/Welcome";
+import { ForgotPassword } from "../../containers/ForgotPassword";
 
 export type NotLoggedNavigationProp = StackNavigationProp<NotLoggedStackList>;
 
@@ -10,6 +11,7 @@ type NotLoggedStackList = {
   Welcome: undefined;
   Login: undefined;
   SignUp: undefined;
+  ForgotPassword: undefined;
 };
 
 const NotLoggedStack = createStackNavigator<NotLoggedStackList>();
@@ -20,6 +22,7 @@ export const NotLoggedNavigator = () => {
       <NotLoggedStack.Screen name="Welcome" component={Welcome} options={{ headerShown: false }} />
       <NotLoggedStack.Screen name="Login" component={Login} options={{ headerShown: false }} />
       <NotLoggedStack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }} />
+      <NotLoggedStack.Screen name="ForgotPassword" component={ForgotPassword} options={{ headerShown: false }} />
     </NotLoggedStack.Navigator>
   );
 };

@@ -15,7 +15,7 @@ enum NavTab {
 }
 
 export function Account() {
-  const { login, isError, isLoading, logout, user } = useUser();
+  const { logout } = useUser();
   const [value, setValue] = useState<string>(NavTab.Settings);
   const HEADER_BUTTONS = [
     {

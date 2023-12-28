@@ -25,6 +25,10 @@ export function Login() {
     navigation.navigate("SignUp");
   };
 
+  const navigateForgotPassword = () => {
+    navigation.navigate("ForgotPassword");
+  };
+
   useFocusEffect(
     useCallback(() => {
       return cleanState();
@@ -97,6 +101,14 @@ export function Login() {
                 Invalid email or password. Please try again.
               </HelperText>
               <Button
+                mode="text"
+                labelStyle={styles.buttonText}
+                onPress={navigateForgotPassword}
+                style={styles.forgotPassword}
+                textColor={colors.brown}>
+                Forgot password?
+              </Button>
+              <Button
                 mode="contained"
                 //@ts-ignore
                 onPress={handleSubmit}
@@ -109,7 +121,7 @@ export function Login() {
               </Button>
               <Row style={styles.signUpRow}>
                 <Text style={styles.textStyle}>Don't have an account?</Text>
-                <Button mode="text" labelStyle={styles.signUp} onPress={navigateSignUp} textColor={colors.brown}>
+                <Button mode="text" labelStyle={styles.buttonText} onPress={navigateSignUp} textColor={colors.brown}>
                   Sign up
                 </Button>
               </Row>
@@ -142,6 +154,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingTop: 20,
   },
-  signUp: { textDecorationLine: "underline", paddingBottom: 1, fontFamily: fonts.medium },
+  buttonText: { textDecorationLine: "underline", paddingBottom: 1, fontFamily: fonts.medium },
   textStyle: { fontFamily: fonts.regular },
+  forgotPassword: { alignSelf: "flex-end" },
 });

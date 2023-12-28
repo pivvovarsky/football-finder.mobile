@@ -1,19 +1,10 @@
 import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
 import React, { createContext, useCallback, useEffect, useMemo, useState } from "react";
-import navigation from "../navigation";
-import { BackHandler } from "react-native";
-import { NotLoggedNavigationProp } from "../navigation/NotLogged";
-import { useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 
-interface LoginEntry {
+export interface LoginEntry {
   email: string;
   password: string;
-}
-interface RegisterEntry {
-  email: string;
-  password: string;
-  confirmPassword?: string;
 }
 
 interface ContextProps {
