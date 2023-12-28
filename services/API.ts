@@ -33,7 +33,6 @@ export class API {
   ): Promise<AxiosResponse<RES>> => {
     // this.logger.debug("GET: ", { url, config });
     const response = await this.instance.get<REQ, AxiosResponse<RES>>(url, config);
-
     return response;
   };
 

@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { Row } from "../Containers/Row";
 import { usePutStadiumRating } from "../../hooks/usePutRating";
 import { fonts } from "../../constants/Fonts";
 interface StartsRatingProps {

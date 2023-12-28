@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Image, StyleSheet, TouchableOpacity } from "react-native";
-import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import { Image, StyleSheet } from "react-native";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { colors } from "../../constants/Colors";
 import { StadiumData } from "../../hooks/api/stadiums/getStadiums";
 import Geolocation from "@react-native-community/geolocation";
+
 interface MapCoordinates {
   latitude: number;
   latitudeDelta: number;

@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { Alert, BackHandler, StyleSheet, View } from "react-native";
+import React, { useCallback, useState } from "react";
+import { StyleSheet, View } from "react-native";
 import { Formik } from "formik";
 import { initLoginFormData } from "./Login.utils";
 import { useUser } from "../../hooks/context/useUser";
-import { DefaultTheme, TextInput, Text, HelperText, Snackbar, Tooltip, IconButton } from "react-native-paper";
+import { TextInput, Text, HelperText, Snackbar } from "react-native-paper";
 import { Button } from "react-native-paper";
 import { colors } from "../../constants/Colors";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
@@ -11,7 +11,6 @@ import { NotLoggedNavigationProp } from "../../navigation/NotLogged";
 import { Topbar } from "../../components/Topbar/Topbar";
 import { Row } from "../../components/Containers/Row";
 import { fonts } from "../../constants/Fonts";
-import { layout } from "../../constants/Layout";
 
 export function Login() {
   const navigation = useNavigation<NotLoggedNavigationProp>();

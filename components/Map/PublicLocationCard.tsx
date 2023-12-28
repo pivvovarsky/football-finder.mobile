@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, ViewProps, Text } from "react-native";
-import { Card } from "react-native-paper";
+import { ActivityIndicator, Card } from "react-native-paper";
 import { colors } from "../../constants/Colors";
 import { StadiumData } from "../../hooks/api/stadiums/getStadiums";
 import { fonts } from "../../constants/Fonts";
@@ -18,12 +18,16 @@ export function PublicLocationCard({ locationDetails, style, updateLocationDetai
         <Text style={styles.cardTitle}>{locationDetails?.name ?? ""}</Text>
         <Text style={styles.description}>{locationDetails?.description ?? ""}</Text>
       </Card.Content>
-      <Card.Cover
-        source={{ uri: locationDetails?.imageUrl ?? "" }}
-        resizeMethod="resize"
-        resizeMode="cover"
-        style={styles.cardImage}
-      />
+      {!locationDetails?.imageUrl ? (
+        <ActivityIndicator size={"small"} color={colors.black} />
+      ) : (
+        <Card.Cover
+          source={{ uri: locationDetails?.imageUrl ?? "" }}
+          resizeMethod="resize"
+          resizeMode="cover"
+          style={styles.cardImage}
+        />
+      )}
       <Card.Actions>
         <CardButton label="Close" onPress={() => updateLocationDetails(null)} />
       </Card.Actions>

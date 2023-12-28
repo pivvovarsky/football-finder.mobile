@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.medium,
   },
   bottomText: {
-    color: colors.simple,
+    color: colors.darkBrown,
     paddingHorizontal: 5,
     paddingVertical: 10,
     textAlign: "center",

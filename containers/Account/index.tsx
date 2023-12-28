@@ -16,7 +16,7 @@ enum NavTab {
 
 export function Account() {
   const { login, isError, isLoading, logout, user } = useUser();
-  const [value, setValue] = useState<NavTab>(NavTab.Settings);
+  const [value, setValue] = useState<string>(NavTab.Settings);
   const HEADER_BUTTONS = [
     {
       value: NavTab.Settings,
@@ -40,10 +40,7 @@ export function Account() {
       <Topbar title={"Account"} />
       <SegmentedButtons
         value={value}
-        //@ts-ignore
         onValueChange={setValue}
-        checkedColor={colors.darkBlue}
-        uncheckedColor={colors.darkBlue}
         density="regular"
         style={{ paddingHorizontal: 30 }}
         buttons={HEADER_BUTTONS}

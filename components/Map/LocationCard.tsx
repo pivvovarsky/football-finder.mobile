@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Linking, StyleSheet, ViewProps, Text } from "react-native";
+import { StyleSheet, ViewProps, Text } from "react-native";
 import { ActivityIndicator, Card, Chip } from "react-native-paper";
 import { colors } from "../../constants/Colors";
 import { StadiumData } from "../../hooks/api/stadiums/getStadiums";

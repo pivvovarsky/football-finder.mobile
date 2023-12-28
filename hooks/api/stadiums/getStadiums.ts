@@ -16,7 +16,6 @@ export interface StadiumData {
 const getStadiums = async () => {
   const url = "/stadiums";
   const { data } = await api.get<unknown, ListResponseData<StadiumData>>(url);
-
   return data;
 };
 
