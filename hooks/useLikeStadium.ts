@@ -4,7 +4,7 @@ import { useGetFavouriteStadium } from "./api/favourites/useGetFavouriteStadium"
 import { usePutFavouriteStadium } from "./api/favourites/usePutFavouriteStadium";
 
 export const useLikeStadium = (stadiumId: string) => {
-  const { refresh: refreshData } = useRefreshQuery([["getFavouriteStadiums"], ["getUpcomingMatches"]]);
+  const { refresh: refreshData } = useRefreshQuery([["getFavouriteStadium"], ["getUpcomingMatches"]]);
 
   const {
     data: favouriteInfo,

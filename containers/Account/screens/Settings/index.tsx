@@ -11,7 +11,7 @@ import { layout, window } from "../../../../constants/Layout";
 import { Row } from "../../../../components/Containers/Row";
 import { useUser } from "../../../../hooks/context/useUser";
 import { useGetSubscription } from "../../../../hooks/api/newsletters/useGetSubscription";
-import { usePutSubscriptionNewsletter } from "../../../../hooks/api/newsletters/usePutSubscription";
+import { usePatchSubscriptionNewsletter } from "../../../../hooks/api/newsletters/usePatchSubscription";
 
 export function Settings() {
   const [securePassword, setSecurePassword] = useState(true);
@@ -22,7 +22,7 @@ export function Settings() {
   const [isSwitchOn, setIsSwitchOn] = useState(false);
   const { user } = useUser();
   const { data: subscriptionInfo, isLoading: isLoadingSubscription } = useGetSubscription(user?.uid ?? null);
-  const { mutate: putSubscribtion } = usePutSubscriptionNewsletter();
+  const { mutate: patchSubscribtion } = usePatchSubscriptionNewsletter();
 
   useEffect(() => {
     if (subscriptionInfo?.newsletterSubscribed) {
@@ -32,7 +32,7 @@ export function Settings() {
 
   const onToggleSwitch = useCallback(() => {
     const value = !isSwitchOn;
-    putSubscribtion({ newsletterSubscribed: value });
+    patchSubscribtion({ newsletterSubscribed: value });
     setIsSwitchOn(value);
   }, [isSwitchOn]);
 

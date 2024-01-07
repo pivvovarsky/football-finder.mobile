@@ -3,10 +3,8 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { HomeNavigator } from "./Home";
 import { MapNavigator } from "./Map";
 import { AccountNavigator } from "./Account";
-import { BottomNavigation, BottomNavigationRoute, Icon } from "react-native-paper";
+import { Icon } from "react-native-paper";
 import { colors } from "../../constants/Colors";
-import { fonts } from "../../constants/Fonts";
-import { ReactNode } from "react";
 
 export type BottomTabNavigationProp = StackNavigationProp<BottomTabList>;
 

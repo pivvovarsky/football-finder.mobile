@@ -1,10 +1,10 @@
 import { useRefreshQuery } from "./useRefreshQuery";
 import { useGetRating } from "./api/ratings/useGetRating";
-import { usePutRating } from "./api/ratings/usePutRating";
+import { usePatchRating } from "./api/ratings/usePatchRating";
 import { useEffect, useState } from "react";
 import { useGetAvgRatingStadium } from "./api/ratings/useGetAverageRating";
 
-export const usePutStadiumRating = (stadiumId: string) => {
+export const useStadiumRating = (stadiumId: string) => {
   const { refresh: refreshRatingData } = useRefreshQuery([["getStadiumRating"], ["getAvgRatingStadium"]]);
   const [rating, setRating] = useState(0);
   const [avgRating, setAvgRating] = useState(0);
@@ -31,14 +31,14 @@ export const usePutStadiumRating = (stadiumId: string) => {
   } = useGetAvgRatingStadium(stadiumId);
 
   const {
-    mutate: putStadiumRating,
+    mutate: patchStadiumRating,
     isLoading: isLoadingPutStadiumRating,
     isError: isErrorPutStadiumRating,
-  } = usePutRating();
+  } = usePatchRating();
 
   const putRating = (selectedRating: number) => {
     if (selectedRating !== rating)
-      putStadiumRating(
+      patchStadiumRating(
         { stadiumId, rating: selectedRating },
         {
           onSuccess: async () => {

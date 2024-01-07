@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { CustomMap } from "../../components/Map/CustomMap";
 import { useMap } from "../../hooks/context/useMap";
 import { StyleSheet, View } from "react-native";

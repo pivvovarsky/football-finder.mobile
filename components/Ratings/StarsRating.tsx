@@ -1,12 +1,12 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { usePutStadiumRating } from "../../hooks/usePutRating";
+import { useStadiumRating } from "../../hooks/useStadiumRating";
 import { fonts } from "../../constants/Fonts";
 interface StartsRatingProps {
   stadiumId: string;
 }
 export const StarsRating = ({ stadiumId }: StartsRatingProps) => {
-  const { rating, handleStarPress } = usePutStadiumRating(stadiumId);
+  const { rating, handleStarPress } = useStadiumRating(stadiumId);
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Your opinion of the stadium</Text>

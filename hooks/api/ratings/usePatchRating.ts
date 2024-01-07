@@ -6,12 +6,12 @@ export interface RatingsData {
   rating: number;
 }
 
-const putRating = async ({ stadiumId, rating }: RatingsData) => {
+const patchRating = async ({ stadiumId, rating }: RatingsData) => {
   const url = `/ratings/me/${stadiumId}`;
-  const { data } = await api.put<RatingsData, unknown>(url, { rating });
+  const { data } = await api.patch<RatingsData, unknown>(url, { rating });
   return data;
 };
 
-export function usePutRating() {
-  return useMutation(putRating);
+export function usePatchRating() {
+  return useMutation(patchRating);
 }

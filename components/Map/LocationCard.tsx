@@ -13,7 +13,7 @@ import { window } from "../../constants/Layout";
 import { openLocationWebsite } from "../../containers/Home/utils/Home.utils";
 import { HomeScreenNavigationProp } from "../../navigation/Logged/Home";
 import { useNavigation } from "@react-navigation/native";
-import { usePutStadiumRating } from "../../hooks/usePutRating";
+import { useStadiumRating } from "../../hooks/useStadiumRating";
 import { useGetNextMatch } from "../../hooks/api/stadiums/getNextMatch";
 import { MatchData } from "../../hooks/api/matches/getMatches";
 interface MapButtonProps extends ViewProps {
@@ -24,7 +24,7 @@ export function LocationCard({ locationDetails, style, updateLocationDetails }: 
   const { icon: heartIcon, like: likeStadium, isLoading, isError } = useLikeStadium(locationDetails?.id ?? "");
   const [nextMatchInfo, setNextMatchInfo] = useState<MatchData | null>(null);
   const { data: nextMatchData } = useGetNextMatch(locationDetails?.id ?? "");
-  const { avgRating } = usePutStadiumRating(locationDetails?.id ?? "");
+  const { avgRating } = useStadiumRating(locationDetails?.id ?? "");
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
   const navigateToHome = () => {
