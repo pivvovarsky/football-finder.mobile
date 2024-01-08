@@ -1,6 +1,6 @@
 # football-finder.mobile
 
-Football Finder App Author: Szczepan Piwowarski
+Football Finder App Author: Szczepan Piwowarski<br />
 Mobile application for locating football stadiums and tracking matches.
 
 ## Prerequisites
