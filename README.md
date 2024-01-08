@@ -1,5 +1,8 @@
 # football-finder.mobile
 
+Football Finder App Author: Szczepan Piwowarski
+Mobile application for locating football stadiums and tracking matches.
+
 ## Prerequisites
 
 - [Node.js v16](https://nodejs.org) and npm (Recommended: Use [nvm](https://github.com/nvm-sh/nvm))
