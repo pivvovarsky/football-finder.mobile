@@ -1,5 +1,26 @@
 # football-finder.mobile
 
+## Prerequisites
+
+- [Node.js v16](https://nodejs.org) and npm (Recommended: Use [nvm](https://github.com/nvm-sh/nvm))
+- [Watchman](https://facebook.github.io/watchman)
+- [Xcode 15](https://developer.apple.com/xcode)
+- [Cocoapods 1.14.2](https://cocoapods.org)
+- [Android Studio and Android SDK](https://developer.android.com/studio)
+
+## Installation
+
+```bash
+$ npm install
+```
+
+## Running the app
+
+```bash
+$ react-native run-android
+$ react-native run-ios
+```
+
 Football finder mobile app - iOS and android
 
 Icons:
