@@ -17,17 +17,22 @@ $ npm install
 ## Running the app
 
 ```bash
-$ react-native run-android
-$ react-native run-ios
+$ npx react-native run-android
+$ npx react-native run-ios
 ```
 
-Football finder mobile app - iOS and android
+# Resources
 
-Icons:
-<a href="https://www.freepik.com/icon/stadium_1259792#fromView=keyword&term=Stadium&page=1&position=16&uuid=7781b235-bbc4-42f5-891e-eed440467d34">Icon by monkik</a>
+This section contains links to external resources used in the project.
 
-Fonts:
+## App icon:
+
+<a href="https://www.flaticon.com/free-icons/sports-and-competition" title="sports and competition icons">Sports and competition icons created by Rashad - Flaticon</a>
+
+## Fonts
+
 <a href="https://fonts.google.com/specimen/Kanit">Fonts</a>
 
-App icon:
-<a href="https://www.flaticon.com/free-icons/sports-and-competition" title="sports and competition icons">Sports and competition icons created by Rashad - Flaticon</a>
+## Icons
+
+<a href="https://www.freepik.com/icon/stadium_1259792#fromView=keyword&term=Stadium&page=1&position=16&uuid=7781b235-bbc4-42f5-891e-eed440467d34">Icon by monkik</a>
