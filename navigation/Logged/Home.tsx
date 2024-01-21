@@ -7,7 +7,6 @@ const HomeStack = createStackNavigator<HomeStackList>();
 
 type HomeStackList = {
   Home: undefined;
-  Favorites: undefined;
 };
 
 export const HomeNavigator = () => {
