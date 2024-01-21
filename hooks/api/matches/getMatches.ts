@@ -21,7 +21,7 @@ export interface MatchData {
 }
 
 const getMatches = async () => {
-  const url = "/matches";
+  const url = "/matches/favourite-first";
   const { data } = await api.get<unknown, ListResponseData<MatchData>>(url);
   return data;
 };
