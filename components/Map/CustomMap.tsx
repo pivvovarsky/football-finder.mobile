@@ -15,6 +15,8 @@ interface MapProps {
   stadiums: StadiumData[];
   onMarkerPress: (stadium: StadiumData | null) => void;
 }
+
+const IMAGE_SIZE = 35;
 export function CustomMap({ stadiums, onMarkerPress }: MapProps) {
   const [position, setPosition] = useState<MapCoordinates>({
     latitude: 50.266224524369505,
@@ -45,7 +47,6 @@ export function CustomMap({ stadiums, onMarkerPress }: MapProps) {
   return (
     <>
       <MapView
-        // remove if not using Google Maps
         provider={PROVIDER_GOOGLE}
         region={position}
         style={styles.map}
@@ -76,7 +77,10 @@ export function CustomMap({ stadiums, onMarkerPress }: MapProps) {
               }}
               style={styles.markerPadding}
               coordinate={{ latitude: stadium.latitude, longitude: stadium.longitude }}>
-              <Image style={{ height: 35, width: 35 }} source={require("../../assets/images/stadium.png")} />
+              <Image
+                style={{ height: IMAGE_SIZE, width: IMAGE_SIZE }}
+                source={require("../../assets/images/stadium.png")}
+              />
             </Marker>
           );
         })}
