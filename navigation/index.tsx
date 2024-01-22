@@ -15,7 +15,7 @@ export default function Navigation() {
   const { isAuthenticated } = useUser();
   return (
     <NavigationContainer theme={CustomTheme}>
-      {!isAuthenticated ? <NotLoggedNavigator /> : <LoggedNavigator />}
+      {isAuthenticated ? <LoggedNavigator /> : <NotLoggedNavigator />}
     </NavigationContainer>
   );
 }
