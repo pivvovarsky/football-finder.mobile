@@ -76,10 +76,7 @@ export function CustomMap({ stadiums, onMarkerPress }: MapProps) {
             }}
             style={styles.markerPadding}
             coordinate={{ latitude: stadium.latitude, longitude: stadium.longitude }}>
-            <Image
-              style={{ height: IMAGE_SIZE, width: IMAGE_SIZE }}
-              source={require("../../assets/images/stadium.png")}
-            />
+            <Image style={styles.image} source={require("../../assets/images/stadium.png")} />
           </Marker>
         );
       })}
@@ -100,4 +97,5 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   markerPadding: { padding: 20 },
+  image: { height: IMAGE_SIZE, width: IMAGE_SIZE },
 });
