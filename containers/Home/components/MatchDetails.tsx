@@ -19,7 +19,6 @@ export function MatchDetails({ match }: MatchDetailsProps) {
 
   const navigateToStadiumDetails = () => {
     navigation.navigate("MAP");
-    console.log(match.host.stadium.imageUrl, "XDD");
     updateLocationDetails(match.host.stadium);
   };
 

@@ -11,7 +11,7 @@ export interface TeamData {
 }
 
 const getTeams = async () => {
-  const url = "/teams";
+  const url = "/teams/favourite-first";
   const { data } = await api.get<unknown, ListResponseData<TeamData>>(url);
   return data;
 };
