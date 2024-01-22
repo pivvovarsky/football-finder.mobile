@@ -45,53 +45,51 @@ export function CustomMap({ stadiums, onMarkerPress }: MapProps) {
   }, []);
 
   return (
-    <>
-      <MapView
-        provider={PROVIDER_GOOGLE}
-        region={position}
-        style={styles.map}
-        loadingBackgroundColor={colors.white}
-        initialRegion={position}
-        showsUserLocation={true}
-        showsMyLocationButton={true}
-        followsUserLocation={true}
-        onPress={(e) => {
-          e.stopPropagation();
-          onMarkerPress(null);
-        }}
-        showsCompass={true}
-        scrollEnabled={true}
-        zoomEnabled={true}
-        pitchEnabled={true}
-        loadingIndicatorColor={colors.black}
-        rotateEnabled={true}
-        loadingEnabled={true}>
-        {stadiums.map((stadium) => {
-          return (
-            <Marker
-              key={stadium.id}
-              onSelect={() => onMarkerPress(stadium)}
-              onPress={(e) => {
-                e.stopPropagation();
-                onMarkerPress(stadium);
-              }}
-              style={styles.markerPadding}
-              coordinate={{ latitude: stadium.latitude, longitude: stadium.longitude }}>
-              <Image
-                style={{ height: IMAGE_SIZE, width: IMAGE_SIZE }}
-                source={require("../../assets/images/stadium.png")}
-              />
-            </Marker>
-          );
-        })}
-        <Marker
-          isPreselected={true}
-          title="Yor are here"
-          description="Let's look for some football game!"
-          coordinate={position}
-        />
-      </MapView>
-    </>
+    <MapView
+      provider={PROVIDER_GOOGLE}
+      region={position}
+      style={styles.map}
+      loadingBackgroundColor={colors.white}
+      initialRegion={position}
+      showsUserLocation={true}
+      showsMyLocationButton={true}
+      followsUserLocation={true}
+      onPress={(e) => {
+        e.stopPropagation();
+        onMarkerPress(null);
+      }}
+      showsCompass={true}
+      scrollEnabled={true}
+      zoomEnabled={true}
+      pitchEnabled={true}
+      loadingIndicatorColor={colors.black}
+      rotateEnabled={true}
+      loadingEnabled={true}>
+      {stadiums.map((stadium) => {
+        return (
+          <Marker
+            key={stadium.id}
+            onSelect={() => onMarkerPress(stadium)}
+            onPress={(e) => {
+              e.stopPropagation();
+              onMarkerPress(stadium);
+            }}
+            style={styles.markerPadding}
+            coordinate={{ latitude: stadium.latitude, longitude: stadium.longitude }}>
+            <Image
+              style={{ height: IMAGE_SIZE, width: IMAGE_SIZE }}
+              source={require("../../assets/images/stadium.png")}
+            />
+          </Marker>
+        );
+      })}
+      <Marker
+        isPreselected={true}
+        title="Yor are here"
+        description="Let's look for some football game!"
+        coordinate={position}
+      />
+    </MapView>
   );
 }
 
