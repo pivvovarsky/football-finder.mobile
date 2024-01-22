@@ -3,15 +3,9 @@ import { NavigationContainer, DarkTheme, DefaultTheme } from "@react-navigation/
 import { NotLoggedNavigator } from "./NotLogged";
 import { useUser } from "../hooks/context/useUser";
 import { LoggedNavigator } from "./Logged";
+import { CustomTheme } from "../constants/Colors";
 
 export default function Navigation() {
-  const CustomTheme = {
-    dark: false,
-    colors: {
-      ...DefaultTheme.colors,
-      background: "white",
-    },
-  };
   const { isAuthenticated } = useUser();
   return (
     <NavigationContainer theme={CustomTheme}>
