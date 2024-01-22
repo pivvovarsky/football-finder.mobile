@@ -1,33 +1,18 @@
 import React from "react";
 import { StatusBar, StyleSheet } from "react-native";
 import { AppProviders } from "./context/AppProviders";
-import { DefaultTheme, PaperProvider, configureFonts } from "react-native-paper";
+import { PaperProvider } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Navigation from "./navigation";
-import { colors } from "./constants/Colors";
-import { fonts } from "./constants/Fonts";
 import { OfflineInfo } from "./components/OfflineInfo";
-const fontConfig = {
-  fontFamily: fonts.regular,
-};
+import { DEFAULT_THEME } from "./constants/Themes";
+import { colors } from "./constants/Colors";
 
 function App(): JSX.Element {
-  const theme = {
-    ...DefaultTheme,
-    dark: false,
-    fonts: configureFonts({ config: fontConfig }),
-    colors: {
-      ...DefaultTheme.colors,
-      primary: colors.lightBrown,
-      secondaryContainer: colors.cream,
-      text: colors.brown,
-    },
-  };
-
   return (
     <AppProviders>
       <SafeAreaView style={styles.safeArea} edges={["left", "right"]}>
-        <PaperProvider theme={theme}>
+        <PaperProvider theme={DEFAULT_THEME}>
           <StatusBar barStyle="dark-content" />
           <OfflineInfo />
           <Navigation />
@@ -40,7 +25,7 @@ function App(): JSX.Element {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: colors.white,
   },
 });
 
