@@ -1,4 +1,4 @@
-import { DefaultTheme } from "@react-navigation/native";
+import { DefaultTheme as NavigationTheme } from "@react-navigation/native";
 import { DefaultTheme as ThemePaper, configureFonts } from "react-native-paper";
 import { colors } from "./Colors";
 import { fonts } from "./Fonts";
@@ -6,7 +6,7 @@ import { fonts } from "./Fonts";
 export const CustomTheme = {
   dark: false,
   colors: {
-    ...DefaultTheme.colors,
+    ...NavigationTheme.colors,
     background: "white",
   },
 };
@@ -20,7 +20,7 @@ export const DEFAULT_THEME = {
   dark: false,
   fonts: configureFonts({ config: fontConfig }),
   colors: {
-    ...DefaultTheme.colors,
+    ...ThemePaper.colors,
     primary: colors.lightBrown,
     secondaryContainer: colors.cream,
     text: colors.brown,
