@@ -23,7 +23,7 @@ export function MatchesList({ items, loading }: MatchesListProps) {
       keyExtractor={(item, index) => item.id + index}
       ListEmptyComponent={
         <Text style={styles.listEmptyText}>
-          {"We strongly encourage you to like the stadium or the match to see the upcoming matches."}
+          {"We strongly encourage you to like the stadium or the team to see the upcoming matches."}
         </Text>
       }
       ListFooterComponent={() => loading && <ActivityIndicator size={"large"} />}
