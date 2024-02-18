@@ -46,3 +46,7 @@ This section contains links to external resources used in the project.
 <a href="https://pl.freepik.com/darmowe-wektory/realistyczna-pilka-nozna-stadion-pilkarski-ilustracja_13399208.htm#page=2&query=stadion&position=28&from_view=keyword&track=sph&uuid=c70f9e57-b745-4853-8f73-fb0a6f9c6e2a">Obraz autorstwa pikisuperstar</a> na Freepik
 
 <a href="https://www.thesportsdb.com/free_sports_api">Free Sports API</a>
+
+# Stadium descriptions
+
+<a href="https://en.wikipedia.org/wiki/Main_Page"> Stadium descriptions </a>
